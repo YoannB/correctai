@@ -10,11 +10,13 @@ reply must raise the `empty` error toast, not an empty success toast. While a ca
 (pending guard, quota, increment, success/error toasts) lives in ONE hook,
 `hooks/use-ai-call.ts`, reused by every AI button — never duplicate it per component. The
 daily credit is consumed ONLY on a useful reply: `increment()` runs AFTER the `await` AND
-after the `if (!reply)` guard, so a thrown HTTP error (`postJson` raises on `!res.ok`) or an
+after the `if (!reply)` guard and after `onSuccess` accepted the reply, so a thrown HTTP error (`postJson` raises on `!res.ok`) or an
 empty 200 reply never debits a call. By default a useful reply is shown as a success toast
 (demo behavior); pass the hook's third argument `onSuccess(reply)` to hand the trimmed reply
 to the app instead (fill a result pane, diff it — see `docs/text-tools.md`); the success toast
-is then skipped and everything else (guard, quota, error toasts) stays in the hook. Keep
+is then skipped and everything else (guard, quota, error toasts) stays in the hook.
+`onSuccess` may return `false` to reject an unusable reply (a broken output contract): the
+hook shows the generic error toast and consumes no credit, like an empty reply. Keep
 `buildBody` and `onSuccess` stable references (module level or `useCallback`). The store
 records `aiPendingSince` with `aiPending`, so `useElapsedSeconds(useAiPendingSince())` can
 show the wait time on the pending button.

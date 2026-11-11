@@ -16,14 +16,18 @@ import { useAiPending, useStore } from "./use-store";
 // (on purpose: a single AI call at a time in the app).
 //
 // CREDIT INVARIANT: postJson THROWS on !res.ok (502/504/429), so the catch branch
-// consumes nothing. increment() is AFTER the `await` AND AFTER the `if (!reply)` guard: a
-// credit is consumed ONLY on a genuinely useful reply (non-empty text).
+// consumes nothing. increment() is AFTER the `await`, AFTER the `if (!reply)` guard AND
+// AFTER `onSuccess` accepted the reply: a credit is consumed ONLY on a genuinely useful reply
+// (non-empty text the app could use).
 //
 // CONSUMING THE REPLY: by default a useful reply is shown as a success toast (demo
 // behavior). Pass `onSuccess` to hand the trimmed reply to the app instead (fill an output
 // field, diff it, scroll to it): the success toast is then skipped, everything else (guard,
-// quota, error toasts) stays here. Like `buildBody`, keep it a stable reference (module
-// level or useCallback), otherwise `call` changes on every render.
+// quota, error toasts) stays here. `onSuccess` may return `false` to REJECT an unusable reply
+// (e.g. an output contract the model broke): the hook then shows the generic error toast and
+// consumes no credit, exactly like an empty reply. Returning nothing (void) accepts it. Like
+// `buildBody`, keep it a stable reference (module level or useCallback), otherwise `call`
+// changes on every render.
 export type AiCallCtx = { locale: string; input?: string };
 export function useAiCall(
     endpoint = "/api/hello",
@@ -31,7 +35,7 @@ export function useAiCall(
         locale,
         input,
     }),
-    onSuccess?: (reply: string) => void,
+    onSuccess?: (reply: string) => boolean | void,
 ) {
     const store = useStore();
     const pending = useAiPending();
@@ -54,9 +58,17 @@ export function useAiCall(
                     });
                     return;
                 }
+                // Reply rejected by the app (unusable): report it, and leave BEFORE the increment.
+                if (onSuccess?.(reply) === false) {
+                    store.pushToast({
+                        severity: "error",
+                        message: te("generic"),
+                        duration: 6000,
+                    });
+                    return;
+                }
                 increment(); // exactly once, here, only on a useful reply.
-                if (onSuccess) onSuccess(reply);
-                else
+                if (!onSuccess)
                     store.pushToast({
                         severity: "success",
                         message: reply,

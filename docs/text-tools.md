@@ -23,9 +23,13 @@ NOT here.
   own; always include `min: 0` (an uncovered value throws, it is an authoring error). Labels
   live in `messages/` (`textTools.bands.*`), never in the lib.
 
-- `lib/text/detect-language.ts` — `detectLanguage(text, fallback)`: stop-word vote among the six
-  shipped locales (accent/apostrophe-insensitive tokens), `fallback` when nothing matches. A
-  hint to preselect a language flag next to an editor, NOT a classifier (short or mixed texts
+- `lib/text/detect-language.ts` — `detectLanguage(text, fallback)`: weighted stop-word vote
+  among the six shipped locales (accent/apostrophe-insensitive tokens; a word shared by k
+  languages votes 1/k each, `languageScores` exposes the tally). The `fallback` (usually the
+  UI locale) wins unless another language leads it by `LEAD_MARGIN` (half a vote): no match,
+  only shared words, or a near-tie. Its tests also run every `corrector.examples.*` text found
+  in `messages/*.json` (an app's tool examples), each against its own locale. A hint to
+  preselect a language flag next to an editor, NOT a classifier (short or mixed texts
   can fail); derive it at render, never store it.
 
 ## Components (neutral API, `components/ui/`)
@@ -64,7 +68,8 @@ NOT here.
 
 1. Keep the source text in component state; bound it with `maxLength`.
 2. `useAiCall("/api/run", buildBody, onSuccess)` with module-level `buildBody` and a stable
-   `onSuccess` that stores the reply and scrolls `endId` into view when stacked. The hook keeps
+   `onSuccess` that stores the reply and scrolls `endId` into view when stacked (return `false`
+   for a reply the tool cannot use: error toast, no credit consumed). The hook keeps
    the pending guard, the quota and the error toasts; do not re-implement them.
 3. Render `diffWords(source, reply)` in a `DiffView` with the same `rows` as the `Textarea`;
    compute `similarityPercent` and `bandFor` at render (no effect).

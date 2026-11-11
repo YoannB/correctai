@@ -78,21 +78,113 @@ export interface Correction {
     corrected: string;
 }
 
+// Lone UTF-16 surrogates (a model escaping an emoji as "\ud83d \udc4f" or cutting a pair):
+// they render as "�", so they are dropped.
+const LONE_SURROGATE = /[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?<![\uD800-\uDBFF])[\uDC00-\uDFFF]/g;
+
+function toCorrection(language: unknown, corrected: unknown): Correction | null {
+    if (typeof corrected !== "string") return null;
+    return {
+        language: typeof language === "string" ? language.toLowerCase() : "",
+        corrected: corrected.replace(LONE_SURROGATE, ""),
+    };
+}
+
 /**
- * Tolerant extraction of the agent's JSON reply ({"language","corrected"}): free models may
- * wrap it in prose or a code fence. Returns null when no usable object is found.
+ * Repairs the usual JSON breakages of free models, string-aware: raw control characters
+ * (line breaks, tabs) inside a string are escaped, invalid escapes ("\'", "\é") lose their
+ * backslash, a quote inside a string that is not followed by , : } ] is text (kept, escaped
+ * if straight), typographic quotes used as delimiters become straight quotes, and trailing
+ * commas before "}" / "]" are dropped.
  */
-export function parseCorrection(raw: string): Correction | null {
-    const match = raw.match(/\{[\s\S]*\}/);
-    if (!match) return null;
-    // The match starts with "{" and ends with "}": JSON.parse yields an object or throws.
-    let obj: { language?: unknown; corrected?: unknown };
+export function repairJson(text: string): string {
+    let out = "";
+    let inString = false;
+    for (let i = 0; i < text.length; i++) {
+        const ch = text[i];
+        if (!inString) {
+            if (ch === '"' || ch === "“" || ch === "”") {
+                inString = true;
+                out += '"';
+            } else if (ch === "," && /^\s*[}\]]/.test(text.slice(i + 1))) {
+                // trailing comma: dropped
+            } else out += ch;
+            continue;
+        }
+        if (ch === "\\") {
+            const next = text[i + 1] ?? "";
+            if (/^["\\/bfnrt]$/.test(next) || /^u[0-9a-fA-F]{4}$/.test(text.slice(i + 1, i + 6))) {
+                out += ch + next;
+                i++;
+            }
+            // else: invalid escape, the backslash is dropped and `next` is read as a plain char.
+        } else if (ch === '"' || ch === "”") {
+            // A quote ends the string only where JSON expects it to (before , : } ]); otherwise
+            // it is an unescaped quote INSIDE the text.
+            if (/^\s*[,:}\]]/.test(text.slice(i + 1))) {
+                inString = false;
+                out += '"';
+            } else out += ch === '"' ? '\\"' : ch;
+        } else if (ch === "\n") out += "\\n";
+        else if (ch === "\r") out += "\\r";
+        else if (ch === "\t") out += "\\t";
+        else out += ch;
+    }
+    return out;
+}
+
+function parseObject(json: string): Correction | null {
+    let obj: unknown;
     try {
-        obj = JSON.parse(match[0]) as typeof obj;
+        obj = JSON.parse(json);
     } catch {
         return null;
     }
-    const { language, corrected } = obj;
-    if (typeof corrected !== "string") return null;
-    return { language: typeof language === "string" ? language.toLowerCase() : "", corrected };
+    // The candidate starts with "{" and ends with "}": a successful parse is an object.
+    const { language, corrected } = obj as { language?: unknown; corrected?: unknown };
+    return toCorrection(language, corrected);
+}
+
+/** Decodes the body of a JSON string literal leniently (unknown escapes keep their char). */
+function unescapeJsonString(body: string): string {
+    return body.replace(/\\(u[0-9a-fA-F]{4}|[\s\S])/g, (_, e: string) => {
+        if (e.length === 5) return String.fromCharCode(parseInt(e.slice(1), 16));
+        return { n: "\n", r: "\r", t: "\t", b: "\b", f: "\f" }[e] ?? e;
+    });
+}
+
+/**
+ * Tolerant extraction of the agent's JSON reply ({"language","corrected"}): free models may
+ * wrap it in prose or a code fence, break the JSON (raw line breaks, bad escapes, smart quotes,
+ * trailing commas, trailing text) or escape emojis into lone surrogates. Tries, in order: the
+ * outermost {…} as is, the same repaired, then a field-level extraction of a COMPLETE
+ * "corrected" string. Returns null when no usable correction is found (a truncated reply
+ * included: a partial correction would read as deletions).
+ */
+export function parseCorrection(raw: string): Correction | null {
+    const match = raw.match(/\{[\s\S]*\}/);
+    const parsed = match ? (parseObject(match[0]) ?? parseObject(repairJson(match[0]))) : null;
+    if (parsed) return parsed;
+    // The string must be COMPLETE: its closing quote is followed by "," "}" or the end (a quote
+    // followed by anything else is an unescaped quote inside the text).
+    const field = raw.match(/["“”]corrected["“”]\s*:\s*"((?:[^"\\]|\\[\s\S]|"(?!\s*(?:[,}]|$)))*)"\s*(?:[,}]|$)/);
+    if (!field) return null;
+    const language = raw.match(/["“”]language["“”]\s*:\s*"([A-Za-z-]+)"/)?.[1];
+    return toCorrection(language, unescapeJsonString(field[1]));
+}
+
+/** True when `text` still looks like the agent's JSON envelope (never show it as a correction). */
+export function looksLikeEnvelope(text: string): boolean {
+    return /^\s*(?:```\w*\s*)?\{/.test(text) || /["“”](?:corrected|language)["“”]\s*:/.test(text);
+}
+
+/**
+ * The correction to display for a model reply: the parsed "corrected" field (trimmed), else
+ * the reply itself when the model skipped the envelope (plain corrected text), else null — a
+ * reply that still looks like a JSON envelope is unusable and must never be shown or diffed.
+ */
+export function correctionFromReply(reply: string): string | null {
+    const corrected = parseCorrection(reply)?.corrected.trim();
+    if (corrected) return corrected;
+    return looksLikeEnvelope(reply) ? null : reply;
 }
