@@ -66,6 +66,15 @@ build the root from a variable. An unknown slug renders the 404 page as a SOFT 4
 `robots: noindex`): `app/[locale]/loading.tsx` starts streaming before `notFound()` runs, the
 same as every other page under `[locale]`.
 
+## Turning the section off
+
+`ARTICLES_ENABLED` in `constants/site.ts` is the single switch. `false` removes every article
+surface at once: the `/articles` nav entry (header, footer, HTML sitemap page), the home
+"latest articles" block, the `sitemap.xml` entries, and both routes (`notFound()`, no
+`generateStaticParams` output). `content/articles/` is left untouched (the files are simply not
+published) and `tests/e2e/articles.spec.ts` skips itself. Do not delete the routes or the
+`pathnames` entries to turn the section off: flipping the constant back must be enough.
+
 ## Adding an article (one article = one PR)
 
 Create `content/articles/<id>/` with one `<locale>.md` per supported locale (translate the

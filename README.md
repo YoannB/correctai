@@ -897,7 +897,7 @@ When transforming Axons into a new app, update at least:
 - feature strip
 - FAQ
 - SEO resources
-- articles in `content/articles/` (the two demo articles, and `tests/e2e/articles.spec.ts` which relies on them)
+- articles in `content/articles/` (the two demo articles, and `tests/e2e/articles.spec.ts` which relies on them), or `ARTICLES_ENABLED = false` in `constants/site.ts` to turn the section off
 - footer links
 - sitemap page
 

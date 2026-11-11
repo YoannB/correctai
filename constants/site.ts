@@ -41,7 +41,12 @@ export const LOCALES: LocaleMeta[] = LOCALE_META.map((l) => ({
     active: (SERVED_LOCALES as readonly string[]).includes(l.code),
 }));
 
-export const NAV = [
+// Markdown articles section (listing, article pages, home "latest articles" block, nav entry and
+// sitemap entries). false => every article surface disappears and /articles answers 404; the
+// files in content/articles/ stay in the repo but are not published. See docs/articles.md.
+export const ARTICLES_ENABLED: boolean = true;
+
+const ALL_NAV = [
     { href: "/", key: "nav.home" },
     { href: "/articles", key: "nav.articles" },
     { href: "/sitemap", key: "nav.sitemap" },
@@ -49,6 +54,7 @@ export const NAV = [
     { href: "/privacy", key: "nav.privacy" },
     { href: "/cookies", key: "nav.cookies" },
 ] as const;
+export const NAV = ALL_NAV.filter((n) => ARTICLES_ENABLED || n.href !== "/articles");
 
 export interface SeoResource {
     id: string;
