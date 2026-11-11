@@ -44,7 +44,7 @@ export const LOCALES: LocaleMeta[] = LOCALE_META.map((l) => ({
 // Markdown articles section (listing, article pages, home "latest articles" block, nav entry and
 // sitemap entries). false => every article surface disappears and /articles answers 404; the
 // files in content/articles/ stay in the repo but are not published. See docs/articles.md.
-export const ARTICLES_ENABLED: boolean = true;
+export const ARTICLES_ENABLED: boolean = false;
 
 const ALL_NAV = [
     { href: "/", key: "nav.home" },
