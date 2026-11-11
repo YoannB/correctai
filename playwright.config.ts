@@ -1,4 +1,9 @@
+import nextEnv from "@next/env";
 import { defineConfig, devices } from "@playwright/test";
+
+// Same .env* resolution as `next` (process env wins over files), so specs see the SAME
+// NEXT_PUBLIC_* as the server under test (e.g. the default locale, tests/e2e/support/locale-path.ts).
+nextEnv.loadEnvConfig(process.cwd());
 
 export default defineConfig({
     testDir: "./tests/e2e",

@@ -1,23 +1,53 @@
-/* ===== Logo ===== */
+/* ===== Logo (CorrectAI pen + sparkles) ===== */
 .logo {
     display: block;
+    overflow: visible;
 }
-.logo__orbit {
-    fill: none;
-    stroke: color-mix(in oklab, var(--accent-2) 50%, transparent);
-    stroke-width: 1.2;
-    opacity: 0.6;
+.logo__pen {
+    stroke-dasharray: 120;
+    stroke-dashoffset: 0;
 }
-.logo__axon {
-    fill: none;
-    stroke: var(--accent-2);
-    stroke-width: 1.4;
-    opacity: 0.5;
+.logo--draw .logo__pen {
+    stroke-dashoffset: 120;
+    animation: logoDraw 1.6s ease-in-out infinite;
 }
-.logo__pulse {
-    fill: var(--accent-2);
-    filter: drop-shadow(0 0 6px var(--accent-2));
+.logo__spark {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: logoSpark 1.8s ease-in-out infinite;
 }
-.logo__core {
-    filter: drop-shadow(0 0 10px color-mix(in oklab, var(--accent-1) 60%, transparent));
+.logo__spark--late {
+    animation-delay: 0.6s;
+}
+@keyframes logoDraw {
+    0% {
+        stroke-dashoffset: 120;
+    }
+    55% {
+        stroke-dashoffset: 0;
+    }
+    100% {
+        stroke-dashoffset: -120;
+    }
+}
+@keyframes logoSpark {
+    0%,
+    100% {
+        opacity: 0.2;
+        transform: scale(0.7);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.15);
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .logo--draw .logo__pen {
+        animation: none;
+        stroke-dashoffset: 0;
+    }
+    .logo__spark {
+        animation: none;
+        opacity: 1;
+    }
 }

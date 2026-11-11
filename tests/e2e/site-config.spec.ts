@@ -1,8 +1,9 @@
 import { expect, test, type Page } from "@playwright/test";
 import { acceptCookiesButton, cookieBanner } from "./support/home";
 
-// v0.3.0 site configuration: consent can be re-opened from the footer, the scripted terminal
-// demo runs without any network call, and the security headers keep same-origin framing.
+// v0.3.0 site configuration: consent can be re-opened from the footer and the security headers
+// keep same-origin framing. (CorrectAI: the showcase terminal/tabs specs left with the showcase;
+// those components stay covered by Storybook.)
 // These specs assume a consent-requiring tracker is configured (CI sets NEXT_PUBLIC_ADS_ENABLED).
 
 async function hydrated(page: Page) {
@@ -55,43 +56,6 @@ test.describe("Site configuration", () => {
         // Re-opening keeps the previous choice: the visitor can now change it.
         await acceptCookiesButton(page).click();
         await expect(cookieBanner(page)).toBeHidden();
-    });
-
-    test("the terminal demo plays the scripted sequence without network requests", async ({ page }) => {
-        await page.goto("/fr");
-        await hydrated(page);
-        const calls: string[] = [];
-        page.on("request", (r) => {
-            if (r.url().includes("/api/")) calls.push(r.url());
-        });
-        const showcase = page.locator("#showcase");
-        await showcase.getByRole("button", { name: "Lancer la démo" }).click();
-
-        const log = showcase.getByRole("log", { name: "Démo scénarisée" });
-        await expect(log).toContainText("npm run demo");
-        await expect(log).toContainText("aucun appel IA", { timeout: 10_000 });
-        await expect(showcase.getByRole("button", { name: "Lancer la démo" })).toBeEnabled();
-        expect(calls).toEqual([]);
-    });
-
-    test("with prefers-reduced-motion, the sequence shows at once", async ({ page }) => {
-        await page.emulateMedia({ reducedMotion: "reduce" });
-        await page.goto("/fr");
-        await hydrated(page);
-        const showcase = page.locator("#showcase");
-        await showcase.getByRole("button", { name: "Lancer la démo" }).click();
-        await expect(showcase.getByRole("log", { name: "Démo scénarisée" }).locator(".terminal__line")).toHaveCount(5, {
-            timeout: 500,
-        });
-    });
-
-    test("tabs switch panels", async ({ page }) => {
-        await page.goto("/fr");
-        await hydrated(page);
-        const showcase = page.locator("#showcase");
-        await showcase.getByRole("button", { name: "Problèmes" }).click();
-        await expect(showcase.getByRole("button", { name: "Problèmes" })).toHaveAttribute("aria-pressed", "true");
-        await expect(showcase.getByText("Aucun problème détecté.")).toBeVisible();
     });
 
     test("headers: framing limited to the same origin by default", async ({ request }) => {

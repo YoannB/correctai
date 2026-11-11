@@ -1,12 +1,13 @@
 import { expect, test } from "@playwright/test";
 import { acceptCookiesButton, cookieBanner, languageButton, languageOption, themeToggle } from "./support/home";
+import { lpRe } from "./support/locale-path";
 
 test.describe("Home — structural smoke", () => {
-    test("shows the hero, the component library, the SEO section and the FAQ", async ({ page }) => {
+    test("shows the hero, the corrector, the SEO section and the FAQ", async ({ page }) => {
         await page.goto("/");
 
         await expect(page.locator("h1")).toBeVisible();
-        await expect(page.locator("#showcase")).toBeVisible();
+        await expect(page.locator("section.corrector")).toBeVisible();
         await expect(page.locator("#seo")).toBeVisible();
         await expect(page.locator("#faq")).toBeVisible();
     });
@@ -28,12 +29,12 @@ test.describe("Home — structural smoke", () => {
         await languageButton(page).click();
         await languageOption(page, "Français").click();
 
-        await expect(page).toHaveURL(/\/fr/);
+        await expect(page).toHaveURL(lpRe("fr"));
 
         await languageButton(page).click();
         await languageOption(page, "English").click();
 
-        await expect(page).toHaveURL(/^(?!.*\/fr)/);
+        await expect(page).toHaveURL(lpRe("en"));
     });
 
     test("the theme toggle sets data-theme on <html>", async ({ page }) => {

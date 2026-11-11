@@ -7,7 +7,9 @@
         "privacy": "Confidentialité",
         "cookies": "Cookies",
         "github": "GitHub",
-        "menu": "Menu"
+        "menu": "Menu",
+        "tagline": "Corrigez votre texte avec l'IA",
+        "taglineSub": "Orthographe • Grammaire • Style"
     },
     "hero": {
         "badge": "Votre assistant IA, prêt en un clic",
@@ -143,31 +145,36 @@
         "title": "Questions fréquentes",
         "items": [
             {
-                "q": "Qu'est‑ce qu'Axons ?",
-                "a": "Un boilerplate Next.js 16 / React 19 orienté SEO et IA, déployable sur Netlify, avec une bibliothèque de composants isolée (Material UI) et un branchement OpenRouter via Route Handler."
+                "q": "CorrectAI est-il vraiment gratuit ?",
+                "a": "Oui. Le service s'appuie sur des modèles gratuits via OpenRouter. Aucun compte, aucune carte bancaire : trois corrections par jour et par navigateur, réinitialisées chaque jour."
             },
             {
-                "q": "L'IA est‑elle payante ?",
-                "a": "Le modèle par défaut est un modèle gratuit OpenRouter (openrouter/free). Un quota quotidien limite les appels côté navigateur ; les erreurs sont remontées en toast pour relancer facilement."
+                "q": "Mes textes sont-ils stockés ?",
+                "a": "Non. Votre texte transite uniquement pour la correction et n'est pas conservé sur nos serveurs. Seules des préférences techniques restent dans votre navigateur : thème, langue, quota, jeton de session."
             },
             {
-                "q": "Mes données partent‑elles quelque part ?",
-                "a": "Non. Le thème, le consentement cookies et le compteur quotidien sont stockés localement (cookie + localStorage). La clé OpenRouter reste côté serveur et n'est jamais exposée au navigateur."
+                "q": "L'IA change-t-elle mon style ?",
+                "a": "Non. L'agent est contraint de ne corriger que la forme. Il préserve les sauts de ligne, listes, émojis, mentions, hashtags et URLs, et ne reformule pas, ne résume pas, ne traduit pas."
             },
             {
-                "q": "Comment ajouter une nouvelle action IA ?",
-                "a": "Déposez un fichier dans capabilities/agents/ (ou un dossier capabilities/skills/<id>/), puis appelez POST /api/run avec { prompt, agentId?, skillId?, inputs? }. La route reste fine : composition, quota, timeout et erreurs vivent dans lib/ai (run → composeRun + runPrompt)."
+                "q": "Faut-il étiqueter un texte corrigé comme « généré par IA » ?",
+                "a": "En règle générale, non. La synthèse officielle de l'article 50 prévoit une exception lorsque le système remplit seulement une fonction d'assistance pour des tâches d'édition courantes, comme la correction grammaticale, ou lorsqu'il ne modifie pas substantiellement les données d'entrée ni leur sémantique. CorrectAI signale en revanche les reformulations du sens, auxquelles une mention devient conseillée."
             },
             {
-                "q": "Le site est‑il indexable par Google ?",
-                "a": "Oui : rendu serveur, URLs localisées, métadonnées, hreflang, sitemap XML et plan du site HTML sont fournis."
+                "q": "Quelles langues sont prises en charge ?",
+                "a": "La détection couvre le français, l'anglais, l'espagnol, l'allemand, l'italien et le portugais. L'interface est disponible dans ces six langues."
+            },
+            {
+                "q": "Les corrections sont-elles infaillibles ?",
+                "a": "Non. Le service est gratuit et s'appuie sur des modèles gratuits, ce qui est justement le revers de la médaille : un résultat peut comporter des erreurs, ou n'avoir rien corrigé sur un texte déjà juste. Relancez l'appel si le résultat vous semble incomplet, et relisez toujours avant de publier — vous restez l'auteur et le responsable du texte final."
             }
         ]
     },
     "footer": {
-        "tagline": "Votre base pour des apps IA modernes",
+        "tagline": "Un coup de pouce pour des textes sans faute.",
         "rights": "© {year} {site}. Tous droits réservés.",
-        "builtWith": "Construit avec Next.js, Material UI, next-intl et OpenRouter"
+        "builtWith": "Construit avec Next.js, Material UI, next-intl et OpenRouter",
+        "poweredBy": "Propulsé par <next>Next.js</next> · Déployé sur <netlify>Netlify</netlify>"
     },
     "cookie": {
         "message": "Ce site utilise des cookies pour améliorer votre expérience, mesurer l'audience et afficher des publicités. Vous pouvez accepter ou refuser leur utilisation.",
@@ -358,5 +365,157 @@
     "notFound": {
         "text": "Nous avons fouillé tout le multivers : cette page n'existe dans aucune réalité connue.",
         "home": "Retour à l'accueil"
+    },
+    "corrector": {
+        "examplesLabel": "Exemples rapides",
+        "examples": {
+            "linkedin": {
+                "label": "Un commentaire LinkedIn",
+                "raw": "Tres beau partage ! Cela me rappel un projet que j'avais mener l'an dernier, on avait réussis a doublé notre impact en 6 mois. Bravo a toute l'equipe 🙌",
+                "corrected": "Très beau partage ! Cela me rappelle un projet que j'avais mené l'an dernier, on avait réussi à doubler notre impact en 6 mois. Bravo à toute l'équipe 🙌"
+            },
+            "pro": {
+                "label": "Un message pro",
+                "raw": "Bonjour,\nJe me permets de vous contacté concernant notre réunion de demain. Serait il possible de la décaler a 14h ?\nCordialement,",
+                "corrected": "Bonjour,\nJe me permets de vous contacter concernant notre réunion de demain. Serait-il possible de la décaler à 14h ?\nCordialement,"
+            },
+            "long": {
+                "label": "Un texte plus long",
+                "raw": "Je suis très content de vous écrire aujourd'hui. J'espère que tout se passe bien de votre coté. N'hésitez pas à me faire savoir si vous avez des questions.\n\nPar ailleurs, je tenais à vous remercier pour votre retour, il m'a été très utile. Bien à vous.",
+                "corrected": "Je suis très content de vous écrire aujourd'hui. J'espère que tout se passe bien de votre côté. N'hésitez pas à me faire savoir si vous avez des questions.\n\nPar ailleurs, je tenais à vous remercier pour votre retour, il m'a été très utile. Bien à vous."
+            }
+        },
+        "reset": "Réinitialiser",
+        "resetTip": "Vider les deux zones pour taper votre propre texte",
+        "languageAria": "Langue détectée : {name}",
+        "lockedTip": "Verrouillé — cliquez sur « Réinitialiser » ou sur un exemple pour éditer",
+        "limit": "Limite : {max} caractères",
+        "inputPlaceholder": "Tapez ou collez votre texte à corriger…",
+        "outputPlaceholder": "Le texte corrigé apparaîtra ici, avec les modifications en surbrillance.",
+        "modified": "Modifié",
+        "modifiedTip": "Vous avez modifié le texte depuis le dernier résultat : la correction affichée n'est plus à jour. Relancez l'opération pour l'actualiser.",
+        "run": "Lancer la correction",
+        "running": "Correction…",
+        "notice": {
+            "wait": "Temps d'attente possible : quelques secondes à 30 s (file LLM gratuite).",
+            "thirdParty": "Appel à un LLM via {provider} (modèle gratuit). IA = tiers, même gratuite.",
+            "quality": "Résultats gratuits : ils peuvent comporter des erreurs ou n'avoir rien corrigé. Relancez si besoin, et relisez toujours avant de publier."
+        },
+        "copy": "Copier le texte corrigé",
+        "copied": "Texte corrigé copié (sans mise en forme).",
+        "legend": {
+            "insert": "Ajout",
+            "replace": "Correction",
+            "delete": "Suppression"
+        },
+        "bands": {
+            "perfect": {
+                "label": "Parfait !",
+                "message": "Aucune correction nécessaire."
+            },
+            "great": {
+                "label": "Très bon !",
+                "message": "Le texte est presque parfait."
+            },
+            "good": {
+                "label": "Bonnes corrections",
+                "message": "Corrections de forme appliquées."
+            },
+            "low": {
+                "label": "Nombreuses corrections",
+                "message": "Beaucoup de fautes de forme corrigées."
+            }
+        },
+        "counts": "{form, plural, =0 {0 corrections de forme} one {# correction de forme} other {# corrections de forme}} · {content, plural, =0 {0 reformulations} one {# reformulation} other {# reformulations}}",
+        "badge": {
+            "ready": "Prêt à poster",
+            "review": "Prêt à poster · à relire",
+            "tag": "Tag « IA » requis"
+        },
+        "explain": {
+            "tag": "Reformulation détectée : le sens ou la voix a été altéré. Au sens de l'art. 50 du Règlement (UE) 2024/1689, ajoutez une mention « modifié/généré par IA » à la publication.",
+            "review": "Corrections de forme uniquement (orthographe, grammaire, ponctuation) : l'auteur reste humain, aucune mention IA n'est requise (considérant 133). Mais l'outil a beaucoup touché — relisez pour vérifier que le sens vous appartient toujours."
+        },
+        "tip": {
+            "tag": "Reformulation substantielle : mention IA requise à la publication.",
+            "review": "Aucune reformulation : pas d'obligation légale de tag, mais relisez (beaucoup de touches de forme)."
+        },
+        "confirm": {
+            "title": "Remplacer le texte saisi ?",
+            "body": "Vous allez charger l'exemple « {label} » et perdre le texte que vous avez saisi. Cette action est immédiate et non annulable. Voulez-vous continuer ?",
+            "cancel": "Annuler",
+            "confirm": "Charger l'exemple"
+        },
+        "inputLabel": "Texte à corriger",
+        "outputLabel": "Texte corrigé",
+        "resetConfirm": {
+            "title": "Effacer le texte saisi ?",
+            "body": "Les deux zones vont être vidées et le texte que vous avez saisi sera perdu. Cette action est immédiate et non annulable. Voulez-vous continuer ?",
+            "confirm": "Réinitialiser"
+        }
+    },
+    "toolHero": {
+        "titleLead": "Un texte plus juste,",
+        "titleAccent": "en quelques secondes",
+        "subtitle": "Corrigez vos fautes d'orthographe et de grammaire grâce à l''<ai>IA</ai>, tout en gardant votre style.",
+        "tagline": "Simple, rapide et sans compromis sur votre façon de vous exprimer."
+    },
+    "seoContent": {
+        "heading": "Corriger sans réécrire",
+        "intro": "CorrectAI ne touche qu'à la surface du texte : fautes d'orthographe, accords, conjugaison, ponctuation. Le fond, le ton et le vocabulaire restent les vôtres.",
+        "steps": [
+            {
+                "title": "Collez ou tapez votre texte",
+                "text": "Jusqu'à 3 000 caractères, soit la norme d'un post LinkedIn ou d'un message professionnel."
+            },
+            {
+                "title": "Lancez la correction",
+                "text": "Un agent IA relit la forme : orthographe, grammaire, conjugaison, syntaxe, ponctuation."
+            },
+            {
+                "title": "Relisez et publiez",
+                "text": "Les modifications sont surlignées ; un score et un verdict de transparence vous orientent."
+            }
+        ],
+        "chips": ["Orthographe", "Grammaire", "Ponctuation"],
+        "law": {
+            "heading": "Article 50 : ce qu'il faut retenir",
+            "intro": "Synthèse non exhaustive de la page officielle sur les règles de transparence de l'article 50 du Règlement (UE) 2024/1689.",
+            "bullets": [
+                "Depuis le 2 août 2026, l'article 50 impose des obligations de transparence dans quatre cas : interaction directe avec une IA, contenu synthétique, reconnaissance des émotions ou classification biométrique, deepfakes et textes d'intérêt public.",
+                "Pour les contenus générés, les fournisseurs doivent marquer les sorties de manière lisible par machine et permettre leur identification comme générées ou manipulées artificiellement ; un délai « AI Omnibus » court jusqu'au 2 décembre 2026 pour ce marquage.",
+                "Exception clé pour CorrectAI : l'obligation ne s'applique pas lorsque le système remplit seulement une fonction d'assistance pour des tâches d'édition courantes, comme la correction grammaticale, ou lorsqu'il ne modifie pas substantiellement les données d'entrée ni leur sémantique.",
+                "L'information doit être claire et distincte, au plus tard au moment de la première interaction ou exposition."
+            ],
+            "linkLaw": "Consulter la synthèse officielle de l'article 50",
+            "linkVideo": "Ouvrir la vidéo courte",
+            "videoTitle": "Vidéo courte sur l'article 50 de la loi européenne sur l'IA",
+            "source": "Synthèse officielle"
+        },
+        "data": {
+            "heading": "Respect de vos données",
+            "text": "Aucun compte, aucun stockage de votre contenu côté serveur. L'IA reste un tiers, même gratuite, et nous l'indiquons en transparence."
+        },
+        "links": {
+            "privacy": "Confidentialité",
+            "cookies": "Cookies",
+            "sitemap": "Plan du site"
+        }
+    },
+    "toolFeatures": {
+        "quota": "{n, plural, one {# correction max / jour} other {# corrections max / jour}}",
+        "quotaSub": "Limite réinitialisée chaque jour",
+        "cookies": "Cookies requis",
+        "cookiesSub": "Pour le bon fonctionnement de l'app",
+        "tier": "IA tiers ({provider})",
+        "tierSub": "Même gratuit, l'IA est un service externe",
+        "bot": "Anti-bot",
+        "botSub": "Protection contre les connexions automatisées"
+    },
+    "meta": {
+        "home": {
+            "title": "CorrectAI – Correction orthographique & grammaticale par IA",
+            "description": "Corrigez orthographe, grammaire et ponctuation grâce à l'IA, sans dénaturer votre style. Simple, rapide, respectueux de votre voix."
+        }
     }
 }

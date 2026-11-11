@@ -13,10 +13,10 @@ import "./globals.css";
 export const metadata = {
     metadataBase: new URL(SITE_URL),
     title: {
-        default: `${SITE_NAME} — Next.js AI/SEO boilerplate`,
+        default: `${SITE_NAME} – AI spelling & grammar checker`,
         template: `%s · ${SITE_NAME}`,
     },
-    description: "Next.js 16 boilerplate for SEO and AI (OpenRouter), deployable on Netlify.",
+    description: "Fix spelling, grammar and punctuation with AI without changing your style.",
     openGraph: { siteName: SITE_NAME, type: "website", url: SITE_URL },
 };
 

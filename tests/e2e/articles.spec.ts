@@ -1,4 +1,5 @@
 import { expect, test, type Page } from "@playwright/test";
+import { ARTICLES_ENABLED } from "../../constants/site";
 import { acceptCookiesButton, cookieBanner, languageButton, languageOption } from "./support/home";
 
 // v0.4.0 articles: listing -> article -> language switch onto the TRANSLATED slug, SEO tags,
@@ -15,6 +16,9 @@ async function ready(page: Page) {
 }
 
 test.describe("Articles", () => {
+    // A derived site that turned the section off (constants/site.ts) has nothing to check here.
+    test.skip(!ARTICLES_ENABLED, "articles section disabled (ARTICLES_ENABLED = false)");
+
     test("list -> article -> language switch on the translated slug", async ({ page }) => {
         await page.goto("/fr/articles");
         await ready(page);

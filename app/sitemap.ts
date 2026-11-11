@@ -1,10 +1,12 @@
-import { SITE_URL } from "@/constants/site";
+import { ARTICLES_ENABLED, SITE_URL } from "@/constants/site";
 import { getPathname, routing } from "@/i18n/routing";
 import { getCatalog } from "@/lib/articles/source";
 import { articlePath, type LogicalHref } from "@/lib/seo";
 import type { MetadataRoute } from "next";
 
-const HREFS: LogicalHref[] = ["/", "/articles", "/sitemap", "/legal", "/privacy", "/cookies"];
+const HREFS: LogicalHref[] = (["/", "/articles", "/sitemap", "/legal", "/privacy", "/cookies"] as const).filter(
+    (href) => ARTICLES_ENABLED || href !== "/articles",
+);
 
 export default function sitemap(): MetadataRoute.Sitemap {
     const now = new Date();
@@ -17,7 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         })),
     );
     // One entry per article TRANSLATION (served locales only), dated by its front matter.
-    const articles = getCatalog().flatMap((entry) =>
+    const articles = (ARTICLES_ENABLED ? getCatalog() : []).flatMap((entry) =>
         Object.values(entry.translations).map((article) => ({
             url: new URL(articlePath(article.locale, article.slug), SITE_URL).toString(),
             lastModified: new Date(`${article.date}T00:00:00Z`),

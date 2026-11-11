@@ -1,6 +1,6 @@
 import { ArticleBody } from "@/components/content/ArticleBody";
 import { StaticPage } from "@/components/content/StaticPage";
-import { SITE_NAME } from "@/constants/site";
+import { ARTICLES_ENABLED, SITE_NAME } from "@/constants/site";
 import { getPathname } from "@/i18n/routing";
 import { getArticle, getCatalog } from "@/lib/articles/source";
 import { articleJsonLd, articleMetadata } from "@/lib/seo";
@@ -11,6 +11,7 @@ type Params = Promise<{ locale: string; slug: string }>;
 
 // One page per translation, under ITS locale's slug; any other slug hits notFound() below.
 export function generateStaticParams({ params }: { params: { locale: string } }) {
+    if (!ARTICLES_ENABLED) return [];
     return getCatalog().flatMap((entry) => {
         const article = entry.translations[params.locale];
         return article ? [{ slug: article.slug }] : [];
@@ -19,14 +20,14 @@ export function generateStaticParams({ params }: { params: { locale: string } })
 
 export async function generateMetadata({ params }: { params: Params }) {
     const { locale, slug } = await params;
-    const entry = getArticle(locale, slug);
+    const entry = ARTICLES_ENABLED ? getArticle(locale, slug) : undefined;
     if (!entry) notFound();
     return articleMetadata(entry, locale);
 }
 
 export default async function ArticlePage({ params }: { params: Params }) {
     const { locale, slug } = await params;
-    const entry = getArticle(locale, slug);
+    const entry = ARTICLES_ENABLED ? getArticle(locale, slug) : undefined;
     if (!entry) notFound();
     const article = entry.translations[locale];
     const t = await getTranslations({ locale, namespace: "pages.articles" });
