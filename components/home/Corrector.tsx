@@ -131,7 +131,10 @@ export function Corrector() {
                     {lang.flag}
                 </span>
                 <span className="corrector__lang-name">{lang.native}</span>
-                <Icon name="shield" size={14} className="corrector__lock" />
+                <svg className="corrector__lock" width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
+                    <rect x="5" y="11" width="14" height="10" rx="2" fill="currentColor" />
+                    <path d="M8 11V8a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" strokeWidth="2" />
+                </svg>
             </span>
             <span className="corrector__count">
                 {stale && result ? (
@@ -193,16 +196,17 @@ export function Corrector() {
                     onChange={pickExample}
                     disabled={pending}
                 />
-                <Button
-                    variant="ghost"
-                    size="sm"
-                    className="corrector__reset"
-                    onClick={askReset}
-                    disabled={pending || (input === "" && result === null)}
-                    ariaLabel={t("resetTip")}
-                >
-                    ↻ {t("reset")}
-                </Button>
+                <span className="corrector__reset">
+                    <Button
+                        variant="secondary"
+                        size="sm"
+                        onClick={askReset}
+                        disabled={pending || (input === "" && result === null)}
+                        ariaLabel={t("resetTip")}
+                    >
+                        ↻ {t("reset")}
+                    </Button>
+                </span>
             </div>
             <EditorPair
                 className="corrector__pair"
@@ -211,7 +215,7 @@ export function Corrector() {
                 start={
                     <Textarea
                         id="corrector-input"
-                        label={t("inputLabel")}
+                        ariaLabel={t("inputLabel")}
                         value={input}
                         onChange={(v) => setInput(v.slice(0, MAX_CHARS))}
                         placeholder={t("inputPlaceholder")}

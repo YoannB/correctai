@@ -1,10 +1,11 @@
 "use client";
 import { Logo } from "@/components/ui";
-import { CONSENT_REQUIRED, GITHUB_URL, NAV, SITE_NAME } from "@/constants/site";
+import { BRAND_ACCENT_FROM, CONSENT_REQUIRED, GITHUB_LINK_ENABLED, GITHUB_URL, NAV, SITE_NAME } from "@/constants/site";
 import { useCookieConsent } from "@/hooks/use-consent";
 import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
 
+// `footer.poweredBy` (optional message, rich tags <next> and <netlify>) adds a credits line.
 export function Footer() {
     const t = useTranslations("footer");
     const tn = useTranslations("nav");
@@ -16,7 +17,10 @@ export function Footer() {
                 <div>
                     <Link href="/" className="brand">
                         <Logo size={26} />
-                        <span>{SITE_NAME}</span>
+                        <span>
+                            {SITE_NAME.slice(0, BRAND_ACCENT_FROM)}
+                            <b>{SITE_NAME.slice(BRAND_ACCENT_FROM)}</b>
+                        </span>
                     </Link>
                     <p className="muted">{t("tagline")}</p>
                 </div>
@@ -34,9 +38,19 @@ export function Footer() {
                             {tc("manage")}
                         </button>
                     ) : null}
-                    <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer">
-                        GitHub
-                    </a>
+                    {GITHUB_LINK_ENABLED ? (
+                        <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer">
+                            GitHub
+                        </a>
+                    ) : null}
+                    {t.has("poweredBy") ? (
+                        <span className="muted">
+                            {t.rich("poweredBy", {
+                                next: (c) => <b>{c}</b>,
+                                netlify: (c) => <b>{c}</b>,
+                            })}
+                        </span>
+                    ) : null}
                     <span className="muted">{t("rights", { year: new Date().getFullYear(), site: SITE_NAME })}</span>
                 </div>
             </div>

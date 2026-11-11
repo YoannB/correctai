@@ -248,3 +248,32 @@
 .tool-features {
     margin-block: 18px;
 }
+
+/* ===== Fidelity with the POC (legend as outlined pills with a dot, lock, borderless lang) ===== */
+.corrector .diff-legend li {
+    padding: 2px 10px 2px 8px;
+    border: 1px solid var(--border-2);
+    border-radius: 999px;
+    font-weight: 600;
+    color: var(--text-1);
+}
+.corrector .diff-legend__swatch {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    box-shadow: none;
+}
+.corrector .diff-legend__swatch.diff--insert {
+    background: var(--ok);
+}
+.corrector .diff-legend__swatch.diff--replace {
+    background: #3b82f6;
+}
+.corrector .diff-legend__swatch.diff--delete {
+    background: var(--danger);
+}
+.corrector__lang {
+    border-color: transparent;
+    background: transparent;
+    padding-inline: 4px;
+}

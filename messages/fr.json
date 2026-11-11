@@ -7,7 +7,9 @@
         "privacy": "Confidentialité",
         "cookies": "Cookies",
         "github": "GitHub",
-        "menu": "Menu"
+        "menu": "Menu",
+        "tagline": "Corrigez votre texte avec l'IA",
+        "taglineSub": "Orthographe • Grammaire • Style"
     },
     "hero": {
         "badge": "Votre assistant IA, prêt en un clic",
@@ -172,7 +174,7 @@
         "tagline": "Un coup de pouce pour des textes sans faute.",
         "rights": "© {year} {site}. Tous droits réservés.",
         "builtWith": "Construit avec Next.js, Material UI, next-intl et OpenRouter",
-        "poweredBy": "Propulsé par {next} · Déployé sur {netlify}"
+        "poweredBy": "Propulsé par <next>Next.js</next> · Déployé sur <netlify>Netlify</netlify>"
     },
     "cookie": {
         "message": "Ce site utilise des cookies pour améliorer votre expérience, mesurer l'audience et afficher des publicités. Vous pouvez accepter ou refuser leur utilisation.",
@@ -456,9 +458,7 @@
         "titleLead": "Un texte plus juste,",
         "titleAccent": "en quelques secondes",
         "subtitle": "Corrigez vos fautes d'orthographe et de grammaire grâce à l''<ai>IA</ai>, tout en gardant votre style.",
-        "tagline": "Simple, rapide et sans compromis sur votre façon de vous exprimer.",
-        "headerTitle": "Corrigez votre texte avec l'IA",
-        "headerSub": "Orthographe • Grammaire • Style"
+        "tagline": "Simple, rapide et sans compromis sur votre façon de vous exprimer."
     },
     "seoContent": {
         "heading": "Corriger sans réécrire",

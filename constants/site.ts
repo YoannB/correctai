@@ -18,6 +18,13 @@ export const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID ?? "";
 export const CONSENT_REQUIRED = isConsentRequired({ gtmId: GTM_ID, adsEnabled: ADS_ENABLED });
 export const GITHUB_URL = "https://github.com/YoannB/correctai";
 
+// Site chrome switches (Axons defaults: true / true / 1). A one-page tool can drop the header
+// nav (the footer and the HTML sitemap still list every page) and the GitHub links.
+export const HEADER_NAV_ENABLED: boolean = false;
+export const GITHUB_LINK_ENABLED: boolean = false;
+/** Brand word: SITE_NAME[0..BRAND_ACCENT_FROM) plain, the rest accented ("Correct" + "AI"). */
+export const BRAND_ACCENT_FROM: number = 7;
+
 export type LocaleCode = "fr" | "en" | "es" | "de" | "it" | "pt";
 export interface LocaleMeta {
     code: LocaleCode;
