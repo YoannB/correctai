@@ -15,12 +15,18 @@ NOT here.
   token OR same skeleton (case/accent/apostrophe-insensitive), so an accent fix is a visible
   `replace` and an inserted comma does not shift the alignment. Only two non-whitespace
   tokens fuse into a `replace`. LCS is O(n·m) in tokens: ALWAYS bound the input upstream
-  (`Textarea maxLength`, and the server bound on `/api/run`).
+  (`Textarea maxLength`, and the server bound on `/api/run`: the agent's `maxPromptChars`, see
+  _Agent contract_ in `docs/ai-capabilities.md`).
 - `lib/text/similarity.ts` — `diffStats` (whitespace-only ops ignored), `similarityPercent`
   (one edit = one unit against the longer side's word count, clamped to [0, 100]),
   `bandFor(percent, bands?)` with `DEFAULT_BANDS` 100 / 95 / 90 / 0. Bands are data: pass your
   own; always include `min: 0` (an uncovered value throws, it is an authoring error). Labels
   live in `messages/` (`textTools.bands.*`), never in the lib.
+
+- `lib/text/detect-language.ts` — `detectLanguage(text, fallback)`: stop-word vote among the six
+  shipped locales (accent/apostrophe-insensitive tokens), `fallback` when nothing matches. A
+  hint to preselect a language flag next to an editor, NOT a classifier (short or mixed texts
+  can fail); derive it at render, never store it.
 
 ## Components (neutral API, `components/ui/`)
 
@@ -39,7 +45,11 @@ NOT here.
   passed translated (`messages/*.json` → `aiNotice`), so it stays free of next-intl.
 - `Gauge tone` — `success | info | warning | error` recolors the arc (CSS beats the gradient
   attribute); map your bands to tones in the app.
-- `CopyButton disabled` — copy the plain result text (never markup).
+- `CopyButton disabled` — copy the plain result text (never markup). `label` / `copiedLabel`
+  replace the generic showcase copy; `onCopied` runs only once the clipboard write resolved
+  (e.g. a toast).
+- `Textarea` / `Input` `ariaLabel` — accessible name when the field has no visible `label` (a
+  placeholder is not a name); ignored when `label` is set.
 
 ## Hooks
 

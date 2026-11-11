@@ -1,4 +1,4 @@
-import { parseAgent, renderPrompt } from "@/lib/ai/parse-agent";
+import { DEFAULT_MAX_PROMPT_CHARS, parseAgent, renderPrompt } from "@/lib/ai/parse-agent";
 import { describe, expect, it } from "vitest";
 
 // Pure BASELINE (no fs/network/mock). NB: the `input` field no longer exists in the agent
@@ -25,6 +25,7 @@ describe("parseAgent — nominal path", () => {
             temperature: 0.7,
             maxTokens: 200,
             timeoutMs: 25000,
+            maxPromptChars: DEFAULT_MAX_PROMPT_CHARS,
             systemPrompt: "Salue dans la langue {locale}.",
         });
     });
@@ -56,6 +57,7 @@ describe("parseAgent — defaults (?? DEFAULTS branch)", () => {
             temperature: 0.7,
             maxTokens: 300,
             timeoutMs: 25000,
+            maxPromptChars: DEFAULT_MAX_PROMPT_CHARS,
         });
     });
     it("ignores a line without ': '", () => {
@@ -66,6 +68,21 @@ describe("parseAgent — defaults (?? DEFAULTS branch)", () => {
         expect(a.temperature).toBe(0.9);
         expect(a.maxTokens).toBe(512);
         expect(a.timeoutMs).toBe(30000);
+    });
+});
+
+describe("parseAgent — maxPromptChars (server bound on the prompt)", () => {
+    it("reads a positive value", () => {
+        expect(parseAgent("---\nid: x\nmaxPromptChars: 3000\n---\nb").maxPromptChars).toBe(3000);
+    });
+    it("rejects a non-numeric value", () => {
+        expect(() => parseAgent("---\nid: x\nmaxPromptChars: lots\n---\nb")).toThrow(/maxPromptChars/);
+    });
+    it("rejects 0 (would refuse every call)", () => {
+        expect(() => parseAgent("---\nid: x\nmaxPromptChars: 0\n---\nb")).toThrow(/must be > 0/);
+    });
+    it("rejects a negative value", () => {
+        expect(() => parseAgent("---\nid: x\nmaxPromptChars: -5\n---\nb")).toThrow(/must be > 0/);
     });
 });
 
