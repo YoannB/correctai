@@ -358,5 +358,101 @@
     "notFound": {
         "text": "Hemos registrado todo el multiverso: esta página no existe en ninguna realidad conocida.",
         "home": "Volver al inicio"
+    },
+    "corrector": {
+        "examplesLabel": "Ejemplos rápidos",
+        "examples": {
+            "linkedin": {
+                "label": "Un comentario de LinkedIn",
+                "raw": "Muy buen compartido ! Esto me recuerda un proyecto que abia llevado el año pasado, logramos duplicar nuestro impacto en 6 meses. Enhorabuena a todo el equipo 🙌",
+                "corrected": "¡Muy buen compartido! Esto me recuerda un proyecto que había llevado el año pasado; logramos duplicar nuestro impacto en 6 meses. Enhorabuena a todo el equipo 🙌"
+            },
+            "pro": {
+                "label": "Un mensaje profesional",
+                "raw": "Hola,\nMe permito contactarle respecto a nuestra reunion de manana. Seria posible aplazarla a las 14h?\nUn saludo,",
+                "corrected": "Hola,\nMe permito contactarle respecto a nuestra reunión de mañana. ¿Sería posible aplazarla a las 14h?\nUn saludo,"
+            },
+            "long": {
+                "label": "Un texto más largo",
+                "raw": "Estoy muy contento de escribirle hoy. Espero que todo vaya bien de su lado. No dude en hacernos saber si tiene alguna pregunta.\n\nPor cierto, queria agradecerle su comentario, me fue muy util. Atentamente.",
+                "corrected": "Estoy muy contento de escribirle hoy. Espero que todo vaya bien de su lado. No dude en hacernos saber si tiene alguna pregunta.\n\nPor cierto, quería agradecerle su comentario; me fue muy útil. Atentamente."
+            }
+        },
+        "reset": "Restablecer",
+        "resetTip": "Vaciar ambas zonas para escribir tu propio texto",
+        "languageAria": "Idioma detectado: {name}",
+        "lockedTip": "Bloqueado — pulsa «Restablecer» o un ejemplo para editar",
+        "limit": "Límite: {max} caracteres",
+        "inputPlaceholder": "Escribe o pega el texto a corregir…",
+        "outputPlaceholder": "El texto corregido aparecerá aquí, con los cambios resaltados.",
+        "modified": "Modificado",
+        "modifiedTip": "Has editado el texto desde el último resultado: la corrección mostrada está obsoleta. Vuelve a lanzarla para actualizarla.",
+        "run": "Iniciar corrección",
+        "running": "Corrigiendo…",
+        "notice": {
+            "wait": "Espera posible: de unos segundos hasta 30 s (cola de LLM gratuita).",
+            "thirdParty": "Llamada a un LLM vía {provider} (modelo gratuito). La IA es un tercero, aunque sea gratis.",
+            "quality": "Resultados gratuitos: pueden contener errores o no haber corregido nada. Vuelve a intentarlo si hace falta, y relee siempre antes de publicar."
+        },
+        "copy": "Copiar texto corregido",
+        "copied": "Texto corregido copiado (sin formato).",
+        "legend": {
+            "insert": "Añadido",
+            "replace": "Corrección",
+            "delete": "Eliminación"
+        },
+        "bands": {
+            "perfect": {
+                "label": "¡Perfecto!",
+                "message": "No hace falta ninguna corrección."
+            },
+            "great": {
+                "label": "¡Muy bien!",
+                "message": "El texto está casi perfecto."
+            },
+            "good": {
+                "label": "Buenas correcciones",
+                "message": "Correcciones de forma aplicadas."
+            },
+            "low": {
+                "label": "Muchas correcciones",
+                "message": "Se corrigieron muchas faltas de ortografía."
+            }
+        },
+        "counts": "{form, plural, =0 {0 correcciones de forma} one {# corrección de forma} other {# correcciones de forma}} · {content, plural, =0 {0 reformulaciones} one {# reformulación} other {# reformulaciones}}",
+        "badge": {
+            "ready": "Listo para publicar",
+            "review": "Listo para publicar · revisar",
+            "tag": "Etiqueta «IA» requerida"
+        },
+        "explain": {
+            "tag": "Reformulación detectada: se alteró el sentido o la voz. Según el art. 50 del Reglamento (UE) 2024/1689, añade una mención «modificado/generado por IA» al publicar.",
+            "review": "Solo correcciones de forma (ortografía, gramática, puntuación): el autor sigue siendo humano, no se requiere mención de IA (considerando 133). Pero la herramienta tocó mucho — relee para confirmar que el sentido sigue siendo tuyo."
+        },
+        "tip": {
+            "tag": "Reformulación sustancial: mención de IA obligatoria al publicar.",
+            "review": "Sin reformulación: no hay obligación legal de etiquetar, pero relee (muchos retoques de forma)."
+        },
+        "confirm": {
+            "title": "¿Reemplazar el texto escrito?",
+            "body": "Vas a cargar el ejemplo «{label}» y perder el texto que escribiste. Es inmediato y no se puede deshacer. ¿Continuar?",
+            "cancel": "Cancelar",
+            "confirm": "Cargar ejemplo"
+        },
+        "inputLabel": "Texto a corregir",
+        "outputLabel": "Texto corregido",
+        "resetConfirm": {
+            "title": "¿Borrar el texto escrito?",
+            "body": "Las dos zonas se vaciarán y perderás el texto que has escrito. Esta acción es inmediata e irreversible. ¿Quieres continuar?",
+            "confirm": "Restablecer"
+        }
+    },
+    "toolHero": {
+        "titleLead": "Un texto más justo,",
+        "titleAccent": "en segundos",
+        "subtitle": "Corrige tus faltas de ortografía y gramática con <ai>IA</ai>, manteniendo tu propio estilo.",
+        "tagline": "Simple, rápido y sin concesiones en tu forma de expresarte.",
+        "headerTitle": "Corrige tu texto con IA",
+        "headerSub": "Ortografía • Gramática • Estilo"
     }
 }

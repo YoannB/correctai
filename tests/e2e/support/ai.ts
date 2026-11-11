@@ -1,12 +1,7 @@
 import type { Page, Route } from "@playwright/test";
 
-const HELLO_URL = "**/api/hello";
-
-export const AI_BTN_NAME = /Test the AI|Tester l.IA/i;
-
-export function aiButton(page: Page) {
-    return page.locator("#showcase").getByRole("button", { name: AI_BTN_NAME });
-}
+// CorrectAI calls the unified route (agent "correct"); the Axons showcase button is gone.
+const RUN_URL = "**/api/run";
 
 // IMPORTANT:
 // .toast-region is the aria-live region that contains the toasts.
@@ -29,7 +24,7 @@ export function toastByText(page: Page, text: string | RegExp) {
     return toastAlerts(page).filter({ hasText: text });
 }
 
-export interface HelloMock {
+export interface RunMock {
     status?: number;
     body?: unknown;
     rawBody?: string;
@@ -37,7 +32,7 @@ export interface HelloMock {
     delayMs?: number;
 }
 
-async function fulfillMock(route: Route, mock: HelloMock) {
+async function fulfillMock(route: Route, mock: RunMock) {
     if (mock.delayMs) {
         await new Promise((resolve) => setTimeout(resolve, mock.delayMs));
     }
@@ -51,14 +46,14 @@ async function fulfillMock(route: Route, mock: HelloMock) {
     });
 }
 
-export async function mockHello(page: Page, mock: HelloMock) {
-    await page.route(HELLO_URL, (route) => fulfillMock(route, mock));
+export async function mockRun(page: Page, mock: RunMock) {
+    await page.route(RUN_URL, (route) => fulfillMock(route, mock));
 }
 
-export async function mockHelloSequence(page: Page, mocks: HelloMock[]) {
+export async function mockRunSequence(page: Page, mocks: RunMock[]) {
     let index = 0;
 
-    await page.route(HELLO_URL, async (route) => {
+    await page.route(RUN_URL, async (route) => {
         const mock = mocks[Math.min(index, mocks.length - 1)];
         index += 1;
 
@@ -66,10 +61,10 @@ export async function mockHelloSequence(page: Page, mocks: HelloMock[]) {
     });
 }
 
-export async function mockHelloWithCounter(page: Page, mock: HelloMock): Promise<{ hits: number }> {
+export async function mockRunWithCounter(page: Page, mock: RunMock): Promise<{ hits: number }> {
     const counter = { hits: 0 };
 
-    await page.route(HELLO_URL, async (route) => {
+    await page.route(RUN_URL, async (route) => {
         counter.hits += 1;
         await fulfillMock(route, mock);
     });

@@ -358,5 +358,101 @@
     "notFound": {
         "text": "Vasculhámos todo o multiverso: esta página não existe em nenhuma realidade conhecida.",
         "home": "Voltar ao início"
+    },
+    "corrector": {
+        "examplesLabel": "Exemplos rápidos",
+        "examples": {
+            "linkedin": {
+                "label": "Um comentário no LinkedIn",
+                "raw": "Muito boa partilha ! Isto lembra-me um projeto que tinha liderado no ano passado, conseguimos duplicar o nosso impacto em 6 meses. Parabens a toda a equipa 🙌",
+                "corrected": "Muito boa partilha! Isto lembra-me um projeto que tinha liderado no ano passado; conseguimos duplicar o nosso impacto em 6 meses. Parabéns a toda a equipa 🙌"
+            },
+            "pro": {
+                "label": "Uma mensagem profissional",
+                "raw": "Bom dia,\nperminto-lhe contacta-lo relativamente a nossa reuniao de amanha. Seria possivel adia-la para as 14h?\nCom os melhores cumprimentos,",
+                "corrected": "Bom dia,\npermito-lhe contactá-lo relativamente à nossa reunião de amanhã. Seria possível adiá-la para as 14h?\nCom os melhores cumprimentos,"
+            },
+            "long": {
+                "label": "Um texto mais longo",
+                "raw": "Estou muito contente por lhe escrever hoje. Espero que tudo corra bem do seu lado. Nao hesite em dizer-me se tiver alguma questao.\n\nA proposito, queria agradecer-lhe o seu retorno, foi-me muito util. Atenciosamente.",
+                "corrected": "Estou muito contente por lhe escrever hoje. Espero que tudo corra bem do seu lado. Não hesite em dizer-me se tiver alguma questão.\n\nA propósito, queria agradecer-lhe o seu retorno; foi-me muito útil. Atenciosamente."
+            }
+        },
+        "reset": "Repor",
+        "resetTip": "Esvaziar as duas áreas para escrever o seu próprio texto",
+        "languageAria": "Idioma detetado: {name}",
+        "lockedTip": "Bloqueado — clique em «Repor» ou num exemplo para editar",
+        "limit": "Limite: {max} caracteres",
+        "inputPlaceholder": "Escreva ou cole o texto a corrigir…",
+        "outputPlaceholder": "O texto corrigido aparecerá aqui, com as alterações destacadas.",
+        "modified": "Modificado",
+        "modifiedTip": "Você editou o texto desde o último resultado: a correção exibida está desatualizada. Execute novamente para atualizá-la.",
+        "run": "Iniciar correção",
+        "running": "A corrigir…",
+        "notice": {
+            "wait": "Espera possível: de alguns segundos até 30 s (fila de LLM gratuita).",
+            "thirdParty": "Chamada a um LLM via {provider} (modelo gratuito). A IA é terceira, mesmo gratuita.",
+            "quality": "Resultados gratuitos: podem conter erros ou não ter corrigido nada. Execute novamente se necessário e releia sempre antes de publicar."
+        },
+        "copy": "Copiar texto corrigido",
+        "copied": "Texto corrigido copiado (sem formatação).",
+        "legend": {
+            "insert": "Adição",
+            "replace": "Correção",
+            "delete": "Eliminação"
+        },
+        "bands": {
+            "perfect": {
+                "label": "Perfeito!",
+                "message": "Nenhuma correção necessária."
+            },
+            "great": {
+                "label": "Muito bom!",
+                "message": "O texto está quase perfeito."
+            },
+            "good": {
+                "label": "Boas correções",
+                "message": "Correções de forma aplicadas."
+            },
+            "low": {
+                "label": "Muitas correções",
+                "message": "Muitos erros ortográficos corrigidos."
+            }
+        },
+        "counts": "{form, plural, =0 {0 correções de forma} one {# correção de forma} other {# correções de forma}} · {content, plural, =0 {0 reformulações} one {# reformulação} other {# reformulações}}",
+        "badge": {
+            "ready": "Pronto a publicar",
+            "review": "Pronto a publicar · rever",
+            "tag": "Etiqueta «IA» necessária"
+        },
+        "explain": {
+            "tag": "Reformulação detetada: sentido ou voz alterados. Nos termos do art. 50 do Regulamento (UE) 2024/1689, adicione uma menção «modificado/gerado por IA» ao publicar.",
+            "review": "Apenas correções de forma (ortografia, gramática, pontuação): o autor continua humano, nenhuma menção de IA é necessária (considerando 133). Mas a ferramenta mexeu muito — reveja para confirmar que o sentido ainda é seu."
+        },
+        "tip": {
+            "tag": "Reformulação substancial: menção de IA obrigatória ao publicar.",
+            "review": "Sem reformulação: nenhuma obrigação legal de etiqueta, mas reveja (muitos retoques de forma)."
+        },
+        "confirm": {
+            "title": "Substituir o texto digitado?",
+            "body": "Vai carregar o exemplo «{label}» e perder o texto que escreveu. É imediato e não pode ser anulado. Continuar?",
+            "cancel": "Cancelar",
+            "confirm": "Carregar exemplo"
+        },
+        "inputLabel": "Texto a corrigir",
+        "outputLabel": "Texto corrigido",
+        "resetConfirm": {
+            "title": "Apagar o texto inserido?",
+            "body": "As duas áreas serão esvaziadas e o texto que inseriu será perdido. Esta ação é imediata e irreversível. Deseja continuar?",
+            "confirm": "Repor"
+        }
+    },
+    "toolHero": {
+        "titleLead": "Um texto mais correto,",
+        "titleAccent": "em segundos",
+        "subtitle": "Corrija erros de ortografia e gramática com <ai>IA</ai>, mantendo o seu estilo.",
+        "tagline": "Simples, rápido e sem comprometer a sua forma de se expressar.",
+        "headerTitle": "Corrija o texto com IA",
+        "headerSub": "Ortografia • Gramática • Estilo"
     }
 }

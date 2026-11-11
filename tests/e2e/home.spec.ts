@@ -3,11 +3,11 @@ import { acceptCookiesButton, cookieBanner, languageButton, languageOption, them
 import { lpRe } from "./support/locale-path";
 
 test.describe("Home — structural smoke", () => {
-    test("shows the hero, the component library, the SEO section and the FAQ", async ({ page }) => {
+    test("shows the hero, the corrector, the SEO section and the FAQ", async ({ page }) => {
         await page.goto("/");
 
         await expect(page.locator("h1")).toBeVisible();
-        await expect(page.locator("#showcase")).toBeVisible();
+        await expect(page.locator("section.corrector")).toBeVisible();
         await expect(page.locator("#seo")).toBeVisible();
         await expect(page.locator("#faq")).toBeVisible();
     });

@@ -358,5 +358,101 @@
     "notFound": {
         "text": "Abbiamo setacciato l'intero multiverso: questa pagina non esiste in nessuna realtà conosciuta.",
         "home": "Torna alla home"
+    },
+    "corrector": {
+        "examplesLabel": "Esempi rapidi",
+        "examples": {
+            "linkedin": {
+                "label": "Un commento LinkedIn",
+                "raw": "Bellissima condivisione ! Questo mi ricorda un progetto che avevo condotto l'anno scorso, siamo riusciti a raddoppiare il nostro impatto in 6 mesi. Complimenti a tutto il team 🙌",
+                "corrected": "Bellissima condivisione! Questo mi ricorda un progetto che avevo condotto l'anno scorso; siamo riusciti a raddoppiare il nostro impatto in 6 mesi. Complimenti a tutto il team 🙌"
+            },
+            "pro": {
+                "label": "Un messaggio professionale",
+                "raw": "Buongiorno,\nmi permetto di contattarla riguardo alla nostra riunioni di domani. Sarebbe possibile rimandarla alle 14?\nCordiali saluti,",
+                "corrected": "Buongiorno,\nmi permetto di contattarla riguardo alla nostra riunione di domani. Sarebbe possibile rimandarla alle 14?\nCordiali saluti,"
+            },
+            "long": {
+                "label": "Un testo più lungo",
+                "raw": "Sono molto contento di scriverle oggi. Spero che tutto vada bene da parte sua. Non esiti a farmi sapere se ha delle domande.\n\nA proposito, volevo ringraziarla per il suo riscontro, mi e stato molto utile. Cordialmente.",
+                "corrected": "Sono molto contento di scriverle oggi. Spero che tutto vada bene da parte sua. Non esiti a farmi sapere se ha delle domande.\n\nA proposito, volevo ringraziarla per il suo riscontro; mi è stato molto utile. Cordialmente."
+            }
+        },
+        "reset": "Reimposta",
+        "resetTip": "Svuota entrambe le aree per scrivere il tuo testo",
+        "languageAria": "Lingua rilevata: {name}",
+        "lockedTip": "Bloccato — clicca su «Reimposta» o su un esempio per modificare",
+        "limit": "Limite: {max} caratteri",
+        "inputPlaceholder": "Scrivi o incolla il testo da correggere…",
+        "outputPlaceholder": "Il testo corretto apparirà qui, con le modifiche evidenziate.",
+        "modified": "Modificato",
+        "modifiedTip": "Hai modificato il testo dall'ultimo risultato: la correzione mostrata è obsoleta. Rilancia per aggiornarla.",
+        "run": "Avvia correzione",
+        "running": "Correzione…",
+        "notice": {
+            "wait": "Attesa possibile: da pochi secondi a 30 s (coda LLM gratuita).",
+            "thirdParty": "Chiamata a un LLM tramite {provider} (modello gratuito). L'IA è terza, anche se gratuita.",
+            "quality": "Risultati gratuiti: possono contenere errori o non aver corretto nulla. Rilancia se necessario e rileggi sempre prima di pubblicare."
+        },
+        "copy": "Copia testo corretto",
+        "copied": "Testo corretto copiato (senza formattazione).",
+        "legend": {
+            "insert": "Aggiunta",
+            "replace": "Correzione",
+            "delete": "Eliminazione"
+        },
+        "bands": {
+            "perfect": {
+                "label": "Perfetto!",
+                "message": "Nessuna correzione necessaria."
+            },
+            "great": {
+                "label": "Ottimo!",
+                "message": "Il testo è quasi perfetto."
+            },
+            "good": {
+                "label": "Buone correzioni",
+                "message": "Correzioni di forma applicate."
+            },
+            "low": {
+                "label": "Molte correzioni",
+                "message": "Molti errori di ortografia corretti."
+            }
+        },
+        "counts": "{form, plural, =0 {0 correzioni di forma} one {# correzione di forma} other {# correzioni di forma}} · {content, plural, =0 {0 riformulazioni} one {# riformulazione} other {# riformulazioni}}",
+        "badge": {
+            "ready": "Pronto da pubblicare",
+            "review": "Pronto da pubblicare · rileggere",
+            "tag": "Tag «IA» richiesto"
+        },
+        "explain": {
+            "tag": "Riformulazione rilevata: senso o voce alterati. Ai sensi dell'art. 50 del Regolamento (UE) 2024/1689, aggiungi una nota «modificato/generato da IA» alla pubblicazione.",
+            "review": "Solo correzioni di forma (ortografia, grammatica, punteggiatura): l'autore resta umano, nessuna nota IA richiesta (considerando 133). Ma lo strumento ha toccato molto — rileggi per confermare che il senso sia ancora tuo."
+        },
+        "tip": {
+            "tag": "Riformulazione sostanziale: nota IA obbligatoria alla pubblicazione.",
+            "review": "Nessuna riformulazione: nessun obbligo legale di tag, ma rileggi (molte modifiche di forma)."
+        },
+        "confirm": {
+            "title": "Sostituire il testo digitato?",
+            "body": "Stai per caricare l'esempio «{label}» e perdere il testo che hai scritto. È immediato e non annullabile. Continuare?",
+            "cancel": "Annulla",
+            "confirm": "Carica esempio"
+        },
+        "inputLabel": "Testo da correggere",
+        "outputLabel": "Testo corretto",
+        "resetConfirm": {
+            "title": "Cancellare il testo inserito?",
+            "body": "Le due aree verranno svuotate e il testo che hai inserito andrà perso. L'azione è immediata e non annullabile. Vuoi continuare?",
+            "confirm": "Reimposta"
+        }
+    },
+    "toolHero": {
+        "titleLead": "Un testo più corretto,",
+        "titleAccent": "in pochi secondi",
+        "subtitle": "Correggi errori di ortografia e grammatica con l''<ai>IA</ai>, mantenendo il tuo stile.",
+        "tagline": "Semplice, veloce e senza compromessi sul tuo modo di esprimerti.",
+        "headerTitle": "Correggi il testo con l'IA",
+        "headerSub": "Ortografia • Grammatica • Stile"
     }
 }

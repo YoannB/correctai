@@ -1,0 +1,187 @@
+/* ===== CorrectAI: tool hero (.tool-hero) and the proofreading tool (.corrector*) ===== */
+.tool-hero {
+    text-align: center;
+    padding: 28px 16px 18px;
+}
+.tool-hero__title {
+    margin: 0 0 8px;
+    font-size: clamp(1.7rem, 3.4vw, 2.4rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+}
+.tool-hero__accent {
+    background: linear-gradient(90deg, #38bdf8, #6366f1, #a855f7, #38bdf8);
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: toolHeroShift 8s ease-in-out infinite;
+}
+.tool-hero__sub {
+    margin: 0;
+    font-size: 1.05rem;
+    color: var(--text-1);
+}
+.tool-hero__ai {
+    color: #a855f7;
+    font-weight: 800;
+}
+.tool-hero__tagline {
+    margin: 4px 0 0;
+    color: var(--muted);
+    font-size: 0.92rem;
+}
+@keyframes toolHeroShift {
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+.corrector {
+    display: grid;
+    gap: 12px;
+    padding: 12px;
+    border: 1px solid var(--border-1);
+    border-radius: var(--radius-lg);
+    background: var(--surface-1);
+}
+.corrector__examples {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+.corrector__examples-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-2);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+.corrector__reset {
+    margin-left: auto;
+}
+.corrector__pair .editor-pair__col {
+    padding: 12px;
+    border: 1px solid var(--border-1);
+    border-radius: var(--radius-md);
+    background: var(--surface-1);
+}
+.corrector__pair.editor-pair {
+    grid-template-areas: "start end" "action end";
+    row-gap: 12px;
+}
+.corrector__pair .editor-pair__col--start {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom: 0;
+}
+.corrector__pair .editor-pair__action {
+    padding: 0 12px 12px;
+    margin-top: -12px;
+    border: 1px solid var(--border-1);
+    border-top: 0;
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+    background: var(--surface-1);
+}
+@media (max-width: 900px) {
+    .corrector__pair.editor-pair {
+        grid-template-areas: "start" "action" "end";
+    }
+}
+.corrector__bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    width: 100%;
+}
+.corrector__bar--end {
+    justify-content: flex-end;
+}
+.corrector__lang {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    border: 1px solid var(--border-2);
+    border-radius: var(--radius-sm);
+    background: var(--surface-2);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: not-allowed;
+}
+.corrector__flag {
+    font-size: 1.1rem;
+    line-height: 1;
+}
+.corrector__lock {
+    color: var(--muted);
+}
+.corrector__count {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.78rem;
+}
+.corrector__count b[data-full] {
+    color: var(--danger);
+}
+.corrector__modified {
+    color: var(--warn);
+    font-weight: 700;
+}
+.corrector__action {
+    display: grid;
+    gap: 10px;
+}
+.corrector__run {
+    min-height: 52px;
+    border-radius: 999px !important;
+    font-size: 1rem;
+}
+.corrector__result {
+    display: grid;
+    gap: 12px;
+}
+.corrector-score {
+    display: grid;
+    gap: 6px;
+}
+.corrector-score__row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+}
+.corrector-score__text {
+    display: grid;
+    flex: 1 1 150px;
+    min-width: 150px;
+    font-size: 0.8rem;
+}
+.corrector-score__band {
+    font-size: 1rem;
+    font-weight: 800;
+}
+.corrector-score--success .corrector-score__band {
+    color: var(--ok);
+}
+.corrector-score--warning .corrector-score__band {
+    color: var(--warn);
+}
+.corrector-score--error .corrector-score__band {
+    color: var(--danger);
+}
+.corrector-score__explain {
+    margin: 0;
+    font-size: 0.78rem;
+    line-height: 1.5;
+}

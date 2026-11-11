@@ -358,5 +358,101 @@
     "notFound": {
         "text": "Wir haben das gesamte Multiversum durchsucht: Diese Seite existiert in keiner bekannten Realität.",
         "home": "Zurück zur Startseite"
+    },
+    "corrector": {
+        "examplesLabel": "Schnellbeispiele",
+        "examples": {
+            "linkedin": {
+                "label": "Ein LinkedIn-Kommentar",
+                "raw": "Sehr schoener Beitrag ! Das erinnert mich an ein projekt das ich letztes jahr geleitet habe, wir haben es geschafft unsere wirkung in 6 monaten zu verdoppeln. Gluckwunsch an das ganze Team 🙌",
+                "corrected": "Sehr schöner Beitrag! Das erinnert mich an ein Projekt, das ich letztes Jahr geleitet habe; wir haben es geschafft, unsere Wirkung in 6 Monaten zu verdoppeln. Glückwunsch an das ganze Team 🙌"
+            },
+            "pro": {
+                "label": "Eine berufliche Nachricht",
+                "raw": "Hallo,\nich erlaube mir, Sie bezuglich unseres treffens morgen zu kontaktieren. Ware es moglich, es auf 14 uhr zu verschieben?\nMit freundlichen gruben,",
+                "corrected": "Hallo,\nich erlaube mir, Sie bezüglich unseres Treffens morgen zu kontaktieren. Wäre es möglich, es auf 14 Uhr zu verschieben?\nMit freundlichen Grüßen,"
+            },
+            "long": {
+                "label": "Ein längerer Text",
+                "raw": "Ich freue mich sehr, Ihnen heute zu schreiben. Ich hoffe, es geht Ihnen gut. Zogern Sie nicht, mir mitzuteilen, falls Sie fragen haben.\n\nUbrigens wollte ich mich fur Ihr Feedback bedanken, es war sehr nutzlich. Mit besten gruben.",
+                "corrected": "Ich freue mich sehr, Ihnen heute zu schreiben. Ich hoffe, es geht Ihnen gut. Zögern Sie nicht, mir mitzuteilen, falls Sie Fragen haben.\n\nÜbrigens wollte ich mich für Ihr Feedback bedanken; es war sehr nützlich. Mit besten Grüßen."
+            }
+        },
+        "reset": "Zurücksetzen",
+        "resetTip": "Beide Felder leeren, um eigenen Text einzugeben",
+        "languageAria": "Erkannte Sprache: {name}",
+        "lockedTip": "Gesperrt — klicke auf „Zurücksetzen“ oder ein Beispiel zum Bearbeiten",
+        "limit": "Limit: {max} Zeichen",
+        "inputPlaceholder": "Text zum Korrigieren eingeben oder einfügen…",
+        "outputPlaceholder": "Der korrigierte Text erscheint hier, Änderungen hervorgehoben.",
+        "modified": "Geändert",
+        "modifiedTip": "Du hast den Text seit dem letzten Ergebnis bearbeitet: die angezeigte Korrektur ist veraltet. Starte neu, um sie zu aktualisieren.",
+        "run": "Korrektur starten",
+        "running": "Korrektur…",
+        "notice": {
+            "wait": "Mögliche Wartezeit: einige Sekunden bis 30 s (kostenlose LLM-Warteschlange).",
+            "thirdParty": "LLM-Aufruf über {provider} (kostenloses Modell). KI = Drittanbieter, auch wenn kostenlos.",
+            "quality": "Kostenlose Ergebnisse: sie können Fehler enthalten oder nichts korrigiert haben. Starte bei Bedarf neu und lies immer gegenz, bevor du veröffentlichst."
+        },
+        "copy": "Korrigierten Text kopieren",
+        "copied": "Korrigierter Text kopiert (ohne Formatierung).",
+        "legend": {
+            "insert": "Ergänzung",
+            "replace": "Korrektur",
+            "delete": "Löschung"
+        },
+        "bands": {
+            "perfect": {
+                "label": "Perfekt!",
+                "message": "Keine Korrektur nötig."
+            },
+            "great": {
+                "label": "Sehr gut!",
+                "message": "Der Text ist nahezu perfekt."
+            },
+            "good": {
+                "label": "Gute Korrekturen",
+                "message": "Formkorrekturen angewendet."
+            },
+            "low": {
+                "label": "Viele Korrekturen",
+                "message": "Viele Rechtschreibfehler korrigiert."
+            }
+        },
+        "counts": "{form, plural, =0 {0 Formkorrekturen} one {# Formkorrektur} other {# Formkorrekturen}} · {content, plural, =0 {0 Umformulierungen} one {# Umformulierung} other {# Umformulierungen}}",
+        "badge": {
+            "ready": "Bereit zu posten",
+            "review": "Bereit zu posten · prüfen",
+            "tag": "„KI“-Kennzeichnung nötig"
+        },
+        "explain": {
+            "tag": "Umformulierung erkannt: Sinn oder Ton verändert. Gemäß Art. 50 der Verordnung (EU) 2024/1689 beim Veröffentlichen einen Hinweis „von KI geändert/erzeugt“ hinzufügen.",
+            "review": "Nur Formkorrekturen (Rechtschreibung, Grammatik, Zeichensetzung): Der Autor bleibt Mensch, kein KI-Hinweis erforderlich (Erwägungsgrund 133). Aber das Tool hat viel verändert — gegenlesen, ob der Sinn noch deiner ist."
+        },
+        "tip": {
+            "tag": "Wesentliche Umformulierung: KI-Hinweis beim Veröffentlichen erforderlich.",
+            "review": "Keine Umformulierung: keine gesetzliche Kennzeichnungspflicht, aber gegenlesen (viele Formänderungen)."
+        },
+        "confirm": {
+            "title": "Eingegebenen Text ersetzen?",
+            "body": "Du lädst gleich das Beispiel „{label}“ und verlierst deinen eingegebenen Text. Das ist sofort und nicht rückgängig machbar. Fortfahren?",
+            "cancel": "Abbrechen",
+            "confirm": "Beispiel laden"
+        },
+        "inputLabel": "Zu korrigierender Text",
+        "outputLabel": "Korrigierter Text",
+        "resetConfirm": {
+            "title": "Eingegebenen Text löschen?",
+            "body": "Beide Felder werden geleert und dein eingegebener Text geht verloren. Diese Aktion erfolgt sofort und kann nicht rückgängig gemacht werden. Möchtest du fortfahren?",
+            "confirm": "Zurücksetzen"
+        }
+    },
+    "toolHero": {
+        "titleLead": "Ein treffenderer Text,",
+        "titleAccent": "in Sekunden",
+        "subtitle": "Korrigiere Rechtschreib- und Grammatikfehler mit <ai>KI</ai> – und behalte deinen Stil.",
+        "tagline": "Einfach, schnell und ohne Kompromisse bei deiner Ausdrucksweise.",
+        "headerTitle": "Textkorrektur mit KI",
+        "headerSub": "Rechtschreibung • Grammatik • Stil"
     }
 }
