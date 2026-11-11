@@ -7,7 +7,9 @@
         "privacy": "Datenschutz",
         "cookies": "Cookies",
         "github": "GitHub",
-        "menu": "Menü"
+        "menu": "Menü",
+        "tagline": "Textkorrektur mit KI",
+        "taglineSub": "Rechtschreibung • Grammatik • Stil"
     },
     "hero": {
         "badge": "Dein KI-Assistent, bereit mit einem Klick",
@@ -172,7 +174,7 @@
         "tagline": "Starthilfe für fehlerfreie Texte.",
         "rights": "© {year} {site}. Alle Rechte vorbehalten.",
         "builtWith": "Erstellt mit Next.js, Material UI, next-intl und OpenRouter",
-        "poweredBy": "Betrieben mit {next} · Bereitgestellt auf {netlify}"
+        "poweredBy": "Betrieben mit <next>Next.js</next> · Bereitgestellt auf <netlify>Netlify</netlify>"
     },
     "cookie": {
         "message": "Diese Website verwendet Cookies, um deine Erfahrung zu verbessern, die Audience zu messen und Anzeigen zu schalten. Du kannst ihre Verwendung akzeptieren oder ablehnen.",
@@ -456,9 +458,7 @@
         "titleLead": "Ein treffenderer Text,",
         "titleAccent": "in Sekunden",
         "subtitle": "Korrigiere Rechtschreib- und Grammatikfehler mit <ai>KI</ai> – und behalte deinen Stil.",
-        "tagline": "Einfach, schnell und ohne Kompromisse bei deiner Ausdrucksweise.",
-        "headerTitle": "Textkorrektur mit KI",
-        "headerSub": "Rechtschreibung • Grammatik • Stil"
+        "tagline": "Einfach, schnell und ohne Kompromisse bei deiner Ausdrucksweise."
     },
     "seoContent": {
         "heading": "Korrigieren ohne umzuschreiben",

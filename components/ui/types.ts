@@ -33,6 +33,8 @@ export interface AppButtonProps {
 }
 export interface AppFieldProps {
     label?: string;
+    /** Accessible name when there is no visible `label` (a placeholder is not a name). */
+    ariaLabel?: string;
     value: string;
     onChange: (v: string) => void;
     placeholder?: string;

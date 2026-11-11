@@ -7,7 +7,9 @@
         "privacy": "Privacy",
         "cookies": "Cookies",
         "github": "GitHub",
-        "menu": "Menu"
+        "menu": "Menu",
+        "tagline": "Fix your text with AI",
+        "taglineSub": "Spelling • Grammar • Style"
     },
     "hero": {
         "badge": "Your AI assistant, ready in one click",
@@ -172,7 +174,7 @@
         "tagline": "A helping hand for flawless texts.",
         "rights": "© {year} {site}. All rights reserved.",
         "builtWith": "Built with Next.js, Material UI, next-intl and OpenRouter",
-        "poweredBy": "Powered by {next} · Deployed on {netlify}"
+        "poweredBy": "Powered by <next>Next.js</next> · Deployed on <netlify>Netlify</netlify>"
     },
     "cookie": {
         "message": "This site uses cookies to improve your experience, measure audience and display ads. You can accept or refuse their use.",
@@ -456,9 +458,7 @@
         "titleLead": "Fairer text,",
         "titleAccent": "in seconds",
         "subtitle": "Fix your spelling and grammar mistakes with <ai>AI</ai>, while keeping your own style.",
-        "tagline": "Simple, fast, with no compromise on the way you express yourself.",
-        "headerTitle": "Fix your text with AI",
-        "headerSub": "Spelling • Grammar • Style"
+        "tagline": "Simple, fast, with no compromise on the way you express yourself."
     },
     "seoContent": {
         "heading": "Correct without rewriting",

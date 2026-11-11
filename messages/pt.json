@@ -7,7 +7,9 @@
         "privacy": "Privacidade",
         "cookies": "Cookies",
         "github": "GitHub",
-        "menu": "Menu"
+        "menu": "Menu",
+        "tagline": "Corrija o texto com IA",
+        "taglineSub": "Ortografia • Gramática • Estilo"
     },
     "hero": {
         "badge": "Seu assistente de IA, pronto num clique",
@@ -172,7 +174,7 @@
         "tagline": "Um empurrão para textos sem erros.",
         "rights": "© {year} {site}. Todos os direitos reservados.",
         "builtWith": "Construído com Next.js, Material UI, next-intl e OpenRouter",
-        "poweredBy": "Feito com {next} · Publicado na {netlify}"
+        "poweredBy": "Feito com <next>Next.js</next> · Publicado na <netlify>Netlify</netlify>"
     },
     "cookie": {
         "message": "Este site utiliza cookies para melhorar a sua experiência, medir audiência e apresentar anúncios. Pode aceitar ou recusar a sua utilização.",
@@ -456,9 +458,7 @@
         "titleLead": "Um texto mais correto,",
         "titleAccent": "em segundos",
         "subtitle": "Corrija erros de ortografia e gramática com <ai>IA</ai>, mantendo o seu estilo.",
-        "tagline": "Simples, rápido e sem comprometer a sua forma de se expressar.",
-        "headerTitle": "Corrija o texto com IA",
-        "headerSub": "Ortografia • Gramática • Estilo"
+        "tagline": "Simples, rápido e sem comprometer a sua forma de se expressar."
     },
     "seoContent": {
         "heading": "Corrigir sem reescrever",
