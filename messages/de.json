@@ -140,34 +140,39 @@
         "securitySub": "Bot-Schutz"
     },
     "faq": {
-        "title": "Häufig gestellte Fragen",
+        "title": "Häufige Fragen",
         "items": [
             {
-                "q": "Was ist Axons?",
-                "a": "Ein Next.js-16-/React-19-Boilerplate mit Fokus auf SEO und KI, deploybar auf Netlify, mit isolierter Komponentenbibliothek (Material UI) und OpenRouter-Anbindung über einen Route Handler."
+                "q": "Ist CorrectAI wirklich kostenlos?",
+                "a": "Ja. Der Dienst stützt sich auf kostenlose Modelle über OpenRouter. Kein Konto, keine Karte: drei Korrekturen pro Tag und Browser, täglich zurückgesetzt."
             },
             {
-                "q": "Ist die KI kostenpflichtig?",
-                "a": "Das Standardmodell ist ein kostenloses OpenRouter-Modell (openrouter/free). Ein Tageskontingent begrenzt Browser-Aufrufe; Fehler werden als Toasts angezeigt, damit du einfach erneut versuchen kannst."
+                "q": "Werden meine Texte gespeichert?",
+                "a": "Nein. Dein Text durchläuft nur die Korrektur und wird nicht auf unseren Servern aufbewahrt. Nur technische Einstellungen bleiben im Browser: Theme, Sprache, Kontingent, Sitzungs-Token."
             },
             {
-                "q": "Gehen meine Daten irgendwohin?",
-                "a": "Nein. Thema, Cookie-Einwilligung und Tageszähler werden lokal gespeichert (Cookie + localStorage). Der OpenRouter-Schlüssel bleibt serverseitig und wird niemals dem Browser übermittelt."
+                "q": "Ändert die KI meinen Stil?",
+                "a": "Nein. Der Agent ist darauf beschränkt, nur die Form zu korrigieren. Er bewahrt Zeilenumbrüche, Listen, Emojis, Erwähnungen, Hashtags und URLs und schreibt nicht um, fasst nicht zusammen, übersetzt nicht."
             },
             {
-                "q": "Wie füge ich eine neue KI-Aktion hinzu?",
-                "a": "Lege eine Datei in capabilities/agents/ ab (oder einen Ordner capabilities/skills/<id>/) und rufe POST /api/run mit { prompt, agentId?, skillId?, inputs? } auf. Die Route bleibt schlank: Komposition, Kontingent, Timeout und Fehler liegen in lib/ai (run → composeRun + runPrompt)."
+                "q": "Muss ein korrigierter Text als „KI-generiert“ gekennzeichnet werden?",
+                "a": "In der Regel nein. Die offizielle Zusammenfassung zu Artikel 50 sieht eine Ausnahme vor, wenn das System nur eine unterstützende Funktion für übliche Bearbeitungsaufgaben wie die Grammatikkorrektur erfüllt oder die Eingabedaten bzw. deren Semantik nicht wesentlich verändert. CorrectAI markiert hingegen Sinn-Umformulierungen, bei denen ein Hinweis ratsam wird."
             },
             {
-                "q": "Ist die Website für Google indexierbar?",
-                "a": "Ja: Server-Rendering, lokalisierte URLs, Metadaten, hreflang, XML-Sitemap und HTML-Sitemap sind enthalten."
+                "q": "Welche Sprachen werden unterstützt?",
+                "a": "Die Erkennung deckt Französisch, Englisch, Spanisch, Deutsch, Italienisch und Portugiesisch ab. Die Oberfläche ist in diesen sechs Sprachen verfügbar."
+            },
+            {
+                "q": "Sind die Korrekturen unfehlbar?",
+                "a": "Nein. Der Dienst ist kostenlos und stützt sich auf kostenlose Modelle, und genau das ist die Kehrseite: Ein Ergebnis kann Fehler enthalten oder bei einem bereits korrekten Text nichts korrigieren. Starte den Aufruf neu, wenn das Ergebnis unvollständig erscheint, und lies stets gegenz, bevor du veröffentlichst — du bleibst Autor und verantwortlich für den Endtext."
             }
         ]
     },
     "footer": {
-        "tagline": "Deine Basis für moderne KI-Apps",
+        "tagline": "Starthilfe für fehlerfreie Texte.",
         "rights": "© {year} {site}. Alle Rechte vorbehalten.",
-        "builtWith": "Erstellt mit Next.js, Material UI, next-intl und OpenRouter"
+        "builtWith": "Erstellt mit Next.js, Material UI, next-intl und OpenRouter",
+        "poweredBy": "Betrieben mit {next} · Bereitgestellt auf {netlify}"
     },
     "cookie": {
         "message": "Diese Website verwendet Cookies, um deine Erfahrung zu verbessern, die Audience zu messen und Anzeigen zu schalten. Du kannst ihre Verwendung akzeptieren oder ablehnen.",
@@ -454,5 +459,63 @@
         "tagline": "Einfach, schnell und ohne Kompromisse bei deiner Ausdrucksweise.",
         "headerTitle": "Textkorrektur mit KI",
         "headerSub": "Rechtschreibung • Grammatik • Stil"
+    },
+    "seoContent": {
+        "heading": "Korrigieren ohne umzuschreiben",
+        "intro": "CorrectAI berührt nur die Oberfläche des Textes: Rechtschreibung, Übereinstimmung, Konjugation, Zeichensetzung. Inhalt, Ton und Wortschatz bleiben deine.",
+        "steps": [
+            {
+                "title": "Text einfügen oder tippen",
+                "text": "Bis zu 3.000 Zeichen, der Standard für einen LinkedIn-Post oder eine berufliche Nachricht."
+            },
+            {
+                "title": "Korrektur starten",
+                "text": "Ein KI-Agent prüft die Form: Rechtschreibung, Grammatik, Konjugation, Syntax, Zeichensetzung."
+            },
+            {
+                "title": "Gegenlesen und veröffentlichen",
+                "text": "Änderungen werden hervorgehoben; ein Score und ein Transparenz-Urteil leiten dich."
+            }
+        ],
+        "chips": ["Rechtschreibung", "Grammatik", "Zeichensetzung"],
+        "law": {
+            "heading": "Artikel 50: das Wichtigste",
+            "intro": "Nicht abschließende Zusammenfassung der offiziellen Seite zu den Transparenzvorschriften des Artikels 50 der Verordnung (EU) 2024/1689.",
+            "bullets": [
+                "Seit dem 2. August 2026 verlangt Artikel 50 Transparenzpflichten in vier Fällen: direkte Interaktion mit einer KI, synthetische Inhalte, Emotionserkennung oder biometrische Klassifizierung, Deepfakes und Texte von öffentlichem Interesse.",
+                "Bei generierten Inhalten müssen Anbieter die Ausgaben maschinenlesbar kennzeichnen und ihre Identifikation als künstlich erzeugt oder manipuliert ermöglichen; eine „AI-Omnibus“-Frist läuft bis zum 2. Dezember 2026 für diese Kennzeichnung.",
+                "Zentrale Ausnahme für CorrectAI: Die Pflicht gilt nicht, wenn das System nur eine unterstützende Funktion für übliche Bearbeitungsaufgaben wie die Grammatikkorrektur erfüllt oder die Eingabedaten bzw. deren Semantik nicht wesentlich verändert.",
+                "Die Information muss klar und unterscheidbar sein, spätestens zum Zeitpunkt der ersten Interaktion oder Exposition."
+            ],
+            "linkLaw": "Offizielle Zusammenfassung zu Artikel 50 lesen",
+            "linkVideo": "Kurzes Video öffnen",
+            "videoTitle": "Kurzes Video zu Artikel 50 des EU-KI-Gesetzes",
+            "source": "Offizielle Zusammenfassung"
+        },
+        "data": {
+            "heading": "Achtung vor deinen Daten",
+            "text": "Kein Konto, keine serverseitige Speicherung deines Inhalts. Die KI bleibt ein Drittanbieter, auch wenn sie kostenlos ist, und wir weisen transparent darauf hin."
+        },
+        "links": {
+            "privacy": "Datenschutz",
+            "cookies": "Cookies",
+            "sitemap": "Sitemap"
+        }
+    },
+    "toolFeatures": {
+        "quota": "{n, plural, one {# Korrektur max. / Tag} other {# Korrekturen max. / Tag}}",
+        "quotaSub": "Limit wird täglich zurückgesetzt",
+        "cookies": "Cookies erforderlich",
+        "cookiesSub": "Für den ordnungsgemäßen Betrieb der App",
+        "tier": "Dritt-KI ({provider})",
+        "tierSub": "Auch kostenlos bleibt die KI ein externer Dienst",
+        "bot": "Anti-Bot",
+        "botSub": "Schutz vor automatisierten Verbindungen"
+    },
+    "meta": {
+        "home": {
+            "title": "CorrectAI – KI-Rechtschreib- und Grammatikprüfung",
+            "description": "Korrigiere Rechtschreibung, Grammatik und Zeichensetzung mit KI, ohne deinen Stil zu verändern. Einfach, schnell und deiner Stimme treu."
+        }
     }
 }

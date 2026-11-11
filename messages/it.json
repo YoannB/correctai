@@ -143,31 +143,36 @@
         "title": "Domande frequenti",
         "items": [
             {
-                "q": "Cos'è Axons?",
-                "a": "Un boilerplate Next.js 16 / React 19 focalizzato su SEO e IA, distribuibile su Netlify, con una libreria di componenti isolata (Material UI) e collegamento OpenRouter tramite Route Handler."
+                "q": "CorrectAI è davvero gratuito?",
+                "a": "Sì. Il servizio si basa su modelli gratuiti via OpenRouter. Nessun account, nessuna carta: tre correzioni al giorno per browser, azzerate ogni giorno."
             },
             {
-                "q": "L'IA è a pagamento?",
-                "a": "Il modello predefinito è un modello gratuito di OpenRouter (openrouter/free). Una quota giornaliera limita le chiamate dal browser; gli errori vengono mostrati come toast così puoi riprovare facilmente."
+                "q": "I miei testi sono archiviati?",
+                "a": "No. Il tuo testo transita solo per la correzione e non è conservato sui nostri server. Restano solo preferenze tecniche nel browser: tema, lingua, quota, token di sessione."
             },
             {
-                "q": "I miei dati vanno da qualche parte?",
-                "a": "No. Tema, consenso ai cookie e contatore giornaliero sono archiviati localmente (cookie + localStorage). La chiave OpenRouter resta lato server e non viene mai esposta al browser."
+                "q": "L'IA cambia il mio stile?",
+                "a": "No. L'agente è vincolato a correggere solo la forma. Preserva a capo, elenchi, emoji, menzioni, hashtag e URL, e non riformula, riassume né traduce."
             },
             {
-                "q": "Come aggiungo una nuova azione IA?",
-                "a": "Inserisci un file in capabilities/agents/ (o una cartella capabilities/skills/<id>/) e chiama POST /api/run con { prompt, agentId?, skillId?, inputs? }. La rotta resta sottile: composizione, quota, timeout ed errori vivono in lib/ai (run → composeRun + runPrompt)."
+                "q": "Un testo corretto va etichettato come «generato da IA»?",
+                "a": "In genere no. La sintesi ufficiale dell'articolo 50 prevede un'eccezione quando il sistema svolge solo una funzione di assistenza per compiti di editing corrente, come la correzione grammaticale, o quando non modifica sostanzialmente i dati di input né la loro semantica. CorrectAI segnala invece le riformulazioni di senso, per le quali una menzione diventa consigliata."
             },
             {
-                "q": "Il sito è indicizzabile da Google?",
-                "a": "Sì: rendering lato server, URL localizzati, metadati, hreflang, sitemap XML e mappa del sito HTML sono forniti."
+                "q": "Quali lingue sono supportate?",
+                "a": "Il rilevamento copre francese, inglese, spagnolo, tedesco, italiano e portoghese. L'interfaccia è disponibile in queste sei lingue."
+            },
+            {
+                "q": "Le correzioni sono infallibili?",
+                "a": "No. Il servizio è gratuito e si basa su modelli gratuiti, ed è proprio questo il rovescio della medaglia: un risultato può contenere errori, o non correggere nulla su un testo già corretto. Rilancia la chiamata se il risultato sembra incompleto, e rileggi sempre prima di pubblicare: resti tu l'autore e il responsabile del testo finale."
             }
         ]
     },
     "footer": {
-        "tagline": "La tua base per app IA moderne",
+        "tagline": "Un aiuto per testi senza errori.",
         "rights": "© {year} {site}. Tutti i diritti riservati.",
-        "builtWith": "Creato con Next.js, Material UI, next-intl e OpenRouter"
+        "builtWith": "Creato con Next.js, Material UI, next-intl e OpenRouter",
+        "poweredBy": "Realizzato con {next} · Distribuito su {netlify}"
     },
     "cookie": {
         "message": "Questo sito utilizza i cookie per migliorare la tua esperienza, misurare il pubblico e mostrare annunci. Puoi accettare o rifiutare il loro utilizzo.",
@@ -454,5 +459,63 @@
         "tagline": "Semplice, veloce e senza compromessi sul tuo modo di esprimerti.",
         "headerTitle": "Correggi il testo con l'IA",
         "headerSub": "Ortografia • Grammatica • Stile"
+    },
+    "seoContent": {
+        "heading": "Correggere senza riscrivere",
+        "intro": "CorrectAI tocca solo la superficie del testo: errori di ortografia, concordanza, coniugazione, punteggiatura. Sostanza, tono e vocabolo restano tuoi.",
+        "steps": [
+            {
+                "title": "Incolla o scrivi il tuo testo",
+                "text": "Fino a 3.000 caratteri, la norma di un post LinkedIn o di un messaggio professionale."
+            },
+            {
+                "title": "Avvia la correzione",
+                "text": "Un agente IA rilegge la forma: ortografia, grammatica, coniugazione, sintassi, punteggiatura."
+            },
+            {
+                "title": "Rileggi e pubblica",
+                "text": "Le modifiche sono evidenziate; un punteggio e un verdetto di trasparenza ti orientano."
+            }
+        ],
+        "chips": ["Ortografia", "Grammatica", "Punteggiatura"],
+        "law": {
+            "heading": "Articolo 50: l'essenziale",
+            "intro": "Sintesi non esaustiva della pagina ufficiale sulle regole di trasparenza dell'articolo 50 del Regolamento (UE) 2024/1689.",
+            "bullets": [
+                "Dal 2 agosto 2026, l'articolo 50 impone obblighi di trasparenza in quattro casi: interazione diretta con un'IA, contenuto sintetico, riconoscimento delle emozioni o classificazione biometrica, deepfake e testi di interesse pubblico.",
+                "Per i contenuti generati, i fornitori devono contrassegnare gli output in modo leggibile dalla macchina e consentirne l'identificazione come generati o manipolati artificialmente; un periodo di grazia «AI Omnibus» vale fino al 2 dicembre 2026 per tale contrassegno.",
+                "Eccezione chiave per CorrectAI: l'obbligo non si applica quando il sistema svolge solo una funzione di assistenza per compiti di editing corrente, come la correzione grammaticale, o quando non modifica sostanzialmente i dati di input né la loro semantica.",
+                "L'informazione deve essere chiara e distinguibile, al più tardi al momento della prima interazione o esposizione."
+            ],
+            "linkLaw": "Consultare la sintesi ufficiale dell'articolo 50",
+            "linkVideo": "Aprire il video breve",
+            "videoTitle": "Video breve sull'articolo 50 della legge europea sull'IA",
+            "source": "Sintesi ufficiale"
+        },
+        "data": {
+            "heading": "Rispetto dei tuoi dati",
+            "text": "Nessun account, nessuna archiviazione del tuo contenuto lato server. L'IA resta un soggetto terzo, anche se gratuita, e lo indichiamo in trasparenza."
+        },
+        "links": {
+            "privacy": "Privacy",
+            "cookies": "Cookie",
+            "sitemap": "Mappa del sito"
+        }
+    },
+    "toolFeatures": {
+        "quota": "{n, plural, one {# correzione max / giorno} other {# correzioni max / giorno}}",
+        "quotaSub": "Limite azzerato ogni giorno",
+        "cookies": "Cookie richiesti",
+        "cookiesSub": "Per il corretto funzionamento dell'app",
+        "tier": "IA di terzi ({provider})",
+        "tierSub": "Anche gratuita, l'IA è un servizio esterno",
+        "bot": "Anti-bot",
+        "botSub": "Protezione contro connessioni automatizzate"
+    },
+    "meta": {
+        "home": {
+            "title": "CorrectAI – Correttore ortografico e grammaticale con IA",
+            "description": "Correggi ortografia, grammatica e punteggiatura con l'IA senza snaturare il tuo stile. Semplice, veloce e fedele alla tua voce."
+        }
     }
 }
