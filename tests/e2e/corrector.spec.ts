@@ -67,6 +67,13 @@ test.describe("Corrector — examples, guard, stale result", () => {
         await typeText(page, "I hope you are doing well and that this message finds you in good health.");
         await expect(tool(page).locator(".corrector__lang")).toContainText("English");
     });
+
+    test("the French LinkedIn example is detected as French (not Español)", async ({ page }) => {
+        await ready(page);
+        await example(page, "Un commentaire LinkedIn").click();
+        await expect(input(page)).toHaveValue(/Tres beau partage/);
+        await expect(tool(page).locator(".corrector__lang")).toContainText("Français");
+    });
 });
 
 test.describe("Corrector — AI call (client boundary)", () => {
@@ -91,6 +98,33 @@ test.describe("Corrector — AI call (client boundary)", () => {
         await typeText(page, "Bonjour a tous.");
         await runButton(page).click();
         await expect(result(page)).toContainText("Bonjour à tous.");
+    });
+
+    test("a broken JSON envelope is repaired: emoji decoded, credit consumed", async ({ page }) => {
+        // Escaped surrogate pair + trailing text with braces: JSON.parse fails on the whole reply.
+        await mockRun(page, {
+            body: { text: '{"language":"fr","corrected":"Bravo à tous \\ud83d\\udc4f"} (note : {fin})' },
+        });
+        await ready(page);
+        await typeText(page, "Bravo a tous 👏");
+        await runButton(page).click();
+        await expect(result(page).locator("mark.diff--replace")).toHaveText("à");
+        await expect(result(page)).toContainText("Bravo à tous 👏");
+        await expect(result(page)).not.toContainText("corrected");
+        expect(await usageCount(page)).toBe(1);
+    });
+
+    test("an unusable JSON envelope is never shown: error toast, credit not consumed", async ({ page }) => {
+        // Truncated reply: no complete "corrected" string can be recovered.
+        await mockRun(page, { body: { text: '{"language":"fr","corrected":"Très beau partage ! Cela me rappelle' } });
+        await ready(page);
+        await typeText(page, "Tres beau partage ! Cela me rappel un projet.");
+        await runButton(page).click();
+        await expect(firstToast(page)).toContainText("La génération IA a échoué");
+        await expect(runButton(page)).toBeEnabled();
+        await expect(result(page)).not.toContainText("corrected");
+        await expect(result(page)).toContainText("Le texte corrigé apparaîtra ici");
+        expect(await usageCount(page)).toBeNull();
     });
 
     for (const [name, mock] of [

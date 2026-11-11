@@ -1,4 +1,12 @@
-import { classifyOp, levenshtein, parseCorrection, verdictFor } from "@/lib/correct/verdict";
+import {
+    classifyOp,
+    correctionFromReply,
+    levenshtein,
+    looksLikeEnvelope,
+    parseCorrection,
+    repairJson,
+    verdictFor,
+} from "@/lib/correct/verdict";
 import { diffWords } from "@/lib/text/diff";
 import { similarityPercent } from "@/lib/text/similarity";
 import { describe, expect, it } from "vitest";
@@ -75,6 +83,36 @@ describe("verdictFor", () => {
     });
 });
 
+describe("repairJson", () => {
+    it("valid JSON is left untouched", () => {
+        const ok = '{"language":"fr","corrected":"a\\nb \\u00e9 \\"q\\" \\\\ \\/"}';
+        expect(repairJson(ok)).toBe(ok);
+    });
+    it("escapes raw control characters inside strings only", () => {
+        expect(repairJson('{\n"corrected":"a\nb\tc\rd"\n}')).toBe('{\n"corrected":"a\\nb\\tc\\rd"\n}');
+    });
+    it("drops the backslash of an invalid escape", () => {
+        expect(repairJson('{"corrected":"l\\\'an \\é"}')).toBe('{"corrected":"l\'an é"}');
+    });
+    it("a dangling backslash at the very end is dropped", () => {
+        expect(repairJson('"abc\\')).toBe('"abc');
+    });
+    it("escapes an unescaped straight quote inside the text", () => {
+        expect(JSON.parse(repairJson('{"corrected":"Il a dit "bonjour" hier"}'))).toEqual({
+            corrected: 'Il a dit "bonjour" hier',
+        });
+    });
+    it("typographic quotes: straight as delimiters, kept as text", () => {
+        expect(JSON.parse(repairJson("{“language”: “fr”, “corrected”: “Un ”mot” ici”}"))).toEqual({
+            language: "fr",
+            corrected: "Un ”mot” ici",
+        });
+    });
+    it("drops trailing commas", () => {
+        expect(JSON.parse(repairJson('{"corrected":"x", "list":[1,2,],}'))).toEqual({ corrected: "x", list: [1, 2] });
+    });
+});
+
 describe("parseCorrection", () => {
     it("plain JSON", () => {
         expect(parseCorrection('{"language":"FR","corrected":"Bonjour."}')).toEqual({
@@ -91,4 +129,60 @@ describe("parseCorrection", () => {
     it("no object => null", () => expect(parseCorrection("no json here")).toBeNull());
     it("invalid JSON => null", () => expect(parseCorrection("{not json}")).toBeNull());
     it("corrected not a string => null", () => expect(parseCorrection('{"corrected":42}')).toBeNull());
+
+    // The live LinkedIn reply: emoji escaped as a surrogate pair => decoded to the emoji.
+    it("escaped surrogate pair => the emoji", () => {
+        expect(parseCorrection('{"language":"fr","corrected":"Bravo à toute l\'équipe \\ud83d\\udc4f"}')).toEqual({
+            language: "fr",
+            corrected: "Bravo à toute l'équipe 👏",
+        });
+    });
+    it("lone surrogates (split pair) are dropped", () => {
+        expect(parseCorrection('{"corrected":"Bravo \\ud83d \\udc4f !"}')?.corrected).toBe("Bravo   !");
+    });
+    it("broken JSON is repaired (raw line break, bad escape, trailing comma)", () => {
+        expect(parseCorrection('{"language":"fr","corrected":"Bonjour,\nl\\\'équipe",}')).toEqual({
+            language: "fr",
+            corrected: "Bonjour,\nl'équipe",
+        });
+    });
+    it("trailing text with braces => field-level extraction", () => {
+        expect(
+            parseCorrection(
+                '{"language":"FR","corrected":"Très \\"beau\\"\\npartage \\u00e0 tous \\x"} (note: {fini})',
+            ),
+        ).toEqual({ language: "fr", corrected: 'Très "beau"\npartage à tous x' });
+    });
+    it("field-level extraction without a closing brace nor language", () => {
+        expect(parseCorrection('"corrected": "Il a dit "oui" hier"')).toEqual({
+            language: "",
+            corrected: 'Il a dit "oui" hier',
+        });
+    });
+    it("a truncated reply (unterminated string) => null, never a partial correction", () => {
+        expect(parseCorrection('{"language":"fr","corrected":"Très beau partage ! Cela me')).toBeNull();
+    });
+});
+
+describe("looksLikeEnvelope", () => {
+    it.each([
+        ['{"language":"fr"', true],
+        ['```json\n{"corrected"', true],
+        ['Voici : "corrected": "x"', true],
+        ["Voici : “language”: fr", true],
+        ["Bonjour à tous, la réunion est décalée.", false],
+    ])("%s => %s", (text, expected) => expect(looksLikeEnvelope(text)).toBe(expected));
+});
+
+describe("correctionFromReply", () => {
+    it("parsed envelope => trimmed correction", () => {
+        expect(correctionFromReply('{"language":"fr","corrected":"  Bonjour.\n"}')).toBe("Bonjour.");
+    });
+    it("plain text (envelope skipped) => the reply itself", () => {
+        expect(correctionFromReply("Bonjour à tous.")).toBe("Bonjour à tous.");
+    });
+    it("an unusable envelope => null (never shown as a correction)", () => {
+        expect(correctionFromReply('{"language":"fr","corrected":"Très beau partage')).toBeNull();
+        expect(correctionFromReply('{"language":"fr","corrected":"  "}')).toBeNull();
+    });
 });

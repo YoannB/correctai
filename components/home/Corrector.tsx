@@ -24,7 +24,7 @@ import { useAiCall, type AiCallCtx } from "@/hooks/use-ai-call";
 import { useDirtyGuard } from "@/hooks/use-dirty-guard";
 import { useElapsedSeconds } from "@/hooks/use-elapsed";
 import { useAiPendingSince, useStore } from "@/hooks/use-store";
-import { parseCorrection } from "@/lib/correct/verdict";
+import { correctionFromReply } from "@/lib/correct/verdict";
 import { detectLanguage } from "@/lib/text/detect-language";
 import { diffWords } from "@/lib/text/diff";
 import { useFormatter, useLocale, useTranslations } from "next-intl";
@@ -71,12 +71,16 @@ export function Corrector() {
     const sentRef = useRef("");
 
     const onSuccess = useCallback((reply: string) => {
-        // Free models may skip the JSON envelope: fall back to the raw reply as the correction.
-        const corrected = parseCorrection(reply)?.corrected.trim() || reply;
+        // Free models may skip the JSON envelope (plain text = the correction) or break it.
+        // A reply that still looks like the envelope is never shown: returning false makes
+        // useAiCall show the error toast and consume no credit; the previous result stays.
+        const corrected = correctionFromReply(reply);
+        if (corrected === null) return false;
         setResult({ source: sentRef.current, corrected });
         if (window.matchMedia(STACKED).matches) {
             document.getElementById(END_ID)?.scrollIntoView({ behavior: "smooth", block: "start" });
         }
+        return true;
     }, []);
     const { call, pending, canCall } = useAiCall("/api/run", buildBody, onSuccess);
     const elapsed = useElapsedSeconds(useAiPendingSince());
