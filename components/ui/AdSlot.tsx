@@ -18,7 +18,10 @@ export interface AdSlotProps {
 }
 
 export function AdSlot({ w, h, label }: AdSlotProps) {
-    if (ADS_ENABLED) {
+    // Placeholders are a DEVELOPMENT aid only (docs/seo-layout.md → Ads): a production build
+    // renders nothing until real tags and consent are wired. NODE_ENV and ADS_ENABLED are both
+    // inlined at build time, so server and client render the same tree (no hydration mismatch).
+    if (ADS_ENABLED || process.env.NODE_ENV !== "development") {
         // Real integration (AdSense / tag) to come; nothing is rendered until configured,
         // and never without consent (see docs/seo-layout.md).
         return null;
