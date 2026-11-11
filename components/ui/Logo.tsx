@@ -1,39 +1,47 @@
 "use client";
+import { SITE_NAME } from "@/constants/site";
 import { cn } from "@/lib/cn";
+import { useId } from "react";
 
-// The pulse travels the axon BACK AND FORTH (keyPoints 0;1;0) instead of looping
-// 0->1->0 by teleporting: no more visible jump at the end of the run. keySplines
-// softens the ends. The orbit and the core already loop symmetrically (no jump).
-export function Logo({ size = 36, className }: { size?: number; className?: string }) {
+// CorrectAI mark: a pen stroke with two sparkle pairs (CSS-only animation, styles/ui/logo.css).
+// `draw` replays the stroke-dashoffset "writing" loop (splash / loaders); the header and footer
+// keep a still pen with only the sparkles breathing. The gradient id is per instance (useId) so
+// several logos on one page never resolve each other's <defs>.
+export function Logo({ size = 36, className, draw = false }: { size?: number; className?: string; draw?: boolean }) {
+    const gradientId = `logoGrad-${useId().replace(/:/g, "")}`;
     return (
         <svg
-            className={cn("logo", className)}
+            className={cn("logo", draw && "logo--draw", className)}
             width={size}
             height={size}
-            viewBox="0 0 48 48"
+            viewBox="0 0 64 64"
+            fill="none"
             role="img"
-            aria-label="Axons"
+            aria-label={SITE_NAME}
         >
             <defs>
-                <linearGradient id="logoGrad" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0%" stopColor="var(--accent-1)" />
-                    <stop offset="100%" stopColor="var(--accent-2)" />
+                <linearGradient id={gradientId} x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stopColor="#38bdf8" />
+                    <stop offset="55%" stopColor="#6366f1" />
+                    <stop offset="100%" stopColor="#a855f7" />
                 </linearGradient>
             </defs>
-            <circle className="logo__orbit" cx="24" cy="24" r="18" />
-            <path className="logo__axon" d="M10 30 C 18 30, 18 18, 26 18 S 36 26, 38 16" />
-            <circle className="logo__pulse" r="2.6" cx="0" cy="0">
-                <animateMotion
-                    dur="3.2s"
-                    repeatCount="indefinite"
-                    calcMode="spline"
-                    keyPoints="0;1;0"
-                    keyTimes="0;0.5;1"
-                    keySplines="0.45 0 0.55 1; 0.45 0 0.55 1"
-                    path="M10 30 C 18 30, 18 18, 26 18 S 36 26, 38 16"
-                />
-            </circle>
-            <path className="logo__core" d="M24 12 L33 33 H15 Z" fill="url(#logoGrad)" />
+            <path
+                className="logo__pen"
+                d="M14 50 L20 32 L44 8 L56 20 L32 44 Z M20 32 L32 44"
+                stroke={`url(#${gradientId})`}
+                strokeWidth="3.2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+            />
+            <g className="logo__spark" fill="#7dd3fc">
+                <circle cx="75" cy="5" r="2.4" />
+                <circle cx="65" cy="2" r="1.6" />
+            </g>
+            <g className="logo__spark logo__spark--late" fill="#c4b5fd">
+                <circle cx="10" cy="20" r="2" />
+                <circle cx="6" cy="28" r="1.4" />
+            </g>
         </svg>
     );
 }

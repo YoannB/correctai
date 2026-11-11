@@ -2,7 +2,7 @@ import { LOCALES as SERVED_LOCALES } from "@/i18n/locales";
 import { resolveTimeZone } from "@/lib/day";
 import { isAiEnabled, isConsentRequired } from "@/lib/flags";
 
-export const SITE_NAME = "Axons";
+export const SITE_NAME = "CorrectAI";
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 export const AI_DAILY_LIMIT = Number(process.env.NEXT_PUBLIC_AI_DAILY_LIMIT ?? 0) || 0;
 // AI feature switch. NEXT_PUBLIC_AI_ENABLED is computed by next.config.ts at build time from the
@@ -16,7 +16,7 @@ export const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID ?? "";
 // The cookie banner exists only when a tracker that needs consent is configured (CNIL: no
 // banner theatre when the site sets no such tracker; functional storage needs none).
 export const CONSENT_REQUIRED = isConsentRequired({ gtmId: GTM_ID, adsEnabled: ADS_ENABLED });
-export const GITHUB_URL = "https://github.com/YoannB/axons";
+export const GITHUB_URL = "https://github.com/YoannB/correctai";
 
 export type LocaleCode = "fr" | "en" | "es" | "de" | "it" | "pt";
 export interface LocaleMeta {

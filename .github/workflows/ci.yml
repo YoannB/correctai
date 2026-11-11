@@ -44,6 +44,8 @@ jobs:
             # E2E runs `next start` (NODE_ENV=production) with no Netlify Blobs store: fail-open
             # lets the server-contract specs reach validation. CI ONLY, never in a deployment.
             AI_QUOTA_FAIL_MODE: "open"
+            # CorrectAI is French-first: same default locale as production (Netlify).
+            NEXT_PUBLIC_DEFAULT_LOCALE: "fr"
         steps:
             - uses: actions/checkout@v7
 
