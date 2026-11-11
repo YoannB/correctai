@@ -185,3 +185,27 @@
         font-size: 0.7rem;
     }
 }
+/* Optional brand tagline (Header: messages nav.tagline / nav.taglineSub), after a divider. */
+.brand-tagline {
+    display: grid;
+    gap: 2px;
+    margin: 0;
+    padding-left: 14px;
+    border-left: 1px solid var(--border-2);
+    font-size: 0.85rem;
+    line-height: 1.25;
+    min-width: 0;
+}
+.brand-tagline__main {
+    color: var(--text-1);
+    font-weight: 600;
+}
+.brand-tagline__sub {
+    color: var(--muted);
+    font-size: 0.75rem;
+}
+@media (max-width: 760px) {
+    .brand-tagline {
+        display: none;
+    }
+}

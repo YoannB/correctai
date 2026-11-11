@@ -18,6 +18,13 @@ export const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID ?? "";
 export const CONSENT_REQUIRED = isConsentRequired({ gtmId: GTM_ID, adsEnabled: ADS_ENABLED });
 export const GITHUB_URL = "https://github.com/YoannB/correctai";
 
+// Site chrome switches (Axons defaults: true / true / 1). A one-page tool can drop the header
+// nav (the footer and the HTML sitemap still list every page) and the GitHub links.
+export const HEADER_NAV_ENABLED: boolean = false;
+export const GITHUB_LINK_ENABLED: boolean = false;
+/** Brand word: SITE_NAME[0..BRAND_ACCENT_FROM) plain, the rest accented ("Correct" + "AI"). */
+export const BRAND_ACCENT_FROM: number = 7;
+
 export type LocaleCode = "fr" | "en" | "es" | "de" | "it" | "pt";
 export interface LocaleMeta {
     code: LocaleCode;
@@ -68,41 +75,34 @@ export interface SeoResource {
     sourceKey: string;
     durationKey: string;
 }
+// CorrectAI: third-party references used by the SEO block (components/home/SeoContent.tsx).
+// Written by others, linked for the reader (and for SEO): the official article 50 summary and
+// a short video about it. Copy keys live under messages → seoContent.law.
 export const SEO_RESOURCES: SeoResource[] = [
     {
         id: "yt",
         kind: "video",
-        url: "https://www.youtube.com/watch?v=jzdTBDmCAKE",
-        videoId: "jzdTBDmCAKE",
-        short: false,
+        url: "https://www.youtube.com/shorts/mNib6lbM-b8",
+        videoId: "mNib6lbM-b8",
+        short: true,
         mark: "YT",
-        titleKey: "seo.a1.title",
-        summaryKey: "seo.a1.summary",
-        sourceKey: "seo.a1.source",
-        durationKey: "seo.a1.duration",
+        titleKey: "seoContent.law.videoTitle",
+        summaryKey: "seoContent.law.intro",
+        sourceKey: "seoContent.law.linkVideo",
+        durationKey: "seoContent.law.linkVideo",
     },
     {
-        id: "oc",
+        id: "ai-act-50",
         kind: "article",
-        url: "https://openclassrooms.com/fr/courses/8710351-creez-une-application-react-avec-next-js/8856186-demarrez-un-projet-next-js",
-        mark: "OC",
-        titleKey: "seo.a2.title",
-        summaryKey: "seo.a2.summary",
-        sourceKey: "seo.a2.source",
-        durationKey: "seo.a2.duration",
-    },
-    {
-        id: "ti",
-        kind: "article",
-        url: "https://tech-insider.org/fr/nextjs-16-tutoriel-app-full-stack-13-etapes-2026/",
-        mark: "TI",
-        titleKey: "seo.a3.title",
-        summaryKey: "seo.a3.summary",
-        sourceKey: "seo.a3.source",
-        durationKey: "seo.a3.duration",
+        url: "https://artificialintelligenceact.eu/fr/transparency-rules-article-50/",
+        mark: "EU",
+        titleKey: "seoContent.law.heading",
+        summaryKey: "seoContent.law.intro",
+        sourceKey: "seoContent.law.source",
+        durationKey: "seoContent.law.source",
     },
 ];
-export const HERO_VIDEO_ID = "jzdTBDmCAKE";
+export const HERO_VIDEO_ID = "mNib6lbM-b8";
 
 // SYMMETRIC, THIN vertical rails (160x600): symmetry kept (the 160/300
 // asymmetry looked bad) AND breathing room in the center (~912px on a 1280 container) => the

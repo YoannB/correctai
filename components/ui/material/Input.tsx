@@ -4,6 +4,7 @@ import TextField from "@mui/material/TextField";
 import type { AppInputProps } from "../types";
 export function Input({
     label,
+    ariaLabel,
     value,
     onChange,
     placeholder,
@@ -32,7 +33,7 @@ export function Input({
                 helperText={error ?? helperText}
                 slotProps={{
                     inputLabel: { shrink: !!value || undefined },
-                    htmlInput: { autoComplete: "off" },
+                    htmlInput: { autoComplete: "off", "aria-label": label ? undefined : ariaLabel },
                 }}
             />
         </div>
