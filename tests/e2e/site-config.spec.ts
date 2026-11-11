@@ -58,6 +58,15 @@ test.describe("Site configuration", () => {
         await expect(cookieBanner(page)).toBeHidden();
     });
 
+    test("no ad placeholder in a production build", async ({ page }) => {
+        // CI serves `next start` (production): placeholders are a development aid only, the
+        // slots must render nothing until real tags exist (docs/seo-layout.md → Ads).
+        test.skip(!process.env.CI, "local runs use next dev, where placeholders are expected");
+        await page.goto("/");
+        await hydrated(page);
+        await expect(page.locator(".ad-slot")).toHaveCount(0);
+    });
+
     test("headers: framing limited to the same origin by default", async ({ request }) => {
         const res = await request.get("/");
         expect(res.headers()["x-frame-options"]).toBe("SAMEORIGIN");
