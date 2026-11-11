@@ -4,6 +4,7 @@ import TextField from "@mui/material/TextField";
 import type { AppTextareaProps } from "../types";
 export function Textarea({
     label,
+    ariaLabel,
     value,
     onChange,
     placeholder,
@@ -39,7 +40,7 @@ export function Textarea({
                     inputLabel: { shrink: !!value || undefined },
                     // Native maxlength/readonly on the <textarea>; aria-describedby is left to MUI
                     // (it wires the helper text), the native maxlength is announced on its own.
-                    htmlInput: { maxLength, readOnly },
+                    htmlInput: { maxLength, readOnly, "aria-label": label ? undefined : ariaLabel },
                 }}
             />
         </div>

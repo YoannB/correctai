@@ -238,3 +238,23 @@
         bottom: calc(12px + env(safe-area-inset-bottom, 0px) + var(--footer-clearance, 0px));
     }
 }
+/* Short (9:16) player: the placeholder must keep the SAME ratio as the media, otherwise the
+   content below jumps by the height difference when the player pins (docs/seo-layout.md).
+   Narrower in flow and when pinned, so a portrait video does not cover half the viewport. */
+.seo-video-slot--short {
+    max-width: 200px;
+}
+.seo-video-slot--short .seo-video-placeholder {
+    aspect-ratio: 9/16;
+}
+.seo-video-slot--short .video-embed.is-short {
+    max-width: none;
+}
+.seo-video-slot--short.is-pinned .seo-video {
+    width: 180px;
+}
+@media (max-width: 900px) {
+    .seo-video-slot--short.is-pinned .seo-video {
+        width: min(150px, calc(100vw - 24px));
+    }
+}

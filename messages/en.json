@@ -7,7 +7,9 @@
         "privacy": "Privacy",
         "cookies": "Cookies",
         "github": "GitHub",
-        "menu": "Menu"
+        "menu": "Menu",
+        "tagline": "Fix your text with AI",
+        "taglineSub": "Spelling • Grammar • Style"
     },
     "hero": {
         "badge": "Your AI assistant, ready in one click",
@@ -143,31 +145,36 @@
         "title": "Frequently asked questions",
         "items": [
             {
-                "q": "What is Axons?",
-                "a": "A Next.js 16 / React 19 boilerplate focused on SEO and AI, deployable on Netlify, with an isolated component library (Material UI) and OpenRouter wiring through a Route Handler."
+                "q": "Is CorrectAI really free?",
+                "a": "Yes. The service relies on free models via OpenRouter. No account, no card: three corrections per day per browser, reset daily."
             },
             {
-                "q": "Is the AI paid?",
-                "a": "The default model is a free OpenRouter model (openrouter/free). A daily quota limits browser calls; errors surface as toasts so you can retry easily."
+                "q": "Are my texts stored?",
+                "a": "No. Your text only transits for correction and is not kept on our servers. Only technical preferences stay in your browser: theme, language, quota, session token."
             },
             {
-                "q": "Does my data go anywhere?",
-                "a": "No. Theme, cookie consent and the daily counter are stored locally (cookie + localStorage). The OpenRouter key stays server‑side and is never exposed to the browser."
+                "q": "Does the AI change my style?",
+                "a": "No. The agent is constrained to correct only the form. It preserves line breaks, lists, emojis, mentions, hashtags and URLs, and does not rephrase, summarize or translate."
             },
             {
-                "q": "How do I add a new AI action?",
-                "a": "Drop a file in capabilities/agents/ (or a folder capabilities/skills/<id>/), then call POST /api/run with { prompt, agentId?, skillId?, inputs? }. The route stays thin: composition, quota, timeout and errors live in lib/ai (run → composeRun + runPrompt)."
+                "q": "Must a corrected text be labelled “AI-generated”?",
+                "a": "Generally no. The official Article 50 summary provides an exception when the system performs only an assistive function for standard editing tasks, such as grammar correction, or when it does not substantially modify the input data or its semantics. CorrectAI does flag sense rewordings, for which a notice becomes advisable."
             },
             {
-                "q": "Is the site indexable by Google?",
-                "a": "Yes: server rendering, localized URLs, metadata, hreflang, XML sitemap and an HTML sitemap are provided."
+                "q": "Which languages are supported?",
+                "a": "Detection covers French, English, Spanish, German, Italian and Portuguese. The interface is available in these six languages."
+            },
+            {
+                "q": "Are the corrections foolproof?",
+                "a": "No. The service is free and relies on free models, which is precisely the other side of the coin: a result may contain errors, or correct nothing on an already-correct text. Re-run the call if the result seems incomplete, and always reread before publishing — you remain the author and the one responsible for the final text."
             }
         ]
     },
     "footer": {
-        "tagline": "Your base for modern AI apps",
+        "tagline": "A helping hand for flawless texts.",
         "rights": "© {year} {site}. All rights reserved.",
-        "builtWith": "Built with Next.js, Material UI, next-intl and OpenRouter"
+        "builtWith": "Built with Next.js, Material UI, next-intl and OpenRouter",
+        "poweredBy": "Powered by <next>Next.js</next> · Deployed on <netlify>Netlify</netlify>"
     },
     "cookie": {
         "message": "This site uses cookies to improve your experience, measure audience and display ads. You can accept or refuse their use.",
@@ -451,8 +458,64 @@
         "titleLead": "Fairer text,",
         "titleAccent": "in seconds",
         "subtitle": "Fix your spelling and grammar mistakes with <ai>AI</ai>, while keeping your own style.",
-        "tagline": "Simple, fast, with no compromise on the way you express yourself.",
-        "headerTitle": "Fix your text with AI",
-        "headerSub": "Spelling • Grammar • Style"
+        "tagline": "Simple, fast, with no compromise on the way you express yourself."
+    },
+    "seoContent": {
+        "heading": "Correct without rewriting",
+        "intro": "CorrectAI only touches the surface of your text: spelling, agreement, conjugation, punctuation. The substance, tone and vocabulary stay yours.",
+        "steps": [
+            {
+                "title": "Paste or type your text",
+                "text": "Up to 3,000 characters, the norm for a LinkedIn post or a professional message."
+            },
+            {
+                "title": "Run the correction",
+                "text": "An AI agent reviews the form: spelling, grammar, conjugation, syntax, punctuation."
+            },
+            {
+                "title": "Reread and publish",
+                "text": "Changes are highlighted; a score and a transparency verdict guide you."
+            }
+        ],
+        "chips": ["Spelling", "Grammar", "Punctuation"],
+        "law": {
+            "heading": "Article 50: what to remember",
+            "intro": "Non-exhaustive summary of the official page on the transparency rules of Article 50 of Regulation (EU) 2024/1689.",
+            "bullets": [
+                "Since 2 August 2026, Article 50 imposes transparency duties in four cases: direct interaction with an AI, synthetic content, emotion recognition or biometric classification, deepfakes and public-interest texts.",
+                "For generated content, providers must mark outputs in a machine-readable way and allow them to be identified as artificially generated or manipulated; an “AI Omnibus” grace period runs until 2 December 2026 for that marking.",
+                "Key exception for CorrectAI: the duty does not apply when the system performs only an assistive function for standard editing tasks, such as grammar correction, or when it does not substantially modify the input data or its semantics.",
+                "The information must be clear and distinguishable, at the latest at the time of first interaction or exposure."
+            ],
+            "linkLaw": "Read the official Article 50 summary",
+            "linkVideo": "Open the short video",
+            "videoTitle": "Short video on Article 50 of the EU AI Act",
+            "source": "Official summary"
+        },
+        "data": {
+            "heading": "Respect for your data",
+            "text": "No account, no server-side storage of your content. The AI remains a third party, even when free, and we state it transparently."
+        },
+        "links": {
+            "privacy": "Privacy",
+            "cookies": "Cookies",
+            "sitemap": "Sitemap"
+        }
+    },
+    "toolFeatures": {
+        "quota": "{n, plural, one {# correction max / day} other {# corrections max / day}}",
+        "quotaSub": "Limit resets every day",
+        "cookies": "Cookies required",
+        "cookiesSub": "For the app to work properly",
+        "tier": "Third-party AI ({provider})",
+        "tierSub": "Even free, the AI is an external service",
+        "bot": "Anti-bot",
+        "botSub": "Protection against automated connections"
+    },
+    "meta": {
+        "home": {
+            "title": "CorrectAI – AI spelling & grammar checker",
+            "description": "Fix spelling, grammar and punctuation with AI without changing your style. Simple, fast, and true to your voice."
+        }
     }
 }
