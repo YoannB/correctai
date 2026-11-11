@@ -31,6 +31,10 @@ While pinned, `hooks/use-footer-clearance.ts` writes the visible footer height i
 variable `--footer-clearance` (scroll/resize, rAF-throttled, no React state) and the fixed
 player's `bottom` adds it, so the player rises above the footer and never hides its links
 (Manage cookies, GitHub). The detach sentinel is unaffected (no oscillation).
+A SHORT video (the `SEO_RESOURCES` video entry has `short: true`) adds `.seo-video-slot--short`:
+the placeholder takes the 9:16 ratio (a 16:9 placeholder under a portrait player made the
+content below jump by the height difference on pin) and the player is narrower in flow (200px)
+and when pinned (180px, 150px under 900px).
 The player is DISMISSIBLE: a `.seo-video-close` button (CSS-only visibility, shown solely under
 `.is-pinned`) calls `store.dismissVideo()`, an IN-MEMORY `videoDismissed` flag on
 `lib/store.ts` (NOT persisted, NOT hydrated in `getServerState` beyond the `false` default).
@@ -49,6 +53,15 @@ of mobile horizontal overflow. The center column width is governed by the side r
 symmetric and THIN (160px wide). Never 300+300 (that steals 600px from the content and squeezes
 the feature strip). Three SEO resources are listed full-width in a single column (no auto-fill
 grid that leaves an orphan gap); horizontal leaderboards are centered (`margin-inline:auto`).
+
+## Site chrome switches
+
+`constants/site.ts`: `HEADER_NAV_ENABLED` (false = no header nav and no burger; the footer and the
+HTML sitemap page still list every page), `GITHUB_LINK_ENABLED` (header and footer GitHub links),
+`BRAND_ACCENT_FROM` (the brand word is `SITE_NAME[0..n)` plain + the rest in `<b>`, header AND
+footer). Optional messages: `nav.tagline` (+ `nav.taglineSub`) render a two-line tagline after
+the brand (`.brand-tagline`, hidden below 760px); `footer.poweredBy` (rich tags `<next>`,
+`<netlify>`) adds a credits line in the footer meta column. Absent keys render nothing (`t.has`).
 
 ## Mobile guards
 

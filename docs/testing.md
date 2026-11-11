@@ -40,6 +40,13 @@ project only; nightly/manual runs add `mobile`.
 `npx playwright install` is a documented prerequisite (browsers are not auto-downloaded
 everywhere); a missing executable fails every test before rendering.
 
+URLs in specs: the default locale has no prefix (`localePrefix: "as-needed"`), so build expected
+hrefs/URLs with `lp(locale, path)` / `lpRe(locale, path)` (`tests/e2e/support/locale-path.ts`)
+instead of hard-coding "/fr/...": the same spec then passes for a derived site whose
+`NEXT_PUBLIC_DEFAULT_LOCALE` differs. Navigate with the explicit prefix (`goto("/fr")`) to FORCE a
+locale (the middleware redirects to the canonical URL). `playwright.config.ts` loads `.env*` with
+`@next/env`, so specs see the same `NEXT_PUBLIC_*` as the server.
+
 ## Verification philosophy
 
 Definition of done for `lib/`: `npm run test` green AND the pure modules at 100% branch coverage.

@@ -70,6 +70,28 @@ test.describe("POST /api/run — server contract, no model call", () => {
         });
     });
 
+    test("prompt over the server bound → 400 invalid (never sent to the model)", async ({ request }) => {
+        const response = await request.post("/api/run", {
+            headers: {
+                "x-forwarded-for": e2eIp("long-prompt"),
+            },
+            // DEFAULT_MAX_PROMPT_CHARS (lib/ai/parse-agent.ts) is 8000; no agent => default bound.
+            data: {
+                prompt: "a".repeat(8001),
+            },
+        });
+
+        expect(response.status()).toBe(400);
+
+        const body = await response.json();
+
+        expect(body).toMatchObject({
+            error: {
+                code: "invalid",
+            },
+        });
+    });
+
     test("whitespace-only prompt → 400 invalid", async ({ request }) => {
         const response = await request.post("/api/run", {
             headers: {

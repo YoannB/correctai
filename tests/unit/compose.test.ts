@@ -1,5 +1,5 @@
 import { composeRun } from "@/lib/ai/compose";
-import { parseAgent } from "@/lib/ai/parse-agent";
+import { DEFAULT_MAX_PROMPT_CHARS, parseAgent } from "@/lib/ai/parse-agent";
 import { parseSkill } from "@/lib/ai/parse-skill";
 import type { LoadedSkill } from "@/lib/ai/skill-pure";
 import { describe, expect, it } from "vitest";
@@ -45,6 +45,17 @@ describe("composeRun — required prompt", () => {
     });
     it("throws on a whitespace-only prompt", () => {
         expect(() => composeRun({ prompt: "   \n " })).toThrow(/prompt/);
+    });
+    it("prompt over the default bound, no agent => throws (DEFAULT_MAX_PROMPT_CHARS branch)", () => {
+        expect(() => composeRun({ prompt: "a".repeat(DEFAULT_MAX_PROMPT_CHARS + 1) })).toThrow(/too long/);
+    });
+    it("prompt exactly at the default bound => accepted", () => {
+        expect(composeRun({ prompt: "a".repeat(DEFAULT_MAX_PROMPT_CHARS) }).messages).toHaveLength(1);
+    });
+    it("agent bound wins over the default (agent.maxPromptChars branch)", () => {
+        const short = parseAgent("---\nid: s\nmaxPromptChars: 5\n---\nsys");
+        expect(() => composeRun({ prompt: "abcdef", agent: short })).toThrow(/6 > 5/);
+        expect(composeRun({ prompt: "  abcde  ", agent: short }).messages[1].content).toBe("abcde");
     });
     it("prompt only => user message only + DEFAULTS (!system branch, src undefined)", () => {
         const c = composeRun({ prompt: " hi " });

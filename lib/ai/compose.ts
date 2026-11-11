@@ -1,5 +1,5 @@
 import type { AgentDef } from "./parse-agent";
-import { renderPrompt } from "./parse-agent";
+import { DEFAULT_MAX_PROMPT_CHARS, renderPrompt } from "./parse-agent";
 import type { LoadedSkill, SkillResource } from "./skill-pure";
 import { serializeSkillResources } from "./skill-pure";
 
@@ -46,6 +46,9 @@ function filterResources(resources: SkillResource[], include?: string[]): SkillR
 export function composeRun({ prompt, agent, skill, inputs = {}, includeResources }: ComposeInput): ComposedRun {
     const user = prompt?.trim();
     if (!user) throw new Error("composeRun: prompt is required and must not be empty.");
+    // Server bound (the agent's, else the default): run() maps this throw to AiError('invalid', 400).
+    const limit = agent ? agent.maxPromptChars : DEFAULT_MAX_PROMPT_CHARS;
+    if (user.length > limit) throw new Error(`composeRun: prompt too long (${user.length} > ${limit} characters).`);
 
     const sections: string[] = [];
 

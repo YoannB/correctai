@@ -99,7 +99,12 @@ exists on agents — see the _Agent contract_ heading below).
 frontmatter delimited by `---` head AND tail; scalar pairs `key: value` (colon + space, else
 the line is ignored); `id` REQUIRED; `name` defaults to `id`; `model` defaults to
 `openrouter/free`; `temperature` / `maxTokens` / `timeoutMs` default to 0.7/300/25000 and MUST be
-finite (NaN/Infinity is an authoring error and throws, never silently defaults); the body is
+finite (NaN/Infinity is an authoring error and throws, never silently defaults);
+`maxPromptChars` (default `DEFAULT_MAX_PROMPT_CHARS` = 8000, must be > 0) is the SERVER bound on
+the trimmed prompt: `composeRun` throws above it (no agent ⇒ the default applies), so `run` maps
+it to `AiError('invalid', 400)` before any network call and the reserved credit is refunded.
+Set it to the tool's client `maxLength` (the client bound is a convenience, a direct POST is
+not bounded by it); the body is
 the system prompt with `{locale}` (and any `{input}`-style) placeholders. The former
 `input: none|optional|required` field is REMOVED — in the unified model the prompt is always
 the user message and always required, so an "expects/doesn't expect a prompt" guard was dead

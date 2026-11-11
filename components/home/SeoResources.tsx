@@ -32,6 +32,8 @@ export function SeoResources() {
     // The pinned player rises above the footer instead of covering its links (bottom-right).
     useFooterClearance(pinned);
     const articles = SEO_RESOURCES;
+    // A short (9:16) hero video gets the portrait slot geometry (seo-video-slot--short).
+    const short = SEO_RESOURCES.find((r) => r.kind === "video" && r.videoId === HERO_VIDEO_ID)?.short ?? false;
     return (
         <Section
             id="seo"
@@ -44,7 +46,7 @@ export function SeoResources() {
         >
             <div className="seo__video-block">
                 <span ref={sentinelRef} className="seo-sentinel" aria-hidden="true" />
-                <div className={cn("seo-video-slot", pinned && "is-pinned")}>
+                <div className={cn("seo-video-slot", short && "seo-video-slot--short", pinned && "is-pinned")}>
                     <div className="seo-video-placeholder" aria-hidden="true" />
                     <div className="seo-video">
                         {/* Close button: always rendered, but display:none while the slot is not
@@ -61,7 +63,7 @@ export function SeoResources() {
                                 <path d="M6 6l12 12M18 6L6 18" />
                             </svg>
                         </button>
-                        <VideoEmbed videoId={HERO_VIDEO_ID} short={false} caption={t("videoCaption")} />
+                        <VideoEmbed videoId={HERO_VIDEO_ID} short={short} caption={t("videoCaption")} />
                     </div>
                 </div>
                 <p className="seo-video-caption muted">{t("videoCaption")}</p>
