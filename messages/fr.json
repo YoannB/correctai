@@ -452,7 +452,9 @@
             "title": "Effacer le texte saisi ?",
             "body": "Les deux zones vont être vidées et le texte que vous avez saisi sera perdu. Cette action est immédiate et non annulable. Voulez-vous continuer ?",
             "confirm": "Réinitialiser"
-        }
+        },
+        "done": "Correction terminée : le texte corrigé est à jour.",
+        "doneNoChange": "Correction terminée : aucune faute détectée, votre texte est déjà correct."
     },
     "toolHero": {
         "titleLead": "Un texte plus juste,",

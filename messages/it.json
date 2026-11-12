@@ -452,7 +452,9 @@
             "title": "Cancellare il testo inserito?",
             "body": "Le due aree verranno svuotate e il testo che hai inserito andrà perso. L'azione è immediata e non annullabile. Vuoi continuare?",
             "confirm": "Reimposta"
-        }
+        },
+        "done": "Correzione completata: il testo corretto è aggiornato.",
+        "doneNoChange": "Correzione completata: nessun errore trovato, il tuo testo è già corretto."
     },
     "toolHero": {
         "titleLead": "Un testo più corretto,",

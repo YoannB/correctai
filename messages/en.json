@@ -452,7 +452,9 @@
             "title": "Clear your text?",
             "body": "Both areas will be emptied and the text you typed will be lost. This is immediate and cannot be undone. Do you want to continue?",
             "confirm": "Reset"
-        }
+        },
+        "done": "Correction done: the corrected text is up to date.",
+        "doneNoChange": "Correction done: no mistake found, your text is already correct."
     },
     "toolHero": {
         "titleLead": "Fairer text,",

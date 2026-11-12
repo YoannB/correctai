@@ -277,3 +277,23 @@
     background: transparent;
     padding-inline: 4px;
 }
+
+/* A new AI reply briefly highlights the result pane (re-keyed by freshKey in Corrector.tsx). */
+.corrector__result--fresh .diff-view {
+    animation: correctorFresh 1.6s ease-out;
+}
+@keyframes correctorFresh {
+    0% {
+        box-shadow: 0 0 0 0 color-mix(in oklab, var(--ok) 70%, transparent);
+        border-color: var(--ok);
+    }
+    100% {
+        box-shadow: 0 0 0 10px transparent;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .corrector__result--fresh .diff-view {
+        animation: none;
+        border-color: var(--ok);
+    }
+}

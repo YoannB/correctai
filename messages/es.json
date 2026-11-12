@@ -452,7 +452,9 @@
             "title": "¿Borrar el texto escrito?",
             "body": "Las dos zonas se vaciarán y perderás el texto que has escrito. Esta acción es inmediata e irreversible. ¿Quieres continuar?",
             "confirm": "Restablecer"
-        }
+        },
+        "done": "Corrección terminada: el texto corregido está actualizado.",
+        "doneNoChange": "Corrección terminada: no se ha detectado ningún error, tu texto ya es correcto."
     },
     "toolHero": {
         "titleLead": "Un texto más justo,",
