@@ -90,6 +90,19 @@ test.describe("Corrector — AI call (client boundary)", () => {
         await expect(input(page)).toBeEnabled();
         expect(counter.hits).toBe(1);
         expect(await usageCount(page)).toBe(1);
+        // Visible confirmation: success toast + highlighted result pane.
+        await expect(firstToast(page)).toContainText("Correction terminée : le texte corrigé est à jour.");
+        await expect(tool(page).locator(".corrector__result--fresh")).toHaveCount(1);
+    });
+
+    test("on an example whose stored correction is already shown, the reply is still confirmed", async ({ page }) => {
+        // The default example already displays its correction: without feedback the call looked like a no-op.
+        await mockRun(page, { body: reply("Texte déjà parfait.") });
+        await ready(page);
+        await typeText(page, "Texte déjà parfait.");
+        await runButton(page).click();
+        await expect(firstToast(page)).toContainText("aucune faute détectée");
+        await expect(tool(page).locator(".corrector__result--fresh")).toHaveCount(1);
     });
 
     test("a reply outside the JSON envelope is used as the correction", async ({ page }) => {

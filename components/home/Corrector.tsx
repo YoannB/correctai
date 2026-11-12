@@ -69,19 +69,32 @@ export function Corrector() {
     });
     // Text sent with the pending call (written in the click handler, read in onSuccess).
     const sentRef = useRef("");
+    // Bumped on every accepted AI reply: re-keys the result pane so its "fresh" highlight replays
+    // (on an example the pane already shows a text, so the update must be visible).
+    const [freshKey, setFreshKey] = useState(0);
 
-    const onSuccess = useCallback((reply: string) => {
-        // Free models may skip the JSON envelope (plain text = the correction) or break it.
-        // A reply that still looks like the envelope is never shown: returning false makes
-        // useAiCall show the error toast and consume no credit; the previous result stays.
-        const corrected = correctionFromReply(reply);
-        if (corrected === null) return false;
-        setResult({ source: sentRef.current, corrected });
-        if (window.matchMedia(STACKED).matches) {
-            document.getElementById(END_ID)?.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
-        return true;
-    }, []);
+    const onSuccess = useCallback(
+        (reply: string) => {
+            // Free models may skip the JSON envelope (plain text = the correction) or break it.
+            // A reply that still looks like the envelope is never shown: returning false makes
+            // useAiCall show the error toast and consume no credit; the previous result stays.
+            const corrected = correctionFromReply(reply);
+            if (corrected === null) return false;
+            const source = sentRef.current;
+            setResult({ source, corrected });
+            setFreshKey((k) => k + 1);
+            store.pushToast({
+                severity: "success",
+                message: corrected.trim() === source.trim() ? t("doneNoChange") : t("done"),
+                duration: 4000,
+            });
+            if (window.matchMedia(STACKED).matches) {
+                document.getElementById(END_ID)?.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+            return true;
+        },
+        [store, t],
+    );
     const { call, pending, canCall } = useAiCall("/api/run", buildBody, onSuccess);
     const elapsed = useElapsedSeconds(useAiPendingSince());
 
@@ -231,7 +244,12 @@ export function Corrector() {
                 action={action}
                 endToolbar={endToolbar}
                 end={
-                    <div className="corrector__result">
+                    <div
+                        key={freshKey}
+                        className={
+                            freshKey > 0 && !stale ? "corrector__result corrector__result--fresh" : "corrector__result"
+                        }
+                    >
                         <DiffView
                             ops={ops}
                             ariaLabel={t("outputLabel")}

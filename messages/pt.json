@@ -452,7 +452,9 @@
             "title": "Apagar o texto inserido?",
             "body": "As duas áreas serão esvaziadas e o texto que inseriu será perdido. Esta ação é imediata e irreversível. Deseja continuar?",
             "confirm": "Repor"
-        }
+        },
+        "done": "Correção concluída: o texto corrigido está atualizado.",
+        "doneNoChange": "Correção concluída: nenhum erro encontrado, o seu texto já está correto."
     },
     "toolHero": {
         "titleLead": "Um texto mais correto,",

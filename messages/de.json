@@ -452,7 +452,9 @@
             "title": "Eingegebenen Text löschen?",
             "body": "Beide Felder werden geleert und dein eingegebener Text geht verloren. Diese Aktion erfolgt sofort und kann nicht rückgängig gemacht werden. Möchtest du fortfahren?",
             "confirm": "Zurücksetzen"
-        }
+        },
+        "done": "Korrektur abgeschlossen: Der korrigierte Text ist aktuell.",
+        "doneNoChange": "Korrektur abgeschlossen: Kein Fehler gefunden, dein Text ist bereits korrekt."
     },
     "toolHero": {
         "titleLead": "Ein treffenderer Text,",
