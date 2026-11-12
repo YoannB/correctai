@@ -25,6 +25,9 @@ Site en ligne : https://correctai-preview.netlify.app
 Next.js 16 (App Router, Turbopack) · React 19 · TypeScript · Material UI 9 derrière une API neutre · `next-intl` 4 ·
 OpenRouter via le Vercel AI SDK · Vitest, Playwright, Storybook 10 · Netlify.
 
+**Version : CorrectAI 1.0.0, basé sur Axons
+[v0.5.0](https://github.com/YoannB/axons/tree/v0.5.0).**
+
 CorrectAI est construit sur le boilerplate [Axons](https://github.com/YoannB/axons) : l'architecture, les conventions
 et la documentation technique viennent de là. `AGENTS.md` et `docs/` sont la documentation (en anglais) d'Axons pour
 les agents de code ; ils ne sont pas spécifiques à CorrectAI.
@@ -101,20 +104,36 @@ Le site Netlify est lié à `main` : chaque merge déclenche un déploiement aut
 
 ## Récupérer les mises à jour d'Axons
 
-Le dépôt Axons est configuré comme remote `upstream` :
+Le dépôt Axons est le remote `upstream`. Ses tags sont rangés localement sous `axons/` (`axons/v0.5.0`) pour ne
+jamais se mélanger à ceux de CorrectAI (`v1.0.0`…). Configuration, une seule fois par clone :
 
 ```bash
-git remote add upstream https://github.com/YoannB/axons.git   # une seule fois
-git fetch upstream --tags
-git merge vX.Y.Z        # ou : git merge upstream/main
+git remote add upstream https://github.com/YoannB/axons.git
+git config remote.upstream.tagOpt --no-tags
+git config --add remote.upstream.fetch "+refs/tags/*:refs/tags/axons/*"
+```
+
+Mise à jour, sur une branche dédiée :
+
+```bash
+git fetch upstream
+git merge --no-ff -m "Merge Axons vX.Y.Z" axons/vX.Y.Z
 ```
 
 En cas de conflit :
 
-- garder la version CorrectAI de `messages/*.json` et de `app/[locale]/page.tsx` ;
+- garder la version CorrectAI de `messages/*.json`, de `app/[locale]/page.tsx` et la `version` de `package.json` /
+  `package-lock.json` (Axons y met la sienne) ;
 - relire `constants/site.ts` : un merge peut y dupliquer des blocs (constantes déclarées deux fois).
 
-Puis relancer le contrôle qualité complet avant d'ouvrir la PR.
+Puis mettre à jour la ligne « basé sur Axons » en tête de ce README, relancer le contrôle qualité complet et ouvrir la
+PR.
+
+## Versions et tags
+
+Les tags de CorrectAI suivent leur propre numérotation (`v1.0.0`…) et sont annotés avec la version d'Axons utilisée.
+Une version se publie après le merge de sa PR, tag par tag : `git push origin vX.Y.Z`. Ne jamais lancer
+`git push --tags`, qui publierait aussi les tags `axons/*` locaux.
 
 ## Licence
 
