@@ -28,8 +28,7 @@
   the splash is hidden by CSS (`body:has(.root-not-found)`), never removed.
 - `app/[locale]/articles/**` = article listing + pages, fed by `content/articles/` (site
   content read through `lib/articles/source.ts`, NOT model-facing); see `docs/articles.md`.
-- `app/api/run/route.ts` = the ONE unified AI entry; `app/api/hello/route.ts` = legacy
-  adapter delegating to `run({ agentId:'hello' })` (see _HTTP_ in `docs/ai-capabilities.md`).
+- `app/api/run/route.ts` = the ONE unified AI entry (see _HTTP_ in `docs/ai-capabilities.md`).
 - `components/ui/` = neutral public API + generic SVG/CSS (no MUI). `components/ui/material/`
   = the ONLY MUI adapter (own `index.css`). `components/{layout,home,content}/` = composition.
 - `tests/unit/` (Vitest) and `tests/e2e/` (Playwright) must not overlap: Vitest `include`

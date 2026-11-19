@@ -32,7 +32,7 @@ const DEV_SECRET = "dev-quota-secret";
 const STORE_DEADLINE_MS = 4_000;
 
 // Memory singleton held by globalThis: each Route Handler may get its own
-// instance of this module (separate bundles); without it /api/run, /api/hello and the dev reset
+// instance of this module (separate bundles); without it /api/run and the dev reset
 // would see different counters.
 const devGlobal = globalThis as { __aiQuotaMemory?: CasStore };
 

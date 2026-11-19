@@ -91,10 +91,8 @@ load/validate/compose failure (bad/missing capability, empty prompt) maps to
 The route owns HTTP concerns (best-effort rate limit, body parse, locale resolution, injecting
 `locale` into `inputs`); composition/network live in `lib/ai`.
 
-`app/api/hello/route.ts` is a LEGACY ADAPTER calling `run({ agentId:'hello', prompt:<fixed> })`
-so the showcase greeting button and the E2E mock (`**/api/hello`) keep working unchanged; its
-body still accepts `{ locale, input }` but `input` is ignored (the `input` field no longer
-exists on agents — see the _Agent contract_ heading below).
+There is no other AI route: every AI surface calls `/api/run` with its agent id (CorrectAI:
+`correct`, `capabilities/agents/correct.md`).
 
 ## Agent contract — `capabilities/agents/<id>.md`
 
@@ -207,8 +205,8 @@ the fix is to ship the content as imported modules or via a tracked mechanism, N
 
 ## Rate limit
 
-Two server layers run BEFORE the model, in both `/api/run` and `/api/hello` (one shared
-counter, like the client quota):
+Two server layers run BEFORE the model, in `/api/run` (one shared counter, like the
+client quota):
 
 1. `hitRateLimit` (`lib/ai/rate-limit.ts`): free, in function memory, per instance. A cheap
    filter against naive floods, NOT a quota.
