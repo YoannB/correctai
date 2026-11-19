@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
 import { buildSecurityHeaders, parseFrameAncestors } from "./lib/security-headers";
+import { COMMENTS_ENABLED } from "./constants/site";
 
 const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
 
@@ -8,9 +9,12 @@ const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
 // still required for scripts (anti-flash bootScript) and styles (Emotion / Material UI).
 // FRAME_ANCESTORS (build-time, server-only): extra origins allowed to embed the site in an iframe
 // (e.g. a portfolio showing this app); empty => same-origin only.
+// Disqus origins join the CSP only when comments are active (a Disqus shortname + a collection
+// that shows them; constants/site.ts, docs/articles.md → Comments).
 const securityHeaders = buildSecurityHeaders({
     isDev: process.env.NODE_ENV !== "production",
     frameAncestors: parseFrameAncestors(process.env.FRAME_ANCESTORS),
+    comments: COMMENTS_ENABLED,
 });
 
 const nextConfig: NextConfig = {

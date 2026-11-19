@@ -30,8 +30,25 @@ export function parseFrameAncestors(raw: string | undefined): string[] {
     return [...new Set(["'self'", ...tokens])];
 }
 
-export function buildSecurityHeaders(opts: { isDev: boolean; frameAncestors: string[] }): HeaderPair[] {
+// Disqus (third-party comments): embed.js from <shortname>.disqus.com, its code, styles and images
+// from *.disquscdn.com, the thread itself in an iframe from disqus.com. Added ONLY when comments
+// are active (lib/comments.ts), so a site without comments keeps the narrow policy.
+const DISQUS = {
+    script: ["https://*.disqus.com", "https://*.disquscdn.com"],
+    style: ["https://*.disquscdn.com"],
+    img: ["https://*.disqus.com", "https://*.disquscdn.com"],
+    frame: ["https://disqus.com", "https://*.disqus.com"],
+    connect: ["https://*.disqus.com"],
+} as const;
+
+export function buildSecurityHeaders(opts: {
+    isDev: boolean;
+    frameAncestors: string[];
+    /** Third-party comments (Disqus) are active: their origins join the CSP. Default false. */
+    comments?: boolean;
+}): HeaderPair[] {
     const ancestors = opts.frameAncestors;
+    const disqus = (kind: keyof typeof DISQUS): string[] => (opts.comments ? [...DISQUS[kind]] : []);
     // X-Frame-Options cannot express an allowlist: it is sent only when it says the same thing as
     // frame-ancestors (old browsers), and dropped when other origins may embed the site (CSP
     // frame-ancestors is authoritative wherever it is supported).
@@ -59,11 +76,18 @@ export function buildSecurityHeaders(opts: { isDev: boolean; frameAncestors: str
                     "https://www.googletagmanager.com",
                     "https://www.youtube.com",
                     "https://www.youtube-nocookie.com",
+                    ...disqus("script"),
                 ].join(" "),
-                "style-src 'self' 'unsafe-inline'",
-                "img-src 'self' data: blob: https://i.ytimg.com https://img.youtube.com",
-                "frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com https://www.googletagmanager.com",
-                "connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com",
+                ["style-src 'self' 'unsafe-inline'", ...disqus("style")].join(" "),
+                ["img-src 'self' data: blob: https://i.ytimg.com https://img.youtube.com", ...disqus("img")].join(" "),
+                [
+                    "frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com https://www.googletagmanager.com",
+                    ...disqus("frame"),
+                ].join(" "),
+                [
+                    "connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com",
+                    ...disqus("connect"),
+                ].join(" "),
                 "font-src 'self' data:",
                 "base-uri 'self'",
                 "form-action 'self'",

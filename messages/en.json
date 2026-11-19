@@ -12,134 +12,21 @@
         "taglineSub": "Spelling • Grammar • Style"
     },
     "hero": {
-        "badge": "Your AI assistant, ready in one click",
-        "titleLead": "The Next.js boilerplate for your",
-        "rotating": ["AI agents", "SEO sites", "Next.js apps", "OpenRouter demos"],
-        "subtitle": "A modern, fast and SEO foundation to easily build web apps with AI. Ready‑to‑use components, multilingual, deployable on Netlify.",
-        "ctaDemo": "See the demo",
-        "ctaPlan": "Sitemap",
-        "scrollCue": "Scroll down",
         "limitSuffix": "Limited: {count} AI calls / day",
-        "tech": {
-            "next": "Next.js 16+",
-            "nextSub": "App Router",
-            "ts": "TypeScript",
-            "tsSub": "Security & stability",
-            "mui": "Material UI 9+",
-            "muiSub": "Modern components",
-            "or": "OpenRouter",
-            "orSub": "Free AI"
-        }
+        "scrollCue": "Scroll down"
     },
     "showcase": {
-        "title": "Component library",
-        "inputLabel": "Input",
-        "inputPlaceholder": "Your text...",
-        "textareaLabel": "Textarea",
-        "textareaPlaceholder": "Your message...",
-        "btnPrimary": "Primary button",
-        "btnSecondary": "Secondary button",
-        "chipLabel": "Chip",
-        "chipInfo": "Info",
-        "chipSuccess": "Verified",
-        "chipWarn": "Review",
-        "chipRemoved": "Item removed.",
-        "toastLabel": "Toast",
-        "toastFire": "Show a toast",
-        "toastMsg": "Toast displayed successfully.",
-        "dialogLabel": "Dialog",
-        "dialogOpen": "Open dialog",
-        "dialogTitle": "Modal window",
-        "dialogBody": "Dialog content, isolated behind the neutral API.",
-        "dialogClose": "Close",
-        "confirmLabel": "Confirm",
-        "confirmQuestion": "Are you sure you want to continue?",
-        "confirmCancel": "Cancel",
-        "confirmOk": "Confirm",
-        "gaugeLabel": "Score / Gauge",
-        "gaugeValue": "{value}%",
-        "iconsLabel": "Animated icons",
         "bcHome": "Home",
-        "bcSection": "Section",
-        "bcPage": "Page",
-        "langLabel": "Language selector",
-        "langCurrent": "{name} (auto‑detected)",
-        "themeLabel": "Light / dark mode",
-        "themeSub": "According to your system",
-        "counterLabel": "Counter display",
-        "counterRemaining": "{count} calls left",
         "copyLabel": "Copy to clipboard",
         "copyCopied": "Copied!",
-        "testAi": "Test the AI",
+        "langLabel": "Language selector",
         "resetDone": "Limiter reset.",
-        "runSkill": "Run the skill (demo)",
-        "elapsed": "{seconds} s",
-        "tabsLabel": "Panels",
-        "tabTerminal": "Terminal",
-        "tabOutput": "Output",
-        "tabProblems": "Problems",
-        "terminalTitle": "Scripted demo",
-        "terminalRun": "Run the demo",
-        "terminalReset": "Reset",
-        "outputEmpty": "No output yet.",
-        "problemsEmpty": "No problems detected.",
-        "terminalLines": [
-            "npm run demo",
-            "Reading the configuration…",
-            "Preparing the 6 locales…",
-            "Generating static pages…",
-            "Done: simulated sequence, no AI call."
-        ]
+        "dialogClose": "Close"
     },
     "aiNotice": {
         "thirdParty": "Your text is sent to the third-party AI provider ({provider}) and to the model it routes to, which may keep it under their own terms. This site itself does not store it.",
         "quality": "Free models can be slow or imprecise: if the result looks wrong, simply run it again.",
         "wait": "A reply can take up to 30 seconds when the free model is busy."
-    },
-    "seo": {
-        "title": "Guides & tutorials",
-        "videoCaption": "Learn to build modern apps with Next.js 16",
-        "articlesTitle": "Why choose {site}?",
-        "why": [
-            "An ultra‑performant Next.js 16 foundation",
-            "Optimized and multilingual SEO (6 languages)",
-            "Reusable UI components (Material UI)",
-            "Simple AI integration (OpenRouter)",
-            "One‑click deploy on Netlify"
-        ],
-        "ctaTitle": "Ready to start?",
-        "ctaText": "Explore the components and test the AI now to see what you can build!",
-        "ctaButton": "Test the AI",
-        "a1": {
-            "title": "Next.js 16: the complete tutorial (2026)",
-            "summary": "Learn how to build a full‑stack app with Next.js 16 in 13 concrete steps: App Router, RSC, Server Actions, Turbopack, PPR, Prisma, Auth.js and deployment.",
-            "source": "YouTube",
-            "duration": "12 min"
-        },
-        "a2": {
-            "title": "Build a React app with Next.js",
-            "summary": "Learn to start a Next.js project and set up your development environment: app/ folder structure, Server Components by default, root layout and server rendering for SEO and speed.",
-            "source": "OpenClassrooms",
-            "duration": "8 min"
-        },
-        "a3": {
-            "title": "Next.js 16: Complete tutorial",
-            "summary": "A complete guide to master Next.js 16 and its 2026 features: stable 16.3.x, coordinated CVE security hardening, cache, images and EU‑sovereign hosting.",
-            "source": "Tech Insider",
-            "duration": "10 min"
-        }
-    },
-    "features": {
-        "multilang": "Multilingual",
-        "multilangSub": "FR, EN, ES, DE, IT, PT",
-        "theme": "Light / dark mode",
-        "themeSub": "According to your system",
-        "cookies": "Cookies",
-        "cookiesSub": "Consent management",
-        "storage": "Local storage",
-        "storageSub": "Your data stays local",
-        "security": "Secured",
-        "securitySub": "Anti‑bot protection"
     },
     "faq": {
         "title": "Frequently asked questions",
@@ -177,12 +64,17 @@
         "poweredBy": "Powered by <next>Next.js</next> · Deployed on <netlify>Netlify</netlify>"
     },
     "cookie": {
-        "message": "This site uses cookies to improve your experience, measure audience and display ads. You can accept or refuse their use.",
+        "message": "This site uses cookies and third-party services that require your consent, for the purposes below. You can accept or refuse them.",
         "accept": "Accept",
         "refuse": "Refuse",
         "settings": "Preferences",
         "link": "Learn more",
-        "manage": "Manage cookies"
+        "manage": "Manage cookies",
+        "purposes": {
+            "analytics": "Audience measurement",
+            "ads": "Advertising",
+            "comments": "Comments (Disqus, a third-party service)"
+        }
     },
     "theme": {
         "light": "Light",
@@ -201,7 +93,8 @@
     },
     "common": {
         "loading": "Loading…",
-        "close": "Close"
+        "close": "Close",
+        "newTab": "(new tab)"
     },
     "pages": {
         "sitemap": {
@@ -223,7 +116,11 @@
                     "heading": "Host",
                     "body": [
                         "The site is hosted by Netlify, Inc., 2325 3rd Street, Suite 100, San Francisco, CA 94107, United States (or its relevant European subsidiary).",
-                        "Technical data required to operate the service (connection logs, IP addresses) is processed by the host as part of providing the service."
+                        "Technical data required to operate the service (connection logs, IP addresses) is processed by the host as part of providing the service.",
+                        {
+                            "text": "Comments shown under some content are written by their authors and hosted by Disqus, a third-party comment service (privacy policy: https://disqus.com/privacy-policy/).",
+                            "when": ["comments"]
+                        }
                     ]
                 },
                 {
@@ -237,7 +134,10 @@
                     "heading": "Limitation of liability",
                     "body": [
                         "The site is provided for informational purposes. The publisher does not warrant the accuracy, completeness or currency of the information published, and shall not be liable for any direct or indirect damages arising from access to or use of the site.",
-                        "AI-generated content (via OpenRouter) is provided as assistance and shall not engage the publisher's liability; it is the user's responsibility to verify its accuracy."
+                        {
+                            "text": "AI-generated content (via OpenRouter) is provided as assistance and shall not engage the publisher's liability; it is the user's responsibility to verify its accuracy.",
+                            "when": ["ai"]
+                        }
                     ]
                 },
                 {
@@ -262,30 +162,93 @@
                 {
                     "heading": "Data collected",
                     "body": [
-                        "This site deliberately collects no identifiable personal data server-side, except for any information you freely submit to obtain an AI response.",
-                        "AI calls go through a Route Handler that relays a text request to OpenRouter; the API key stays server-side and is never exposed to the browser.",
-                        "Theme preferences, cookie consent and the daily call counter are stored locally in your browser (cookie + localStorage) and are not transmitted to the server."
+                        {
+                            "text": "This site deliberately collects no identifiable personal data server-side, except for any information you freely submit to obtain an AI response.",
+                            "when": ["ai"]
+                        },
+                        {
+                            "text": "This site deliberately collects no identifiable personal data server-side.",
+                            "when": ["!ai"]
+                        },
+                        {
+                            "text": "AI calls go through a Route Handler that relays a text request to OpenRouter; the API key stays server-side and is never exposed to the browser.",
+                            "when": ["ai"]
+                        },
+                        {
+                            "text": "Theme preferences, cookie consent and the daily call counter are stored locally in your browser (cookie + localStorage) and are not transmitted to the server.",
+                            "when": ["ai"]
+                        },
+                        {
+                            "text": "Theme preferences and cookie consent are stored locally in your browser (cookie + localStorage) and are not transmitted to the server.",
+                            "when": ["!ai"]
+                        },
+                        {
+                            "text": "If you choose to show the comments of an entry, the Disqus service loads in your browser and receives the data needed to display them (such as your IP address and browser information); what you post there is processed by Disqus under its own privacy policy: https://disqus.com/privacy-policy/.",
+                            "when": ["comments"]
+                        }
                     ]
                 },
                 {
                     "heading": "Purposes and lawful basis",
                     "body": [
-                        "The processing operations implemented serve: the functioning of the site (contract performance / legitimate interest), audience measurement and advertising (consent), and providing AI answers to your request (performance of the requested service).",
-                        "If you include personal data in a message submitted to the AI, it is processed solely to generate the requested response.",
+                        "The processing operations implemented serve:",
+                        {
+                            "list": [
+                                "the functioning of the site (contract performance / legitimate interest)",
+                                {
+                                    "text": "audience measurement (consent)",
+                                    "when": ["gtm"]
+                                },
+                                {
+                                    "text": "advertising (consent)",
+                                    "when": ["ads"]
+                                },
+                                {
+                                    "text": "displaying comments through Disqus (consent)",
+                                    "when": ["comments"]
+                                },
+                                {
+                                    "text": "providing AI answers to your request (performance of the requested service)",
+                                    "when": ["ai"]
+                                }
+                            ]
+                        },
+                        {
+                            "text": "If you include personal data in a message submitted to the AI, it is processed solely to generate the requested response.",
+                            "when": ["ai"]
+                        },
                         "The lawful basis of each processing operation is indicated above; consent-based processing can be stopped at any time."
                     ]
                 },
                 {
                     "heading": "Retention period",
                     "body": [
-                        "Locally stored data (theme, consent, counter) is kept as long as your browser retains it and until you delete it.",
+                        {
+                            "text": "Locally stored data (theme, consent, counter) is kept as long as your browser retains it and until you delete it.",
+                            "when": ["ai"]
+                        },
+                        {
+                            "text": "Locally stored data (theme, consent) is kept as long as your browser retains it and until you delete it.",
+                            "when": ["!ai"]
+                        },
                         "Host technical logs are kept for the period strictly necessary to operate and secure the service."
                     ]
                 },
                 {
                     "heading": "Recipients and transfers",
                     "body": [
-                        "Data is not sold or rented. Only the host (Netlify) and, where applicable, the AI provider (OpenRouter) may process the data strictly necessary to deliver the service.",
+                        {
+                            "text": "Data is not sold or rented. Only the host (Netlify) and, where applicable, the AI provider (OpenRouter) may process the data strictly necessary to deliver the service.",
+                            "when": ["ai"]
+                        },
+                        {
+                            "text": "Data is not sold or rented. Only the host (Netlify) may process the data strictly necessary to deliver the service.",
+                            "when": ["!ai"]
+                        },
+                        {
+                            "text": "When you show the comments, Disqus, a third-party provider, receives the data needed to display them and processes it under its own policy.",
+                            "when": ["comments"]
+                        },
                         "If any transfer outside the European Union occurs, it is framed by appropriate safeguards (European Commission standard contractual clauses or an adequacy decision)."
                     ]
                 },
@@ -300,7 +263,10 @@
                     "heading": "Security",
                     "body": [
                         "Reasonable technical and organizational measures are implemented to protect data against unauthorized access, alteration, disclosure or destruction.",
-                        "The OpenRouter key is stored in server environment variables and is never sent to the client nor included in responses."
+                        {
+                            "text": "The OpenRouter key is stored in server environment variables and is never sent to the client nor included in responses.",
+                            "when": ["ai"]
+                        }
                     ]
                 }
             ]
@@ -319,28 +285,61 @@
                     "heading": "Cookies used",
                     "body": [
                         "Functional cookies (light/dark theme, consent): strictly necessary, they do not require prior consent and are stored locally.",
-                        "Daily AI-call counter cookie: measures local usage of the quota, stored in your browser.",
-                        "Audience-measurement and advertising cookies: placed only after your consent, they can be refused without degrading navigation."
+                        {
+                            "text": "Daily AI-call counter cookie: measures local usage of the quota, stored in your browser.",
+                            "when": ["ai"]
+                        },
+                        {
+                            "text": "Audience-measurement and advertising cookies: placed only after your consent, they can be refused without degrading navigation.",
+                            "when": ["gtm", "ads"]
+                        },
+                        {
+                            "text": "Audience-measurement cookies: placed only after your consent, they can be refused without degrading navigation.",
+                            "when": ["gtm", "!ads"]
+                        },
+                        {
+                            "text": "Advertising cookies: placed only after your consent, they can be refused without degrading navigation.",
+                            "when": ["ads", "!gtm"]
+                        },
+                        {
+                            "text": "Comment cookies (Disqus): the comment thread is loaded from Disqus, a third-party service, only after you click \"Show comments\" or allow comments; Disqus may then place its own cookies, described in its privacy policy (https://disqus.com/privacy-policy/). Refusing them never prevents reading the content.",
+                            "when": ["comments"]
+                        }
                     ]
                 },
                 {
                     "heading": "Consent",
                     "body": [
-                        "On your first visit, a banner lets you accept, refuse or customize the placement of non-essential cookies.",
-                        "Until you give your agreement, only strictly necessary cookies are placed. Your choice is remembered and can be changed at any time via the \"Cookies\" link in the footer."
+                        {
+                            "text": "On your first visit, a banner lets you accept, refuse or customize the placement of non-essential cookies.",
+                            "when": ["consent"]
+                        },
+                        {
+                            "text": "Until you give your agreement, only strictly necessary cookies are placed. Your choice is remembered and can be changed at any time via the \"Cookies\" link in the footer.",
+                            "when": ["consent"]
+                        }
                     ]
                 },
                 {
                     "heading": "Retention period",
                     "body": [
-                        "Consent cookies are kept for a maximum of six (6) months, in line with supervisory-authority recommendations, except for strictly necessary technical durations.",
-                        "Audience-measurement cookies are kept for the minimum period necessary for their purpose."
+                        {
+                            "text": "Consent cookies are kept for a maximum of six (6) months, in line with supervisory-authority recommendations, except for strictly necessary technical durations.",
+                            "when": ["consent"]
+                        },
+                        {
+                            "text": "Audience-measurement cookies are kept for the minimum period necessary for their purpose.",
+                            "when": ["gtm"]
+                        }
                     ]
                 },
                 {
                     "heading": "Your choices",
                     "body": [
-                        "You can accept or refuse non-essential cookies at any time via the banner or the \"Cookies\" page.",
+                        {
+                            "text": "You can accept or refuse non-essential cookies at any time via the banner or the \"Cookies\" page.",
+                            "when": ["consent"]
+                        },
                         "You can also configure your browser to block or delete cookies; some site features may then not work properly."
                     ]
                 },
@@ -356,6 +355,7 @@
             "title": "Articles",
             "intro": "Guides and background notes about the site, published as Markdown.",
             "latestTitle": "Latest articles",
+            "archivesTitle": "From the archives",
             "viewAll": "All articles",
             "publishedOn": "Published on {date}",
             "onlyIn": "Only available in {language}",
@@ -519,5 +519,18 @@
             "title": "CorrectAI – AI spelling & grammar checker",
             "description": "Fix spelling, grammar and punctuation with AI without changing your style. Simple, fast, and true to your voice."
         }
+    },
+    "entryStatus": {
+        "new": "New",
+        "archive": "Archive",
+        "archiveNotice": "Archived content: published a while ago and kept as it was, it may be out of date."
+    },
+    "comments": {
+        "title": "Comments",
+        "notice": "Comments are provided by Disqus, a third-party service. Showing them loads Disqus, which may place its own cookies and process your data under its privacy policy.",
+        "policy": "Disqus privacy policy",
+        "show": "Show comments",
+        "always": "Always show comments",
+        "loading": "Loading comments…"
     }
 }

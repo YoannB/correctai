@@ -12,134 +12,21 @@
         "taglineSub": "Rechtschreibung • Grammatik • Stil"
     },
     "hero": {
-        "badge": "Dein KI-Assistent, bereit mit einem Klick",
-        "titleLead": "Das Next.js-Boilerplate für deine ",
-        "rotating": ["KI-Agenten", "SEO-Websites", "Next.js-Apps", "OpenRouter-Demos"],
-        "subtitle": "Eine moderne, schnelle und SEO-freundliche Grundlage, um einfach Web-Apps mit KI zu erstellen. Einsatzfertige Komponenten, mehrsprachig, deploybar auf Netlify.",
-        "ctaDemo": "Demo ansehen",
-        "ctaPlan": "Sitemap",
-        "scrollCue": "Nach unten scrollen",
         "limitSuffix": "Begrenzt: {count} KI-Aufrufe / Tag",
-        "tech": {
-            "next": "Next.js 16+",
-            "nextSub": "App Router",
-            "ts": "TypeScript",
-            "tsSub": "Sicherheit und Stabilität",
-            "mui": "Material UI 9+",
-            "muiSub": "Moderne Komponenten",
-            "or": "OpenRouter",
-            "orSub": "Kostenlose KI"
-        }
+        "scrollCue": "Nach unten scrollen"
     },
     "showcase": {
-        "title": "Komponentenbibliothek",
-        "inputLabel": "Eingabe",
-        "inputPlaceholder": "Dein Text...",
-        "textareaLabel": "Textbereich",
-        "textareaPlaceholder": "Deine Nachricht...",
-        "btnPrimary": "Primäre Schaltfläche",
-        "btnSecondary": "Sekundäre Schaltfläche",
-        "chipLabel": "Chip",
-        "chipInfo": "Info",
-        "chipSuccess": "Verifiziert",
-        "chipWarn": "Prüfen",
-        "chipRemoved": "Element entfernt.",
-        "toastLabel": "Toast",
-        "toastFire": "Toast anzeigen",
-        "toastMsg": "Toast erfolgreich angezeigt.",
-        "dialogLabel": "Dialog",
-        "dialogOpen": "Dialog öffnen",
-        "dialogTitle": "Modalfenster",
-        "dialogBody": "Dialoginhalt, isoliert hinter der neutralen API.",
-        "dialogClose": "Schließen",
-        "confirmLabel": "Bestätigen",
-        "confirmQuestion": "Bist du sicher, dass du fortfahren möchtest?",
-        "confirmCancel": "Abbrechen",
-        "confirmOk": "Bestätigen",
-        "gaugeLabel": "Punktzahl / Anzeige",
-        "gaugeValue": "{value}%",
-        "iconsLabel": "Animierte Symbole",
         "bcHome": "Startseite",
-        "bcSection": "Abschnitt",
-        "bcPage": "Seite",
-        "langLabel": "Sprachauswahl",
-        "langCurrent": "{name} (automatisch erkannt)",
-        "themeLabel": "Heller / dunkler Modus",
-        "themeSub": "Entsprechend deinem System",
-        "counterLabel": "Zähleranzeige",
-        "counterRemaining": "{count} Aufrufe verbleibend",
         "copyLabel": "In Zwischenablage kopieren",
         "copyCopied": "Kopiert!",
-        "testAi": "KI testen",
+        "langLabel": "Sprachauswahl",
         "resetDone": "Begrenzer zurückgesetzt.",
-        "runSkill": "Skill ausführen (Demo)",
-        "elapsed": "{seconds} s",
-        "tabsLabel": "Bereiche",
-        "tabTerminal": "Terminal",
-        "tabOutput": "Ausgabe",
-        "tabProblems": "Probleme",
-        "terminalTitle": "Skriptbasierte Demo",
-        "terminalRun": "Demo starten",
-        "terminalReset": "Zurücksetzen",
-        "outputEmpty": "Noch keine Ausgabe.",
-        "problemsEmpty": "Keine Probleme gefunden.",
-        "terminalLines": [
-            "npm run demo",
-            "Konfiguration wird gelesen…",
-            "Die 6 Sprachen werden vorbereitet…",
-            "Statische Seiten werden erzeugt…",
-            "Fertig: simulierte Sequenz, kein KI-Aufruf."
-        ]
+        "dialogClose": "Schließen"
     },
     "aiNotice": {
         "thirdParty": "Ihr Text wird an den externen KI-Anbieter ({provider}) und das von ihm genutzte Modell gesendet, die ihn nach ihren eigenen Bedingungen speichern können. Diese Website selbst speichert ihn nicht.",
         "quality": "Kostenlose Modelle können langsam oder ungenau sein: Wirkt das Ergebnis falsch, starten Sie einfach erneut.",
         "wait": "Eine Antwort kann bis zu 30 Sekunden dauern, wenn das kostenlose Modell ausgelastet ist."
-    },
-    "seo": {
-        "title": "Anleitungen und Tutorials",
-        "videoCaption": "Lerne, moderne Apps mit Next.js 16 zu erstellen",
-        "articlesTitle": "Warum {site} wählen?",
-        "why": [
-            "Eine ultraschnelle Next.js-16-Grundlage",
-            "Optimiertes und mehrsprachiges SEO (6 Sprachen)",
-            "Wiederverwendbare UI-Komponenten (Material UI)",
-            "Einfache KI-Integration (OpenRouter)",
-            "Deployment mit einem Klick auf Netlify"
-        ],
-        "ctaTitle": "Bereit zu starten?",
-        "ctaText": "Entdecke die Komponenten und teste jetzt die KI, um zu sehen, was du erstellen kannst!",
-        "ctaButton": "KI testen",
-        "a1": {
-            "title": "Next.js 16: das komplette Tutorial (2026)",
-            "summary": "Erfahre, wie du mit Next.js 16 in 13 konkreten Schritten eine Full-Stack-App erstellst: App Router, RSC, Server Actions, Turbopack, PPR, Prisma, Auth.js und Deployment.",
-            "source": "YouTube",
-            "duration": "12 min"
-        },
-        "a2": {
-            "title": "React-App mit Next.js erstellen",
-            "summary": "Lerne, ein Next.js-Projekt zu starten und deine Entwicklungsumgebung einzurichten: Struktur des app/-Ordners, Server Components standardmäßig, Root-Layout und Server-Rendering für SEO und Geschwindigkeit.",
-            "source": "OpenClassrooms",
-            "duration": "8 min"
-        },
-        "a3": {
-            "title": "Next.js 16: Komplettes Tutorial",
-            "summary": "Ein vollständiger Leitfaden, um Next.js 16 und seine Neuerungen für 2026 zu beherrschen: stabile Version 16.3.x, koordinierte CVE-Sicherheitshärtung, Cache, Bilder und EU-souveränes Hosting.",
-            "source": "Tech Insider",
-            "duration": "10 min"
-        }
-    },
-    "features": {
-        "multilang": "Mehrsprachig",
-        "multilangSub": "FR, EN, ES, DE, IT, PT",
-        "theme": "Heller / dunkler Modus",
-        "themeSub": "Entsprechend deinem System",
-        "cookies": "Cookies",
-        "cookiesSub": "Einwilligungsverwaltung",
-        "storage": "Lokaler Speicher",
-        "storageSub": "Deine Daten bleiben lokal",
-        "security": "Gesichert",
-        "securitySub": "Bot-Schutz"
     },
     "faq": {
         "title": "Häufige Fragen",
@@ -177,12 +64,17 @@
         "poweredBy": "Betrieben mit <next>Next.js</next> · Bereitgestellt auf <netlify>Netlify</netlify>"
     },
     "cookie": {
-        "message": "Diese Website verwendet Cookies, um deine Erfahrung zu verbessern, die Audience zu messen und Anzeigen zu schalten. Du kannst ihre Verwendung akzeptieren oder ablehnen.",
+        "message": "Diese Website verwendet Cookies und Dienste Dritter, die deine Einwilligung erfordern, für die unten genannten Zwecke. Du kannst sie akzeptieren oder ablehnen.",
         "accept": "Akzeptieren",
         "refuse": "Ablehnen",
         "settings": "Einstellungen",
         "link": "Mehr erfahren",
-        "manage": "Cookies verwalten"
+        "manage": "Cookies verwalten",
+        "purposes": {
+            "analytics": "Reichweitenmessung",
+            "ads": "Werbung",
+            "comments": "Kommentare (Disqus, Drittanbieterdienst)"
+        }
     },
     "theme": {
         "light": "Hell",
@@ -201,7 +93,8 @@
     },
     "common": {
         "loading": "Laden…",
-        "close": "Schließen"
+        "close": "Schließen",
+        "newTab": "(neuer Tab)"
     },
     "pages": {
         "sitemap": {
@@ -223,7 +116,11 @@
                     "heading": "Hoster",
                     "body": [
                         "Die Website wird von Netlify, Inc., 2325 3rd Street, Suite 100, San Francisco, CA 94107, Vereinigte Staaten (oder ihrer zuständigen europäischen Tochtergesellschaft) gehostet.",
-                        "Technische Daten, die für den Betrieb des Dienstes erforderlich sind (Verbindungslogs, IP-Adressen), werden vom Hoster im Rahmen der Dienstleistung verarbeitet."
+                        "Technische Daten, die für den Betrieb des Dienstes erforderlich sind (Verbindungslogs, IP-Adressen), werden vom Hoster im Rahmen der Dienstleistung verarbeitet.",
+                        {
+                            "text": "Die unter einigen Inhalten angezeigten Kommentare werden von ihren Autorinnen und Autoren verfasst und von Disqus gehostet, einem Kommentardienst eines Drittanbieters (Datenschutzerklärung: https://disqus.com/privacy-policy/).",
+                            "when": ["comments"]
+                        }
                     ]
                 },
                 {
@@ -237,7 +134,10 @@
                     "heading": "Haftungsbeschränkung",
                     "body": [
                         "Die Website wird ausschließlich zu Informationszwecken bereitgestellt. Der Herausgeber übernimmt keine Gewähr für Genauigkeit, Vollständigkeit oder Aktualität der veröffentlichten Informationen und haftet nicht für direkte oder indirekte Schäden aus Zugang oder Nutzung der Website.",
-                        "KI-generierte Inhalte (über OpenRouter) werden als Unterstützung bereitgestellt und begründen keine Haftung des Herausgebers; es liegt in der Verantwortung des Nutzers, ihre Richtigkeit zu überprüfen."
+                        {
+                            "text": "KI-generierte Inhalte (über OpenRouter) werden als Unterstützung bereitgestellt und begründen keine Haftung des Herausgebers; es liegt in der Verantwortung des Nutzers, ihre Richtigkeit zu überprüfen.",
+                            "when": ["ai"]
+                        }
                     ]
                 },
                 {
@@ -262,30 +162,93 @@
                 {
                     "heading": "Erhobene Daten",
                     "body": [
-                        "Diese Website erhebt bewusst keine identifizierenden personenbezogenen Daten serverseitig, außer den Angaben, die Sie freiwillig übermitteln, um eine KI-Antwort zu erhalten.",
-                        "KI-Aufrufe laufen über einen Route Handler, der eine Textanfrage an OpenRouter weiterleitet; der API-Schlüssel bleibt serverseitig und wird niemals dem Browser übermittelt.",
-                        "Theme-Einstellungen, Cookie-Einwilligung und der Tageszähler werden lokal in Ihrem Browser gespeichert (Cookie + localStorage) und nicht an den Server übertragen."
+                        {
+                            "text": "Diese Website erhebt bewusst keine identifizierenden personenbezogenen Daten serverseitig, außer den Angaben, die Sie freiwillig übermitteln, um eine KI-Antwort zu erhalten.",
+                            "when": ["ai"]
+                        },
+                        {
+                            "text": "Diese Website erhebt bewusst keine identifizierenden personenbezogenen Daten serverseitig.",
+                            "when": ["!ai"]
+                        },
+                        {
+                            "text": "KI-Aufrufe laufen über einen Route Handler, der eine Textanfrage an OpenRouter weiterleitet; der API-Schlüssel bleibt serverseitig und wird niemals dem Browser übermittelt.",
+                            "when": ["ai"]
+                        },
+                        {
+                            "text": "Theme-Einstellungen, Cookie-Einwilligung und der Tageszähler werden lokal in Ihrem Browser gespeichert (Cookie + localStorage) und nicht an den Server übertragen.",
+                            "when": ["ai"]
+                        },
+                        {
+                            "text": "Theme-Einstellungen und Cookie-Einwilligung werden lokal in Ihrem Browser gespeichert (Cookie + localStorage) und nicht an den Server übertragen.",
+                            "when": ["!ai"]
+                        },
+                        {
+                            "text": "Wenn Sie die Kommentare eines Inhalts anzeigen, wird der Dienst Disqus in Ihrem Browser geladen und erhält die für die Anzeige erforderlichen Daten (etwa Ihre IP-Adresse und Angaben zu Ihrem Browser); was Sie dort veröffentlichen, verarbeitet Disqus gemäß seiner eigenen Datenschutzerklärung: https://disqus.com/privacy-policy/.",
+                            "when": ["comments"]
+                        }
                     ]
                 },
                 {
                     "heading": "Zwecke und Rechtsgrundlage",
                     "body": [
-                        "Die Verarbeitungsvorgänge dienen: dem Betrieb der Website (Vertragserfüllung / berechtigtes Interesse), der Reichweitenmessung und Werbung (Einwilligung) sowie der Bereitstellung von KI-Antworten auf Ihre Anfrage (Erfüllung des angeforderten Dienstes).",
-                        "Sofern Sie personenbezogene Daten in eine an die KI übermittelte Nachricht eingeben, werden diese ausschließlich zur Erzeugung der angeforderten Antwort verarbeitet.",
+                        "Die Verarbeitungsvorgänge dienen:",
+                        {
+                            "list": [
+                                "dem Betrieb der Website (Vertragserfüllung / berechtigtes Interesse)",
+                                {
+                                    "text": "der Reichweitenmessung (Einwilligung)",
+                                    "when": ["gtm"]
+                                },
+                                {
+                                    "text": "der Werbung (Einwilligung)",
+                                    "when": ["ads"]
+                                },
+                                {
+                                    "text": "die Anzeige der Kommentare über Disqus (Einwilligung)",
+                                    "when": ["comments"]
+                                },
+                                {
+                                    "text": "der Bereitstellung von KI-Antworten auf Ihre Anfrage (Erfüllung des angeforderten Dienstes)",
+                                    "when": ["ai"]
+                                }
+                            ]
+                        },
+                        {
+                            "text": "Sofern Sie personenbezogene Daten in eine an die KI übermittelte Nachricht eingeben, werden diese ausschließlich zur Erzeugung der angeforderten Antwort verarbeitet.",
+                            "when": ["ai"]
+                        },
                         "Die Rechtsgrundlage jeder Verarbeitung ist oben angegeben; Verarbeitungen auf Grundlage der Einwilligung können jederzeit beendet werden."
                     ]
                 },
                 {
                     "heading": "Speicherdauer",
                     "body": [
-                        "Lokal gespeicherte Daten (Theme, Einwilligung, Zähler) werden gespeichert, solange Ihr Browser sie speichert und bis Sie sie löschen.",
+                        {
+                            "text": "Lokal gespeicherte Daten (Theme, Einwilligung, Zähler) werden gespeichert, solange Ihr Browser sie speichert und bis Sie sie löschen.",
+                            "when": ["ai"]
+                        },
+                        {
+                            "text": "Lokal gespeicherte Daten (Theme, Einwilligung) werden gespeichert, solange Ihr Browser sie speichert und bis Sie sie löschen.",
+                            "when": ["!ai"]
+                        },
                         "Technische Logs des Hosters werden nur für die Dauer aufbewahrt, die für Betrieb und Sicherheit des Dienstes strikt erforderlich ist."
                     ]
                 },
                 {
                     "heading": "Empfänger und Übermittlungen",
                     "body": [
-                        "Daten werden nicht verkauft oder vermietet. Nur der Hoster (Netlify) und gegebenenfalls der KI-Anbieter (OpenRouter) können die streng erforderlichen Daten zur Erbringung des Dienstes verarbeiten.",
+                        {
+                            "text": "Daten werden nicht verkauft oder vermietet. Nur der Hoster (Netlify) und gegebenenfalls der KI-Anbieter (OpenRouter) können die streng erforderlichen Daten zur Erbringung des Dienstes verarbeiten.",
+                            "when": ["ai"]
+                        },
+                        {
+                            "text": "Daten werden nicht verkauft oder vermietet. Nur der Hoster (Netlify) kann die streng erforderlichen Daten zur Erbringung des Dienstes verarbeiten.",
+                            "when": ["!ai"]
+                        },
+                        {
+                            "text": "Wenn Sie die Kommentare anzeigen, erhält Disqus als Drittanbieter die für die Anzeige erforderlichen Daten und verarbeitet sie gemäß seiner eigenen Richtlinie.",
+                            "when": ["comments"]
+                        },
                         "Sofern eine Übermittlung außerhalb der Europäischen Union erfolgt, wird sie durch geeignete Garantien abgesichert (Standardvertragsklauseln der Europäischen Kommission oder Angemessenheitsbeschluss)."
                     ]
                 },
@@ -300,7 +263,10 @@
                     "heading": "Sicherheit",
                     "body": [
                         "Angemessene technische und organisatorische Maßnahmen werden umgesetzt, um Daten vor unbefugtem Zugriff, Veränderung, Offenlegung oder Zerstörung zu schützen.",
-                        "Der OpenRouter-Schlüssel wird in Server-Umgebungsvariablen gespeichert und niemals an den Client gesendet oder in Antworten aufgenommen."
+                        {
+                            "text": "Der OpenRouter-Schlüssel wird in Server-Umgebungsvariablen gespeichert und niemals an den Client gesendet oder in Antworten aufgenommen.",
+                            "when": ["ai"]
+                        }
                     ]
                 }
             ]
@@ -319,28 +285,61 @@
                     "heading": "Verwendete Cookies",
                     "body": [
                         "Funktionale Cookies (hell/dunkel, Einwilligung): strikt erforderlich, sie benötigen keine vorherige Einwilligung und werden lokal gespeichert.",
-                        "Cookie für den täglichen KI-Aufrufzähler: misst die lokale Nutzung des Kontingents und wird in Ihrem Browser gespeichert.",
-                        "Cookies zur Reichweitenmessung und für Werbung: werden nur nach Ihrer Einwilligung gesetzt und können abgelehnt werden, ohne die Navigation zu beeinträchtigen."
+                        {
+                            "text": "Cookie für den täglichen KI-Aufrufzähler: misst die lokale Nutzung des Kontingents und wird in Ihrem Browser gespeichert.",
+                            "when": ["ai"]
+                        },
+                        {
+                            "text": "Cookies zur Reichweitenmessung und für Werbung: werden nur nach Ihrer Einwilligung gesetzt und können abgelehnt werden, ohne die Navigation zu beeinträchtigen.",
+                            "when": ["gtm", "ads"]
+                        },
+                        {
+                            "text": "Cookies zur Reichweitenmessung: werden nur nach Ihrer Einwilligung gesetzt und können abgelehnt werden, ohne die Navigation zu beeinträchtigen.",
+                            "when": ["gtm", "!ads"]
+                        },
+                        {
+                            "text": "Cookies für Werbung: werden nur nach Ihrer Einwilligung gesetzt und können abgelehnt werden, ohne die Navigation zu beeinträchtigen.",
+                            "when": ["ads", "!gtm"]
+                        },
+                        {
+                            "text": "Kommentar-Cookies (Disqus): Der Kommentarbereich wird erst nach einem Klick auf „Kommentare anzeigen“ oder Ihrer Zustimmung zu den Kommentaren von Disqus, einem Drittanbieterdienst, geladen; Disqus kann dann eigene Cookies setzen, die in seiner Datenschutzerklärung beschrieben sind (https://disqus.com/privacy-policy/). Eine Ablehnung verhindert nie das Lesen der Inhalte.",
+                            "when": ["comments"]
+                        }
                     ]
                 },
                 {
                     "heading": "Einwilligung",
                     "body": [
-                        "Beim ersten Besuch ermöglicht Ihnen ein Banner, das Setzen nicht essenzieller Cookies zu akzeptieren, abzulehnen oder anzupassen.",
-                        "Bis Sie Ihre Zustimmung erteilen, werden nur strikt erforderliche Cookies gesetzt. Ihre Wahl wird gespeichert und kann jederzeit über den Link „Cookies“ im Footer geändert werden."
+                        {
+                            "text": "Beim ersten Besuch ermöglicht Ihnen ein Banner, das Setzen nicht essenzieller Cookies zu akzeptieren, abzulehnen oder anzupassen.",
+                            "when": ["consent"]
+                        },
+                        {
+                            "text": "Bis Sie Ihre Zustimmung erteilen, werden nur strikt erforderliche Cookies gesetzt. Ihre Wahl wird gespeichert und kann jederzeit über den Link „Cookies“ im Footer geändert werden.",
+                            "when": ["consent"]
+                        }
                     ]
                 },
                 {
                     "heading": "Speicherdauer",
                     "body": [
-                        "Einwilligungs-Cookies werden maximal sechs (6) Monate gespeichert, entsprechend den Empfehlungen der Aufsichtsbehörden, außer bei strikt notwendigen technischen Laufzeiten.",
-                        "Cookies zur Reichweitenmessung werden für die minimal erforderliche Dauer ihres Zwecks gespeichert."
+                        {
+                            "text": "Einwilligungs-Cookies werden maximal sechs (6) Monate gespeichert, entsprechend den Empfehlungen der Aufsichtsbehörden, außer bei strikt notwendigen technischen Laufzeiten.",
+                            "when": ["consent"]
+                        },
+                        {
+                            "text": "Cookies zur Reichweitenmessung werden für die minimal erforderliche Dauer ihres Zwecks gespeichert.",
+                            "when": ["gtm"]
+                        }
                     ]
                 },
                 {
                     "heading": "Ihre Entscheidungen",
                     "body": [
-                        "Sie können nicht essenzielle Cookies jederzeit über das Banner oder die Seite „Cookies“ akzeptieren oder ablehnen.",
+                        {
+                            "text": "Sie können nicht essenzielle Cookies jederzeit über das Banner oder die Seite „Cookies“ akzeptieren oder ablehnen.",
+                            "when": ["consent"]
+                        },
                         "Sie können Ihren Browser auch so konfigurieren, dass Cookies blockiert oder gelöscht werden; einige Funktionen der Website funktionieren dann möglicherweise nicht korrekt."
                     ]
                 },
@@ -356,6 +355,7 @@
             "title": "Artikel",
             "intro": "Anleitungen und Hintergrundnotizen zur Website, in Markdown veröffentlicht.",
             "latestTitle": "Neueste Artikel",
+            "archivesTitle": "Aus dem Archiv",
             "viewAll": "Alle Artikel",
             "publishedOn": "Veröffentlicht am {date}",
             "onlyIn": "Nur auf {language} verfügbar",
@@ -519,5 +519,18 @@
             "title": "CorrectAI – KI-Rechtschreib- und Grammatikprüfung",
             "description": "Korrigiere Rechtschreibung, Grammatik und Zeichensetzung mit KI, ohne deinen Stil zu verändern. Einfach, schnell und deiner Stimme treu."
         }
+    },
+    "entryStatus": {
+        "new": "Neu",
+        "archive": "Archiv",
+        "archiveNotice": "Archivinhalt: vor längerer Zeit veröffentlicht und unverändert erhalten, er kann veraltet sein."
+    },
+    "comments": {
+        "title": "Kommentare",
+        "notice": "Die Kommentare werden von Disqus bereitgestellt, einem Drittanbieterdienst. Beim Anzeigen wird Disqus geladen, das eigene Cookies setzen und deine Daten gemäß seiner Datenschutzerklärung verarbeiten kann.",
+        "policy": "Datenschutzerklärung von Disqus",
+        "show": "Kommentare anzeigen",
+        "always": "Kommentare immer anzeigen",
+        "loading": "Kommentare werden geladen…"
     }
 }

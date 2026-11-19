@@ -4,8 +4,8 @@ import {
     BRAND_ACCENT_FROM,
     GITHUB_LINK_ENABLED,
     GITHUB_URL,
+    HEADER_NAV,
     HEADER_NAV_ENABLED,
-    NAV,
     SITE_NAME,
 } from "@/constants/site";
 import { Link, usePathname } from "@/i18n/routing";
@@ -17,7 +17,7 @@ import { useState } from "react";
 // tools. The tools are pushed to the right by margin-left:auto (CSS), without an auto margin on
 // the brand, which would override the nav's flex:1 on desktop.
 // Optional chrome (constants/site.ts): HEADER_NAV_ENABLED (nav + burger), GITHUB_LINK_ENABLED,
-// BRAND_ACCENT_FROM; and a brand tagline shown when messages define `nav.tagline` (+ `nav.taglineSub`).
+// BRAND_ACCENT_FROM; HEADER_NAV drops site entries declared `header: false`; and a brand tagline shown when messages define `nav.tagline` (+ `nav.taglineSub`).
 export function Header() {
     const t = useTranslations("nav");
     const pathname = usePathname();
@@ -61,7 +61,7 @@ export function Header() {
 
                 {HEADER_NAV_ENABLED ? (
                     <nav id="site-nav" className={cn("site-nav", open && "is-open")} aria-label="Main">
-                        {NAV.map((n) => (
+                        {HEADER_NAV.map((n) => (
                             <Link
                                 key={n.href}
                                 href={n.href}

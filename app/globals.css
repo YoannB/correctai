@@ -11,6 +11,8 @@
 
 @import "../styles/tokens.css";
 @import "../styles/base.css";
+/* Early on purpose: zero-specificity defaults that any later component rule overrides. */
+@import "../styles/scrollbars.css";
 @import "../styles/layout/containers.css";
 @import "../styles/layout/ad-slots.css";
 @import "../styles/layout/header.css";

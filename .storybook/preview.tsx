@@ -52,7 +52,7 @@ const preview: Preview = {
             const theme = (context.globals.theme as "dark" | "light") ?? "dark";
             return (
                 <ThemedCanvas theme={theme}>
-                    <StorybookProviders>
+                    <StorybookProviders mode={theme}>
                         <Story />
                     </StorybookProviders>
                 </ThemedCanvas>

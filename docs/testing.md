@@ -14,6 +14,12 @@ fail-fast, so a missing tail delimiter throws at MODULE IMPORT (before any `it` 
 "0 test / Failed Suites" while other files still pass. Inline fixtures in
 `agent-parser.test.ts`/`skill-parser.test.ts` already close correctly; keep it that way.
 
+IDENTITY-AGNOSTIC: tests check that an identity value reaches its consumer (`PALETTE` →
+`buildTheme`, `SITE_NAME` → `Logo`, …), never the identity VALUES themselves (colours, name,
+drawing): a site rewrites them, and a test pinning them would fail for no reason (see
+`tests/unit/site-identity.test.tsx`). Specs that check the DEMO content (article titles in
+`tests/e2e/articles.spec.ts`) are part of the demo and are rewritten with it.
+
 ## IO & network — covered by E2E, not unit
 
 `loadSkill` (`lib/ai/skill-io.ts`), `run` (`lib/ai/agent.ts`), `runPrompt` (`lib/ai/agent.ts`),
@@ -42,7 +48,7 @@ everywhere); a missing executable fails every test before rendering.
 
 URLs in specs: the default locale has no prefix (`localePrefix: "as-needed"`), so build expected
 hrefs/URLs with `lp(locale, path)` / `lpRe(locale, path)` (`tests/e2e/support/locale-path.ts`)
-instead of hard-coding "/fr/...": the same spec then passes for a derived site whose
+instead of hard-coding "/fr/...": the same spec then passes for a site whose
 `NEXT_PUBLIC_DEFAULT_LOCALE` differs. Navigate with the explicit prefix (`goto("/fr")`) to FORCE a
 locale (the middleware redirects to the canonical URL). `playwright.config.ts` loads `.env*` with
 `@next/env`, so specs see the same `NEXT_PUBLIC_*` as the server.
@@ -81,3 +87,23 @@ upgrade; do not impose a compiler major (e.g. TS) on the whole chain without che
 reaching for `--force` / `--legacy-peer-deps` (they mask an incompatibility rather than
 solve it). Patch-version pins live in `package.json`/`package-lock.json` — do NOT duplicate
 them into these docs (single source of truth).
+
+## Tool scope: never scan `.claude/**`
+
+Claude Code keeps session worktrees in `.claude/worktrees/*`: full checkouts with their own
+`.next`, `storybook-static` and sources. Every Definition-of-done tool must skip them, and must
+say so EXPLICITLY rather than rely on an implicit default:
+
+- ESLint: `".claude/**"` in the global ignores of `eslint.config.mjs` (flat config does NOT read
+  `.gitignore`; without it a checkout with worktrees reported ~1.9k errors).
+- Prettier: `.claude/` in `.prettierignore` (Prettier also reads `.gitignore`, which lists it).
+- TypeScript: `.claude` in `tsconfig.json` `exclude` (TS wildcards already skip dot-folders).
+- Vitest: `.claude/**` in `test.exclude` (`include` is anchored anyway).
+- Playwright needs nothing (`testDir: tests/e2e`); Storybook neither (`../components/**`).
+
+`tests/unit/tooling-ignores.test.ts` ASKS ESLint (`isPathIgnored`) and Prettier (`getFileInfo`)
+and checks the TS / Vitest configs; it fails if one of the ignores is dropped. Add the same
+entry to any new tool that walks the repository. The ESLint and Prettier cases load the real
+tool (config + plugins), which can exceed Vitest's 5 s default under a loaded parallel run: they
+carry an explicit 30 s timeout. Give the same budget to any new case that instantiates a tool;
+never relax an assertion to make it faster.

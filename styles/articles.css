@@ -25,6 +25,83 @@
     font-size: 0.75rem;
     color: var(--text-2);
 }
+/* Title cover of an entry without `image` (docs/articles.md → Cards without an image). Derived
+   from the theme tokens only: a site recolours it through --accent-* / --surface-* / --text-*.
+   Text is --text-1 on a LIGHT tint of the accents over --surface-2, so AA (>= 4.5:1) holds in
+   both themes whatever the accent hue; the full-strength accents only paint the decorative bar. */
+.article-teaser .article-card__thumb {
+    container-type: inline-size;
+    place-items: stretch;
+}
+.article-teaser__cover {
+    --cover-tint-1: 30%;
+    --cover-tint-2: 22%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    min-height: 120px;
+    padding: 16px 16px 16px 20px;
+    color: var(--text-1);
+    background:
+        radial-gradient(
+            120% 90% at 100% 0%,
+            color-mix(in oklab, var(--accent-2) var(--cover-tint-2), transparent),
+            transparent 70%
+        ),
+        linear-gradient(
+            135deg,
+            color-mix(in oklab, var(--accent-1) var(--cover-tint-1), var(--surface-2)),
+            var(--surface-2)
+        );
+    transition: filter 0.3s ease;
+}
+[data-theme="light"] .article-teaser__cover {
+    --cover-tint-1: 18%;
+    --cover-tint-2: 16%;
+}
+/* Decorative accent bar on the leading edge. */
+.article-teaser__cover::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 4px;
+    background: linear-gradient(180deg, var(--accent-1), var(--accent-2));
+}
+.article-card:hover .article-teaser__cover {
+    filter: saturate(1.15) brightness(1.04);
+}
+.article-teaser__cover-kicker {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-2);
+}
+/* Whole words per line (no hyphenation, a word is only broken when it cannot fit a line on its
+   own), clamped with an ellipsis. Size follows the thumb width (container query units). */
+.article-teaser__cover-title {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+    overflow: hidden;
+    font-size: clamp(0.95rem, 0.55rem + 3.4cqi, 1.35rem);
+    font-weight: 750;
+    line-height: 1.22;
+    letter-spacing: -0.01em;
+    overflow-wrap: break-word;
+    hyphens: manual;
+    text-wrap: pretty;
+}
+/* Wide thumb (single-column card on mobile): bigger text, fewer lines in the same height. */
+@container (min-width: 320px) {
+    .article-teaser__cover-title {
+        -webkit-line-clamp: 3;
+        line-clamp: 3;
+    }
+}
 .latest-articles__all {
     display: inline-block;
     margin-top: 14px;
@@ -32,8 +109,27 @@
     font-weight: 600;
 }
 .article__meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
     margin: 0 0 14px;
     font-size: 0.85rem;
+}
+/* "New" / "Archive" status badges (EntryBadges → neutral Chip, text in --text-1: AA both themes). */
+.entry-badges {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+.article__archive-notice {
+    margin: 0 0 18px;
+    padding: 10px 14px;
+    border: 1px solid var(--border-2);
+    border-left-width: 4px;
+    border-radius: var(--radius-md);
+    color: var(--text-2);
+    font-size: 0.9rem;
 }
 .article__cover {
     width: 100%;
@@ -85,6 +181,68 @@
     padding: 0;
     border: 0;
     background: none;
+    color: var(--text-1);
+}
+/* Syntax highlighting: `hljs-*` classes emitted at render by rehype-highlight (ArticleBody).
+   Colours are tokens (styles/tokens.css, AA on --bg-0 in both themes); unlisted classes keep
+   the code colour. */
+.article-body .hljs-keyword,
+.article-body .hljs-built_in,
+.article-body .hljs-type,
+.article-body .hljs-literal,
+.article-body .hljs-selector-tag,
+.article-body .hljs-operator {
+    color: var(--code-keyword);
+}
+.article-body .hljs-string,
+.article-body .hljs-regexp,
+.article-body .hljs-addition,
+.article-body .hljs-char {
+    color: var(--code-string);
+}
+.article-body .hljs-comment,
+.article-body .hljs-quote,
+.article-body .hljs-doctag {
+    color: var(--code-comment);
+    font-style: italic;
+}
+.article-body .hljs-number,
+.article-body .hljs-symbol,
+.article-body .hljs-bullet {
+    color: var(--code-number);
+}
+.article-body .hljs-title,
+.article-body .hljs-section,
+.article-body .hljs-selector-class,
+.article-body .hljs-selector-id {
+    color: var(--code-title);
+}
+.article-body .hljs-attr,
+.article-body .hljs-attribute,
+.article-body .hljs-property,
+.article-body .hljs-variable,
+.article-body .hljs-template-variable,
+.article-body .hljs-params {
+    color: var(--code-attr);
+}
+.article-body .hljs-name,
+.article-body .hljs-tag,
+.article-body .hljs-selector-pseudo,
+.article-body .hljs-selector-attr {
+    color: var(--code-tag);
+}
+.article-body .hljs-meta,
+.article-body .hljs-subst {
+    color: var(--code-meta);
+}
+.article-body .hljs-deletion {
+    color: var(--code-deletion);
+}
+.article-body .hljs-emphasis {
+    font-style: italic;
+}
+.article-body .hljs-strong {
+    font-weight: 700;
 }
 /* Wide tables scroll inside their own box: no page-level horizontal overflow on mobile. */
 .article-body table {
@@ -105,4 +263,36 @@
     padding-inline-start: 14px;
     border-inline-start: 3px solid var(--accent-1);
     color: var(--muted);
+}
+
+/* ===== Entry comments (components/content/EntryComments.tsx, CommentsGate.tsx) ===== */
+.entry-comments {
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-2);
+}
+.entry-comments__title {
+    margin: 0 0 12px;
+}
+.entry-comments__notice,
+.entry-comments__loading {
+    margin: 0 0 14px;
+    color: var(--text-2);
+    font-size: 0.9rem;
+}
+.entry-comments__actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.entry-comments__policy {
+    font-size: 0.82rem;
+    color: var(--accent-2);
+    text-decoration: underline;
+}
+/* Disqus picks its light/dark scheme from the text colour around the thread (its iframe is
+   transparent over --bg-0), so the thread sits on the page colours of the painted theme. */
+.entry-comments__thread {
+    color: var(--text-1);
 }

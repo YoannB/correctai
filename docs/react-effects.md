@@ -31,13 +31,27 @@ _Boot-script placement_ in `docs/architecture.md`) prevents FOUC/banner-flash wi
 
 ## Theme persistence & single source of truth
 
-All `localStorage` keys are declared ONLY in `lib/storage.ts` (`LS_USAGE`, `LS_THEME_MODE`);
+All `localStorage` keys are declared ONLY in `lib/storage.ts` (`LS_USAGE`, `LS_THEME_MODE`, and
+any new one next to them, never a string literal elsewhere);
 never redeclare them in `lib/store.ts` (duplicate = divergent sources = broken hydration).
 The theme mode is persisted TWICE on user intent: a cookie (read by the boot script before
 hydration) and localStorage (read by `hydrateClient` on next load). Reading persisted
 theme/consent/usage is centralized in `lib/store.ts` `hydrateClient`; `hooks/use-theme.ts`
 only derives, syncs the DOM, and writes — it never re-reads storage. (The MUI-theme build
 and light-mode tokens live in `docs/ui-material.md`.)
+
+Single source of the painted theme: BEFORE hydration the boot script (`lib/boot-script.ts`,
+built from the `LS_THEME_MODE` / `COOKIE_THEME` constants) sets `data-theme`, resolving the mode
+exactly like `hydrateClient` (localStorage JSON-decoded first — `writeLS` stores `"dark"` WITH
+quotes —, then the cookie, then `prefers-color-scheme`). AFTER hydration `useTheme`'s Effect
+writes `data-theme`, but ONLY from client snapshots: it is gated by `useHydrated()`
+(`hooks/use-hydrated.ts`, a `useSyncExternalStore` whose server snapshot is `false`). During the
+hydration render every store reads its SERVER snapshot (`themeMode: "system"`,
+`prefersDark: false`), so an ungated Effect wrote `light` over the boot script's `dark` — a flash
+for every dark-system visitor and every explicit choice that differs from the system. Rule: an
+Effect that writes the DOM must never act on values that are only server defaults.
+`tests/e2e/theme-flash.spec.ts` records EVERY `data-theme` write (MutationObserver, old values
+included) in both directions; a final-state assertion cannot catch a corrected flash.
 
 ## React 19 authoring notes
 

@@ -1,6 +1,6 @@
 import type { Page, Route } from "@playwright/test";
 
-// CorrectAI calls the unified route (agent "correct"); the Axons showcase button is gone.
+// CorrectAI calls the unified route (agent "correct"); no other AI button exists.
 const RUN_URL = "**/api/run";
 
 // IMPORTANT:

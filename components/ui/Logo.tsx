@@ -3,12 +3,16 @@ import { SITE_NAME } from "@/constants/site";
 import { cn } from "@/lib/cn";
 import { useId } from "react";
 
-// CorrectAI mark: a pen stroke with two sparkle pairs (CSS-only animation, styles/ui/logo.css).
+// The site's logo (accessible name = SITE_NAME): the CorrectAI pen stroke with two sparkle pairs.
+// The `logo__*` classes are animated by styles/ui/logo.css; the favicon is app/icon.svg.
 // `draw` replays the stroke-dashoffset "writing" loop (splash / loaders); the header and footer
-// keep a still pen with only the sparkles breathing. The gradient id is per instance (useId) so
-// several logos on one page never resolve each other's <defs>.
+// keep a still pen with only the sparkles breathing.
+// `useId()` (unique per rendered logo, stable between server and hydration) builds EVERY SVG id of
+// the drawing, never a literal id: the splash, the header and a loader may show the logo at the
+// same time, and a duplicated id would make `url(#…)` resolve to the first copy (the hidden
+// splash's).
 export function Logo({ size = 36, className, draw = false }: { size?: number; className?: string; draw?: boolean }) {
-    const gradientId = `logoGrad-${useId().replace(/:/g, "")}`;
+    const grad = `${useId()}-grad`;
     return (
         <svg
             className={cn("logo", draw && "logo--draw", className)}
@@ -20,7 +24,7 @@ export function Logo({ size = 36, className, draw = false }: { size?: number; cl
             aria-label={SITE_NAME}
         >
             <defs>
-                <linearGradient id={gradientId} x1="0" y1="0" x2="1" y2="1">
+                <linearGradient id={grad} x1="0" y1="0" x2="1" y2="1">
                     <stop offset="0%" stopColor="#38bdf8" />
                     <stop offset="55%" stopColor="#6366f1" />
                     <stop offset="100%" stopColor="#a855f7" />
@@ -29,7 +33,7 @@ export function Logo({ size = 36, className, draw = false }: { size?: number; cl
             <path
                 className="logo__pen"
                 d="M14 50 L20 32 L44 8 L56 20 L32 44 Z M20 32 L32 44"
-                stroke={`url(#${gradientId})`}
+                stroke={`url(#${grad})`}
                 strokeWidth="3.2"
                 strokeLinecap="round"
                 strokeLinejoin="round"

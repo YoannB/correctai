@@ -2,9 +2,9 @@
 import { cn } from "@/lib/cn";
 import type { AppTerminalProps } from "./types";
 
-// Displays lines as plain React text (never innerHTML). The body is a role="log" live region,
-// so screen readers announce new lines politely as a scripted sequence (useScriptedSequence)
-// reveals them. Monospace, fixed max height from `rows`, scrolls beyond.
+// Displays lines as plain React text (never innerHTML). By default the body is a role="log" live
+// region, so screen readers announce new lines politely as a scripted sequence (useScriptedSequence)
+// reveals them; `live={false}` makes it a plain named region (static content, nothing to announce). Monospace, fixed max height from `rows`, scrolls beyond.
 const MARK: Record<string, string> = { command: ">", success: "✓", error: "✗", link: "→", output: "" };
 
 export function Terminal({
@@ -14,6 +14,7 @@ export function Terminal({
     running = false,
     actions,
     rows = 12,
+    live = true,
     className,
 }: AppTerminalProps) {
     return (
@@ -26,8 +27,8 @@ export function Terminal({
             ) : null}
             <div
                 className="terminal__body"
-                role="log"
-                aria-live="polite"
+                role={live ? "log" : "region"}
+                aria-live={live ? "polite" : undefined}
                 aria-label={ariaLabel}
                 tabIndex={0}
                 style={{ maxHeight: `calc(${rows} * 1.6em + 24px)` }}

@@ -4,6 +4,9 @@
     inset: 0;
     z-index: 9999;
     display: grid;
+    /* place-content groups logo + bar in the middle (default align-content would stretch the
+       rows and push them to the quarters of the screen); place-items centers each one. */
+    place-content: center;
     place-items: center;
     gap: 18px;
     background: var(--bg-0);
@@ -20,6 +23,8 @@
 body:has(.root-not-found) #app-splash {
     display: none;
 }
+/* Logo of the splash (SPLASH.logo, constants/site.ts), restyled/re-animated here;
+   the global prefers-reduced-motion rule (styles/a11y.css) freezes any CSS animation on it. */
 .splash-logo {
     width: 120px;
     height: 120px;

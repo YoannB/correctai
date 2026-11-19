@@ -28,4 +28,8 @@ describe("isConsentRequired", () => {
     it("ads enabled => banner", () => {
         expect(isConsentRequired({ gtmId: "", adsEnabled: true })).toBe(true);
     });
+    it("third-party comments active => banner", () => {
+        expect(isConsentRequired({ gtmId: "", adsEnabled: false, commentsEnabled: true })).toBe(true);
+        expect(isConsentRequired({ gtmId: "", adsEnabled: false, commentsEnabled: false })).toBe(false);
+    });
 });

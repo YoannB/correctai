@@ -9,7 +9,7 @@ export type AppInternalHref = ComponentProps<typeof Link>["href"];
 /** External URL: rendered as a plain <a>, never localized. */
 export type AppExternalHref = `https://${string}` | `http://${string}` | `mailto:${string}`;
 export type AppHref = AppInternalHref | AppExternalHref;
-export interface AppButtonProps {
+interface AppButtonBaseProps {
     variant?: ButtonVariant;
     size?: ButtonSize;
     disabled?: boolean;
@@ -17,12 +17,6 @@ export interface AppButtonProps {
     fullWidth?: boolean;
     /** Ignored when `href` is set (a link has no form type). */
     type?: "button" | "submit" | "reset";
-    /**
-     * Renders a real link styled as the button (never a <button> inside an <a>, which HTML
-     * forbids). An internal pathname goes through `Link` from `@/i18n/routing` (localized
-     * URL, client navigation); an external URL is a plain <a>.
-     */
-    href?: AppHref;
     onClick?: () => void;
     iconLeft?: ReactNode;
     iconRight?: ReactNode;
@@ -31,6 +25,33 @@ export interface AppButtonProps {
     className?: string;
     id?: string;
 }
+/** Link mode: `external` is only accepted here (a type error without `href`). */
+interface AppButtonLinkProps extends AppButtonBaseProps {
+    /**
+     * Renders a real link styled as the button (never a <button> inside an <a>, which HTML
+     * forbids). An internal pathname goes through `Link` from `@/i18n/routing` (localized
+     * URL, client navigation); an external URL is a plain <a>.
+     */
+    href: AppHref;
+    /**
+     * Opens the link in a new tab: `target="_blank"` + `rel="noopener noreferrer"` and a visually
+     * hidden, localized "(new tab)" (`common.newTab`) appended to the accessible name.
+     */
+    external?: boolean;
+    busy?: never;
+}
+/** Action mode (a <button>): `busy` is only accepted here (a link navigates, it has no long action). */
+interface AppButtonActionProps extends AppButtonBaseProps {
+    href?: undefined;
+    external?: never;
+    /**
+     * Long action in progress: same spinner and look as `loading`, but WITHOUT the native
+     * `disabled` attribute (`aria-disabled` + `aria-busy`), so the button KEEPS the focus; clicks
+     * and Enter/Space are ignored (`onClick` is not called, a submit does not submit).
+     */
+    busy?: boolean;
+}
+export type AppButtonProps = AppButtonLinkProps | AppButtonActionProps;
 export interface AppFieldProps {
     label?: string;
     /** Accessible name when there is no visible `label` (a placeholder is not a name). */
@@ -222,5 +243,10 @@ export interface AppTerminalProps {
     actions?: ReactNode;
     /** Max visible lines before the body scrolls (default 12). */
     rows?: number;
+    /**
+     * Live log (default true): role="log" + aria-live="polite", new lines are announced. Set false
+     * for STATIC content (a code sample, a file listing): a plain named, focusable region.
+     */
+    live?: boolean;
     className?: string;
 }

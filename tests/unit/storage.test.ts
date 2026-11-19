@@ -62,8 +62,8 @@ afterEach(() => {
 
 describe("storage — constants", () => {
     it("exposes the centrally declared localStorage keys", () => {
-        expect(LS_USAGE).toBe("axons-usage");
-        expect(LS_THEME_MODE).toBe("axons-theme-mode");
+        expect(LS_USAGE).toBe("usage");
+        expect(LS_THEME_MODE).toBe("theme-mode");
     });
 });
 

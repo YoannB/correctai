@@ -13,7 +13,7 @@ const LAW = SEO_RESOURCES.find((r) => r.kind === "article");
 const VIDEO = SEO_RESOURCES.find((r) => r.kind === "video");
 
 // CorrectAI SEO block: "fix without rewriting" (how-to), the EU AI Act art. 50 summary next to a
-// SHORT video that detaches on scroll (same geometry contract as Axons' SeoResources, see
+// SHORT video that detaches on scroll (same geometry contract as the generic detach-on-scroll player, see
 // docs/seo-layout.md → Detach-on-scroll video player), then the data-protection note.
 // The FAQ is a separate section (components/home/Faq.tsx).
 export function SeoContent() {

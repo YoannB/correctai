@@ -25,12 +25,10 @@ Site en ligne : https://correctai-preview.netlify.app
 Next.js 16 (App Router, Turbopack) · React 19 · TypeScript · Material UI 9 derrière une API neutre · `next-intl` 4 ·
 OpenRouter via le Vercel AI SDK · Vitest, Playwright, Storybook 10 · Netlify.
 
-**Version : CorrectAI 1.1.0, basé sur Axons
-[v0.5.0](https://github.com/YoannB/axons/tree/v0.5.0).**
+**Version : CorrectAI 1.1.0, moteur issu du boilerplate [Axons](https://github.com/YoannB/axons)
+[v0.16.0](https://github.com/YoannB/axons/tree/v0.16.0).**
 
-CorrectAI est construit sur le boilerplate [Axons](https://github.com/YoannB/axons) : l'architecture, les conventions
-et la documentation technique viennent de là. `AGENTS.md` et `docs/` sont la documentation (en anglais) d'Axons pour
-les agents de code ; ils ne sont pas spécifiques à CorrectAI.
+`AGENTS.md` et `docs/` décrivent le moteur (en anglais) pour les agents de code.
 
 ## Démarrage rapide
 
@@ -76,7 +74,7 @@ Le nom du site (`SITE_NAME`) et l'URL du dépôt sont déclarés une seule fois 
 
 | Emplacement                                                                            | Contenu                                                                  |
 | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| [`app/[locale]/page.tsx`](app/[locale]/page.tsx)                                       | Page d'accueil : l'outil et ses blocs SEO.                               |
+| [`components/home/Home.tsx`](components/home/Home.tsx)                                 | Corps de la page d'accueil : l'outil et ses blocs SEO.                   |
 | `components/home/Corrector.tsx`, `CorrectorScore.tsx`                                  | Éditeurs, exemples, diff, score et verdict.                              |
 | `components/home/ToolHero.tsx`, `ToolFeatures.tsx`, `SeoContent.tsx`                   | Accroche, points forts, contenu SEO (dont la section AI Act).            |
 | [`lib/correct/verdict.ts`](lib/correct/verdict.ts)                                     | Classement forme/fond des modifications, verdict, lecture de la réponse. |
@@ -84,7 +82,9 @@ Le nom du site (`SITE_NAME`) et l'URL du dépôt sont déclarés une seule fois 
 | [`capabilities/agents/correct.md`](capabilities/agents/correct.md)                     | Prompt et réglages de l'agent de correction.                             |
 | `messages/*.json` (`corrector`, `toolHero`, `seoContent`, `toolFeatures`, `meta.home`) | Textes de l'outil dans les six langues.                                  |
 
-Le diff et la similarité génériques (`lib/text/`) et la route IA unifiée (`/api/run`, `lib/ai/`) viennent d'Axons.
+Identité du site : [`constants/site.ts`](constants/site.ts) (nom, titres, options d'en-tête, ressources SEO),
+[`components/ui/Logo.tsx`](components/ui/Logo.tsx), [`app/icon.svg`](app/icon.svg),
+[`styles/tokens.css`](styles/tokens.css) et `messages/*.json`.
 
 ## Contrôle qualité
 
@@ -102,10 +102,10 @@ Le site Netlify est lié à `main` : chaque merge déclenche un déploiement aut
 24). Les variables d'environnement se règlent dans Netlify > Site configuration > Environment variables.
 `main` est protégée : passer par une branche et une PR.
 
-## Récupérer les mises à jour d'Axons
+## Mettre à jour le moteur
 
-Le dépôt Axons est le remote `upstream`. Ses tags sont rangés localement sous `axons/` (`axons/v0.5.0`) pour ne
-jamais se mélanger à ceux de CorrectAI (`v1.0.0`…). Configuration, une seule fois par clone :
+Le moteur vient du dépôt `upstream`, dont les tags sont rangés localement sous `axons/` pour ne pas se mélanger à ceux
+de CorrectAI. Configuration, une seule fois par clone :
 
 ```bash
 git remote add upstream https://github.com/YoannB/axons.git
@@ -113,27 +113,23 @@ git config remote.upstream.tagOpt --no-tags
 git config --add remote.upstream.fetch "+refs/tags/*:refs/tags/axons/*"
 ```
 
-Mise à jour, sur une branche dédiée :
+Mise à jour, sur une branche dédiée, en suivant les notes de la release :
 
 ```bash
 git fetch upstream
-git merge --no-ff -m "Merge Axons vX.Y.Z" axons/vX.Y.Z
+git merge --no-ff -m "Merge upstream vX.Y.Z" axons/vX.Y.Z
 ```
 
-En cas de conflit :
-
-- garder la version CorrectAI de `messages/*.json`, de `app/[locale]/page.tsx` et la `version` de `package.json` /
-  `package-lock.json` (Axons y met la sienne) ;
-- relire `constants/site.ts` : un merge peut y dupliquer des blocs (constantes déclarées deux fois).
-
-Puis mettre à jour la ligne « basé sur Axons » en tête de ce README, relancer le contrôle qualité complet et ouvrir la
-PR.
+En cas de conflit : garder la version CorrectAI de l'identité et du contenu (les fichiers listés plus haut, la `version`
+de `package.json` / `package-lock.json`), prendre le moteur de la release, puis reporter à la main les nouvelles clés de
+messages et constantes. Mettre à jour la ligne « Version » en tête de ce README, relancer le contrôle qualité complet et
+ouvrir une PR.
 
 ## Versions et tags
 
-Les tags de CorrectAI suivent leur propre numérotation (`v1.0.0`…) et sont annotés avec la version d'Axons utilisée.
-Une version se publie après le merge de sa PR, tag par tag : `git push origin vX.Y.Z`. Ne jamais lancer
-`git push --tags`, qui publierait aussi les tags `axons/*` locaux.
+Les tags de CorrectAI suivent leur propre numérotation (`v1.0.0`…) et sont annotés avec la version du moteur. Une
+version se publie après le merge de sa PR, tag par tag : `git push origin vX.Y.Z`. Ne jamais lancer `git push --tags`,
+qui publierait aussi les tags `axons/*` locaux.
 
 ## Licence
 

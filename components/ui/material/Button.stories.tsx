@@ -48,7 +48,7 @@ export const AsLinkPrimary: Story = {
     decorators: withLocale,
 };
 export const ExternalLink: Story = {
-    args: { variant: "ghost", href: "https://github.com/YoannB/axons", children: "Source code" },
+    args: { variant: "ghost", href: "https://github.com/example/app", children: "Source code" },
 };
 export const DisabledLink: Story = {
     args: { variant: "secondary", href: "/sitemap", disabled: true, children: "Sitemap" },
@@ -60,4 +60,38 @@ export const DisabledLink: Story = {
             },
         },
     },
+};
+
+// `external`: new tab (target/rel set by the adapter) + a visually hidden "(new tab)" read from
+// common.newTab => the provider must carry that message.
+const withNewTabMessage: NonNullable<Story["decorators"]> = [
+    (Story) => (
+        <NextIntlClientProvider locale="en" messages={{ common: { newTab: "(new tab)" } }}>
+            <Story />
+        </NextIntlClientProvider>
+    ),
+];
+export const External: Story = {
+    args: { variant: "secondary", href: "https://github.com/example/app", external: true, children: "Source code" },
+    decorators: withNewTabMessage,
+    parameters: {
+        docs: {
+            description: {
+                story: '`external` opens the link in a new tab (`target="_blank"`, `rel="noopener noreferrer"`) and appends a visually hidden, localized "(new tab)" to its accessible name. Only accepted with `href` (type error otherwise).',
+            },
+        },
+    },
+};
+export const Busy: Story = {
+    args: { variant: "primary", busy: true, children: "Saving…" },
+    parameters: {
+        docs: {
+            description: {
+                story: "`busy`: same spinner and look as `loading`, but `aria-disabled` + `aria-busy` instead of the native `disabled`: the button keeps the focus (Tab to it) while clicks and Enter/Space are ignored.",
+            },
+        },
+    },
+};
+export const BusySecondary: Story = {
+    args: { variant: "secondary", busy: true, children: "Checking…" },
 };

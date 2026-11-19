@@ -1,6 +1,6 @@
 // Skill contract: capabilities/skills/<id>/SKILL.md.
 // The manifest frontmatter must contain name and description.
-// Axons-specific fields should live under metadata: to avoid conflicting with
+// App-specific fields should live under metadata: to avoid conflicting with
 // editor-owned agent schemas. Legacy top-level inputs/outputs/model/... are
 // still accepted as fallback, but metadata wins when both are present.
 // Pure parser: no fs, no network, no server-only.

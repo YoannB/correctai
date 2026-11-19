@@ -58,4 +58,20 @@ describe("buildSecurityHeaders", () => {
         expect(header(h, "Referrer-Policy")).toBe("strict-origin-when-cross-origin");
         expect(header(h, "Permissions-Policy")).toContain("camera=()");
     });
+    it("Disqus origins only when comments are active", () => {
+        const off = csp(["'self'"]);
+        expect(off).not.toMatch(/disqus/);
+        const on = header(
+            buildSecurityHeaders({ isDev: false, frameAncestors: ["'self'"], comments: true }),
+            "Content-Security-Policy",
+        ) as string;
+        const directive = (name: string) => on.split("; ").find((d) => d.startsWith(`${name} `)) as string;
+        expect(directive("script-src")).toContain("https://*.disqus.com https://*.disquscdn.com");
+        expect(directive("style-src")).toContain("https://*.disquscdn.com");
+        expect(directive("img-src")).toContain("https://*.disqus.com https://*.disquscdn.com");
+        expect(directive("frame-src")).toContain("https://disqus.com https://*.disqus.com");
+        expect(directive("connect-src")).toContain("https://*.disqus.com");
+        // Everything else is unchanged.
+        expect(on.replace(/ https:\/\/(\*\.)?disqus(cdn)?\.com/g, "")).toBe(off);
+    });
 });

@@ -1,6 +1,6 @@
 // CorrectAI domain rules on top of the generic text kit (lib/text/): what KIND of edits the
 // model made, and the AI-disclosure verdict that follows (EU AI Act, art. 50 — assistive
-// editing exception). Pure: no React, no IO. Axons keeps the generic measure (diff, similarity,
+// editing exception). Pure: no React, no IO. lib/text/ keeps the generic measure (diff, similarity,
 // bands); the legal meaning of an edit belongs here (docs/text-tools.md).
 import { isPunctuation, isWhitespace, skeletonOf, type DiffOp } from "@/lib/text/diff";
 

@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { NextIntlClientProvider } from "next-intl";
 import type { ComponentProps, ComponentType } from "react";
 import { useState } from "react";
+import { AppSplash } from "./AppSplash";
 import { Loader, SplashLoader } from "./Loader";
 
 /**
@@ -25,9 +26,8 @@ const withTranslations = (Story: ComponentType) => (
 /**
  * Rebuilds the server #app-splash container (full-screen fixed, see styles/ui/loader.css)
  * to demonstrate the "full-page splash screen" loader and the dismissal mechanics.
- * The .splash-logo (breathing) belongs to the SERVER markup not provided here: the Logo
- * rendered by <Loader> carries .logo (static), not .splash-logo; the full-screen
- * structure and the fade are faithful.
+ * The real server markup (Logo with .splash-logo + bar, per SPLASH in constants/site.ts) is AppSplash,
+ * shown by the SplashWithLogo / SplashBarOnly stories below.
  */
 const withSplashContainer = (Story: ComponentType) => (
     <div id="app-splash">
@@ -154,7 +154,7 @@ export const FullPageSplash: Story = {
     parameters: {
         docs: {
             description: {
-                story: "Structure of the full-screen splash (rebuilt #app-splash container + large Loader). The breathing .splash-logo of the server markup is not reproduced (Logo.tsx not provided): this checks the centered fixed container and the animated bar.",
+                story: "Structure of the full-screen splash (rebuilt #app-splash container + large Loader): this checks the centered fixed container and the animated bar. The real server markup is AppSplash (see SplashWithLogo).",
             },
         },
     },
@@ -171,4 +171,22 @@ export const SplashDismissal: Story = {
             },
         },
     },
+};
+
+/** The REAL pre-hydration splash (AppSplash, as app/layout.tsx renders it) with SPLASH = { logo: true }:
+ *  the Logo with .splash-logo (animated by CSS) above the bar, grouped in the center. */
+export const SplashWithLogo: Story = {
+    render: () => <AppSplash logo bar />,
+    parameters: {
+        docs: {
+            description: {
+                story: "AppSplash with `logo` and `bar`: the server markup of #app-splash with `SPLASH = { logo: true }` (constants/site.ts). The logo is the real `Logo` (ids from useId) with the `.splash-logo` class, animated by styles/ui/loader.css. Fixed z:9999: it covers the canvas.",
+            },
+        },
+    },
+};
+
+/** The default splash (SPLASH.logo false): the progress bar only. */
+export const SplashBarOnly: Story = {
+    render: () => <AppSplash logo={false} bar />,
 };

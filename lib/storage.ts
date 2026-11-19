@@ -16,5 +16,7 @@ export function writeLS(key: string, value: unknown) {
         /* quota / private mode */
     }
 }
-export const LS_USAGE = "axons-usage";
-export const LS_THEME_MODE = "axons-theme-mode";
+// Every localStorage key of the app, declared here ONLY (docs/react-effects.md → Theme persistence).
+// Code reads them from here, never from a string literal; two features never share a key.
+export const LS_USAGE = "usage";
+export const LS_THEME_MODE = "theme-mode";

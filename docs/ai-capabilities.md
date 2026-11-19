@@ -117,7 +117,7 @@ and contradictory. Parser: `lib/ai/parse-agent.ts` (fail-fast, BOM/CRLF tolerant
 A skill is a DIRECTORY, not a flat file. The manifest `SKILL.md` has `---` frontmatter with
 `name` and `description` REQUIRED.
 
-Axons-specific fields should live under `metadata:` to avoid conflicting with editor-owned
+App-specific fields should live under `metadata:` to avoid conflicting with editor-owned
 agent schemas, such as VS Code agent validation. The supported metadata keys are:
 
 - `metadata.inputs`
