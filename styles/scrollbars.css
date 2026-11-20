@@ -1,0 +1,56 @@
+/* ===== Themed scrollbars (CSS only, no JS library) =====
+   Colours come from the --scrollbar-* tokens (styles/tokens.css): recolour them there only.
+
+   Scope: devices with a fine pointer that can hover (desktop). Touch screens keep the system's
+   native overlay scrollbars untouched: nothing here applies to them.
+
+   Two layers, never both on the same engine:
+   1. The standard properties (Firefox, Chrome/Edge >= 121, Safari >= 18.2 for the width). Both
+      are set on EVERY element: `scrollbar-width` is not inherited, and `scrollbar-color` (which
+      is) must not leak a hovered ancestor's colour down to the other panes it contains.
+   2. The `::-webkit-scrollbar*` fallback, only where `scrollbar-color` is unsupported (Safari,
+      older Chromium). Chrome >= 121 ignores `::-webkit-scrollbar` on any element whose
+      `scrollbar-color`/`scrollbar-width` is not `auto`, so the fallback would be dead code there
+      anyway; the `@supports not` guard makes that explicit and keeps one source of truth.
+
+   All selectors have zero specificity (`*`, `:where`): a component may set its own
+   `scrollbar-*` (e.g. `.tabs__list`) and wins regardless of file order.
+   Bars are never hidden: `thin` keeps them visible whenever content scrolls (unless the OS itself
+   uses overlay bars). Forced colours (Windows High Contrast) keep the system bars. */
+@media (hover: hover) and (pointer: fine) and (forced-colors: none) {
+    * {
+        scrollbar-width: thin;
+        scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+    }
+    /* The scroll area under the pointer brightens its thumb, VS Code style. `html` is excluded:
+       it is hovered whenever the pointer is in the window, so the page bar stays quiet. */
+    :where(body *):hover {
+        scrollbar-color: var(--scrollbar-thumb-hover) var(--scrollbar-track);
+    }
+
+    @supports not (scrollbar-color: auto) {
+        /* Safari >= 18.2 knows `scrollbar-width` but not `scrollbar-color`: back to `auto` so the
+           pseudo-elements below (sized by --scrollbar-size) are not overridden by `thin`. */
+        * {
+            scrollbar-width: auto;
+        }
+        ::-webkit-scrollbar {
+            width: var(--scrollbar-size);
+            height: var(--scrollbar-size);
+        }
+        ::-webkit-scrollbar-track,
+        ::-webkit-scrollbar-corner {
+            background: var(--scrollbar-track);
+        }
+        ::-webkit-scrollbar-thumb {
+            /* The transparent border insets the thumb inside the track (VS Code look). */
+            border: 2px solid transparent;
+            border-radius: var(--scrollbar-size);
+            background: var(--scrollbar-thumb) padding-box;
+        }
+        ::-webkit-scrollbar-thumb:hover,
+        ::-webkit-scrollbar-thumb:active {
+            background-color: var(--scrollbar-thumb-hover);
+        }
+    }
+}

@@ -14,7 +14,7 @@ const toConfigArray = (config) => (Array.isArray(config) ? config : [config]);
 /** @type {import('eslint').Linter.Config[]} */
 const config = [
     {
-        name: "axons/global-ignores",
+        name: "app/global-ignores",
         ignores: [
             "node_modules/**",
             ".netlify/**",
@@ -26,6 +26,9 @@ const config = [
             "playwright-report/**",
             "test-results/**",
             "next-env.d.ts",
+            // Claude Code session worktrees (.claude/worktrees/*: full checkouts with their own
+            // .next, storybook-static, node_modules…). Flat config does not read .gitignore.
+            ".claude/**",
         ],
     },
 
@@ -33,7 +36,7 @@ const config = [
     ...toConfigArray(nextTypescript),
 
     {
-        name: "axons/material-ui-boundary",
+        name: "app/material-ui-boundary",
         files: ["**/*.{js,mjs,cjs,jsx,ts,tsx}"],
         ignores: [
             // @mui imports are only allowed in the Material UI adapter folder.

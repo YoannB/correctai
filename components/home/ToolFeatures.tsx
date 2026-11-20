@@ -11,7 +11,7 @@ const ITEMS: { icon: IconName; k: "quota" | "cookies" | "tier" | "bot"; ai?: boo
     { icon: "shield", k: "bot" },
 ];
 
-// CorrectAI guarantees strip under the tool (same markup/CSS as Axons' FeatureStrip). The AI
+// CorrectAI guarantees strip under the tool (the generic `.feature-strip` markup/CSS). The AI
 // items disappear with the AI layer (docs/ai-capabilities.md → AI on/off switch).
 export function ToolFeatures() {
     const t = useTranslations("toolFeatures");

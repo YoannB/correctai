@@ -62,8 +62,8 @@ afterEach(() => {
 
 describe("cookies — constants", () => {
     it("exposes the non-httpOnly cookie names", () => {
-        expect(COOKIE_THEME).toBe("axons-theme");
-        expect(COOKIE_CONSENT).toBe("axons-consent");
+        expect(COOKIE_THEME).toBe("theme");
+        expect(COOKIE_CONSENT).toBe("consent");
     });
 });
 

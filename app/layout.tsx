@@ -1,5 +1,7 @@
-import { SITE_NAME, SITE_URL } from "@/constants/site";
+import { AppSplash } from "@/components/ui/AppSplash";
+import { DEFAULT_DESCRIPTION, DEFAULT_TITLE, SITE_NAME, SITE_URL, SPLASH } from "@/constants/site";
 import { LOCALES } from "@/i18n/locales";
+import { buildBootScript } from "@/lib/boot-script";
 import { getLocale } from "next-intl/server";
 import Script from "next/script";
 import type { ReactNode } from "react";
@@ -13,17 +15,17 @@ import "./globals.css";
 export const metadata = {
     metadataBase: new URL(SITE_URL),
     title: {
-        default: `${SITE_NAME} – AI spelling & grammar checker`,
+        default: DEFAULT_TITLE,
         template: `%s · ${SITE_NAME}`,
     },
-    description: "Fix spelling, grammar and punctuation with AI without changing your style.",
+    description: DEFAULT_DESCRIPTION,
     openGraph: { siteName: SITE_NAME, type: "website", url: SITE_URL },
 };
 
-// Anti-flash boot: sets data-theme + has-consent BEFORE hydration.
-// Also reads the locale from the pathname to set lang (the root does not receive params.locale):
-// every SERVED locale is recognized (the list is serialized from i18n/locales.ts at build time).
-const bootScript = `(function(){try{var d=document.documentElement;var m=localStorage.getItem('axons-theme-mode')||(/axons-theme=([^;]+)/.exec(document.cookie)||[])[1];var sys=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';d.dataset.theme=(m==='light'||m==='dark')?m:sys;if(/axons-consent=/.test(document.cookie))d.classList.add('has-consent');var seg=location.pathname.split('/')[1];if(${JSON.stringify(LOCALES)}.indexOf(seg)>-1)d.setAttribute('lang',seg);}catch(e){}})();`;
+// Anti-flash boot: sets data-theme + has-consent + lang BEFORE hydration (lib/boot-script.ts).
+// The root does not receive params.locale: every SERVED locale is recognized from the pathname
+// (the list is serialized from i18n/locales.ts at build time).
+const bootScript = buildBootScript(LOCALES);
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
     // getLocale() reads the locale resolved from the request context (set by middleware.ts / next-intl),
@@ -33,14 +35,17 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
     return (
         <html lang={locale} data-theme="dark" suppressHydrationWarning>
             <head>
-                <Script id="axons-boot" strategy="beforeInteractive" dangerouslySetInnerHTML={{ __html: bootScript }} />
+                <Script
+                    id="boot-script"
+                    strategy="beforeInteractive"
+                    dangerouslySetInnerHTML={{ __html: bootScript }}
+                />
             </head>
             <body>
                 {/* Pre-hydration splash: server node, hidden (never removed) by SplashLoader,
-            which lives under the providers in app/[locale]/layout.tsx (same document). */}
-                <div id="app-splash" aria-hidden="true">
-                    <span className="loader__bar" />
-                </div>
+            which lives under the providers in app/[locale]/layout.tsx (same document).
+            Its content (logo, bar): SPLASH in constants/site.ts. */}
+                <AppSplash {...SPLASH} />
                 {children}
             </body>
         </html>

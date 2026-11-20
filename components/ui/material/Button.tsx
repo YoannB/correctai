@@ -2,6 +2,9 @@
 import MuiButton from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Link } from "@/i18n/routing";
+import { cn } from "@/lib/cn";
+import { useTranslations } from "next-intl";
+import type { MouseEvent } from "react";
 import type { AppButtonProps, AppHref } from "../types";
 
 const VARIANT = {
@@ -22,12 +25,44 @@ const isInternal = (href: AppHref) => typeof href !== "string" || href.startsWit
 // Internal hrefs use next-intl's Link (localized URL, client navigation, prefetch).
 // A disabled/loading link drops its href: ButtonBase then falls back to a real disabled
 // <button> (not focusable, not navigable) instead of an <a aria-disabled> that still has a URL.
-function linkProps(href: AppHref | undefined, inactive: boolean | undefined) {
+// `newTab` (external link): target/rel are added here, never exposed by the neutral API.
+function linkProps(href: AppHref | undefined, inactive: boolean | undefined, newTab: boolean) {
     if (href === undefined || inactive) return {};
+    const tab = newTab ? { target: "_blank", rel: "noopener noreferrer" } : {};
     // MUI types href as string; ButtonBase forwards it untouched to LinkComponent, which
     // accepts next-intl's typed href (string pathname or { pathname, params } object).
-    if (isInternal(href)) return { href: href as unknown as string, LinkComponent: Link };
-    return { href: href as string };
+    if (isInternal(href)) return { href: href as unknown as string, LinkComponent: Link, ...tab };
+    return { href: href as string, ...tab };
+}
+
+// Visually hidden but read by screen readers (inline: no global utility class exists).
+const VISUALLY_HIDDEN = {
+    position: "absolute",
+    width: 1,
+    height: 1,
+    padding: 0,
+    margin: -1,
+    overflow: "hidden",
+    clip: "rect(0 0 0 0)",
+    whiteSpace: "nowrap",
+    border: 0,
+} as const;
+
+// Swallows the click of a BUSY button (pointer, Enter, Space): onClick is not called and a
+// submit button does not submit.
+const ignoreClick = (event: MouseEvent) => event.preventDefault();
+
+// The "(new tab)" hint needs next-intl, so ONLY an active external link reads the messages
+// (common.newTab): every other Button renders without an intl provider (stories, tests).
+export function Button(props: AppButtonProps) {
+    const { href, external, disabled, loading } = props;
+    if (external && href !== undefined && !disabled && !loading) return <ExternalButton {...props} />;
+    return <BaseButton {...props} />;
+}
+
+function ExternalButton(props: AppButtonProps) {
+    const t = useTranslations("common");
+    return <BaseButton {...props} newTab={t("newTab")} />;
 }
 
 // NO transform on :hover: moving the box changes the pointer hit area and
@@ -35,11 +70,12 @@ function linkProps(href: AppHref | undefined, inactive: boolean | undefined) {
 // Hover strengthens the shadow + lightens, and STOPS the halo animation (otherwise the animation
 // drives box-shadow and would override the static hover shadow). The btnShift/
 // btnHalo/btnSheen keyframes live in material/index.css (sx cannot define @keyframes).
-export function Button({
+function BaseButton({
     variant = "primary",
     size = "md",
     disabled,
     loading,
+    busy,
     fullWidth,
     type = "button",
     href,
@@ -50,30 +86,41 @@ export function Button({
     children,
     className,
     id,
-}: AppButtonProps) {
+    newTab,
+}: AppButtonProps & { newTab?: string }) {
     const isPrimary = variant === "primary";
-    const link = linkProps(href, disabled || loading);
+    const link = linkProps(href, disabled || loading, newTab !== undefined);
+    // Busy: loading's look (the Mui-disabled class carries MUI's disabled styles and ours below)
+    // and spinner, but NO native `disabled`, so the button keeps the focus. Ignored when the
+    // button is already disabled/loading (those stay unchanged).
+    const isBusy = Boolean(busy) && !disabled && !loading;
     return (
         <MuiButton
             id={id}
-            className={className}
+            className={cn(className, isBusy && "Mui-disabled") || undefined}
             variant={VARIANT[variant]}
             size={SIZE[size]}
             color="primary"
             disabled={disabled || loading}
             fullWidth={fullWidth}
             // A link has no form type (ButtonBase only sets `type` on a <button> anyway).
-            type={link.href ? undefined : type}
+            type={"href" in link ? undefined : type}
             {...link}
-            onClick={onClick}
-            aria-label={ariaLabel}
-            startIcon={loading ? <CircularProgress size={16} color="inherit" /> : iconLeft}
+            onClick={isBusy ? ignoreClick : onClick}
+            // The hidden "(new tab)" is part of the content; an explicit aria-label replaces the
+            // content, so it carries the hint too.
+            aria-label={ariaLabel && newTab ? `${ariaLabel} ${newTab}` : ariaLabel}
+            aria-disabled={isBusy || undefined}
+            aria-busy={isBusy || undefined}
+            startIcon={loading || isBusy ? <CircularProgress size={16} color="inherit" /> : iconLeft}
             endIcon={iconRight}
             sx={{
                 position: "relative",
                 overflow: "hidden",
                 textTransform: "none",
                 fontWeight: 700,
+                // Label on the gradient: a token (styles/tokens.css), overridable per theme by a site.
+                color: isPrimary ? "var(--btn-fg)" : undefined,
                 backgroundImage: isPrimary
                     ? "linear-gradient(120deg,var(--accent-1),var(--accent-2),var(--accent-1))"
                     : undefined,
@@ -120,6 +167,7 @@ export function Button({
             }}
         >
             {children}
+            {newTab ? <span style={VISUALLY_HIDDEN}> {newTab}</span> : null}
         </MuiButton>
     );
 }

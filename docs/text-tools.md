@@ -4,7 +4,7 @@ Generic pieces for any app whose core is "the user gives a text, a tool returns 
 text" (proofreading, rephrasing, summarizing with a visible delta, template filling). The
 kit is AI-agnostic: it compares two strings; where the second string comes from (a model
 reply, a fixed reference, a rule engine) is the app's business. Domain rules built on top
-(for example an AI-disclosure verdict from the kind of edits) belong to the derived app,
+(for example an AI-disclosure verdict from the kind of edits) belong to the app built on it,
 NOT here.
 
 ## Pure logic (100%-branch rule, see `docs/testing.md`)
@@ -78,7 +78,7 @@ NOT here.
 5. When the source changes after a reply, the old diff is stale: derive "stale" at render
    (`source !== sourceOfReply`) and show the placeholder instead of a misleading diff.
 
-There is deliberately NO text-tool demo on the Axons home page: a before/after editor is a
+There is deliberately NO text-tool demo on the home page: a before/after editor is a
 product (e.g. a proofreading app), not a boilerplate section. The pieces are documented and
 exercised in Storybook (`UI/DiffView`, `UI/EditorPair`, `UI/ChoiceChips`, `UI/AiNotice`,
 `UI/Textarea`, `UI/Gauge`) and the pure logic in `tests/unit/text-*.test.ts`. `messages/*.json`

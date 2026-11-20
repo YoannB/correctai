@@ -22,6 +22,9 @@ const getPathname = vi.hoisted(() => ({ locale, href }: { locale: string; href: 
 
 vi.mock("@/constants/site", () => ({
     SITE_URL,
+    SITE_NAME: "Site",
+    // Pages with their own social image (constants/site.ts OG_PAGES); "/about" has none.
+    OG_PAGES: { "/": "meta.home", "/sitemap": "pages.sitemap", "/legal": "pages.legal" },
 }));
 
 vi.mock("@/i18n/routing", () => ({
@@ -101,12 +104,55 @@ describe("pageMetadata — OpenGraph", () => {
     it("duplicates the page's title, description, canonical URL, type and locale", () => {
         const metadata = pageMetadata({ title: "Plan", description: "Plan du site", href: "/sitemap", locale: "fr" });
 
-        expect(metadata.openGraph).toEqual({
+        expect(metadata.openGraph).toMatchObject({
             title: "Plan",
             description: "Plan du site",
             url: "https://example.com/fr/sitemap",
             type: "website",
             locale: "fr",
+        });
+    });
+});
+
+describe("pageMetadata — social image", () => {
+    it("points og:image to the page's own absolute PNG in its locale, 1200x630, alt = localized title", () => {
+        const metadata = pageMetadata({ title: "Plan", description: "Plan du site", href: "/sitemap", locale: "fr" });
+
+        expect(metadata.openGraph?.images).toEqual([
+            {
+                url: "https://example.com/og/fr/sitemap.png",
+                width: 1200,
+                height: 630,
+                alt: "Plan",
+                type: "image/png",
+            },
+        ]);
+    });
+
+    it("uses the same image for a Twitter large card", () => {
+        const metadata = pageMetadata({ title: "Legal", description: "Legal page", href: "/legal", locale: "en" });
+
+        expect(metadata.twitter).toEqual({
+            card: "summary_large_image",
+            title: "Legal",
+            description: "Legal page",
+            images: [{ url: "https://example.com/og/en/legal.png", alt: "Legal", width: 1200, height: 630 }],
+        });
+    });
+
+    it("names the home image index.png", () => {
+        const metadata = pageMetadata({ title: "Accueil", description: "Accueil", href: "/", locale: "fr" });
+
+        expect(metadata.openGraph?.images).toMatchObject([{ url: "https://example.com/og/fr/index.png" }]);
+    });
+
+    it("shares the home image (alt = site name) for a page without its own", () => {
+        // A page not listed in OG_PAGES ("/about" is not a key of the routing types).
+        const metadata = pageMetadata({ title: "About", description: "About", href: "/about" as "/", locale: "fr" });
+
+        expect(metadata.openGraph?.images).toMatchObject([{ url: "https://example.com/og/fr/index.png", alt: "Site" }]);
+        expect(metadata.twitter).toMatchObject({
+            images: [{ url: "https://example.com/og/fr/index.png", alt: "Site" }],
         });
     });
 });
@@ -160,7 +206,7 @@ describe("articleMetadata", () => {
         });
     });
 
-    it("OpenGraph of type article, with date and absolute image when it exists", () => {
+    it("OpenGraph of type article, with date and the entry's own generated image", () => {
         expect(articleMetadata(BOTH, "en").openGraph).toEqual({
             title: "Title en",
             description: "Description en",
@@ -168,12 +214,28 @@ describe("articleMetadata", () => {
             type: "article",
             locale: "en",
             publishedTime: "2026-11-10",
-            images: [{ url: "https://example.com/articles/demo/cover.png" }],
+            images: [
+                {
+                    url: "https://example.com/og/en/articles/hello.png",
+                    width: 1200,
+                    height: 630,
+                    alt: "Title en",
+                    type: "image/png",
+                },
+            ],
         });
     });
 
-    it("OpenGraph without image when the article has none", () => {
-        expect(articleMetadata(BOTH, "fr").openGraph).not.toHaveProperty("images");
+    it("the image follows the translation's slug and the collection's entry route", () => {
+        const metadata = articleMetadata(BOTH, "fr", "/reminders/[slug]" as "/articles/[slug]");
+
+        expect(metadata.openGraph?.images).toMatchObject([
+            { url: "https://example.com/og/fr/reminders/bonjour.png", alt: "Title fr" },
+        ]);
+        expect(metadata.twitter).toMatchObject({
+            card: "summary_large_image",
+            images: [{ url: "https://example.com/og/fr/reminders/bonjour.png" }],
+        });
     });
 });
 

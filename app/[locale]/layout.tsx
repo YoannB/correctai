@@ -3,7 +3,9 @@ import { Footer } from "@/components/layout/Footer";
 import { GtmScript } from "@/components/layout/GtmScript";
 import { Header } from "@/components/layout/Header";
 import { SplashLoader } from "@/components/ui";
+import { CLIENT_MESSAGES } from "@/i18n/client-messages";
 import { routing } from "@/i18n/routing";
+import { pickMessages, type Messages } from "@/lib/client-messages";
 import { AppProviders } from "@/providers/AppProviders";
 import { hasLocale } from "next-intl";
 import { getMessages } from "next-intl/server";
@@ -25,15 +27,12 @@ export default async function LocaleLayout({
 }) {
     const { locale } = await params;
     if (!hasLocale(routing.locales, locale)) notFound();
-    const messages = await getMessages({ locale });
+    // Client Components only get the namespaces they read (i18n/client-messages.ts); Server
+    // Components keep the full catalogue through getTranslations.
+    const messages = pickMessages((await getMessages({ locale })) as Messages, CLIENT_MESSAGES);
 
     return (
-        <AppProviders
-            locale={locale}
-            messages={messages as Record<string, unknown>}
-            initialThemeMode="system"
-            initialConsent={null}
-        >
+        <AppProviders locale={locale} messages={messages} initialThemeMode="system" initialConsent={null}>
             <Header />
             <main>{children}</main>
             <Footer />

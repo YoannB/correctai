@@ -14,5 +14,8 @@ tsconfig.tsbuildinfo
 package-lock.json
 deno.lock
 
+# Claude Code session worktrees (already in .gitignore; explicit in case that file changes)
+.claude/
+
 # Bloc réécrit par `next dev` : ne pas le reformater
 AGENTS.md

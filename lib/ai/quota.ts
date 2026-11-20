@@ -26,15 +26,15 @@ const CONFIG = readQuotaConfig(process.env, AI_DAILY_LIMIT);
 const IS_PROD = process.env.NODE_ENV === "production";
 const STORE_NAME = "ai-quota";
 const MAX_CAS_ATTEMPTS = 8;
-const DEV_SECRET = "axons-dev-quota-secret";
+const DEV_SECRET = "dev-quota-secret";
 // Total quota budget per request (CAS reads + writes + retries). Generous compared to a
 // normal Blobs latency (~tens of ms), well below the ~30 s function limit.
 const STORE_DEADLINE_MS = 4_000;
 
 // Memory singleton held by globalThis: each Route Handler may get its own
-// instance of this module (separate bundles); without it /api/run, /api/hello and the dev reset
+// instance of this module (separate bundles); without it /api/run and the dev reset
 // would see different counters.
-const devGlobal = globalThis as { __axonsQuotaMemory?: CasStore };
+const devGlobal = globalThis as { __aiQuotaMemory?: CasStore };
 
 // fetch given to @netlify/blobs. Three roles:
 // 1. ORIGINAL fetch (not patched by Next, kept in `_nextOriginalFetch`): the patched
@@ -91,7 +91,7 @@ function resolveDeps(): { deps: CasDeps; secret: string } {
     const secret = process.env.AI_QUOTA_SECRET ?? "";
     if (IS_PROD && secret.length < 32)
         throw new Error("quota: AI_QUOTA_SECRET missing or too short (>= 32 characters)");
-    const store = IS_PROD ? blobsStore() : (devGlobal.__axonsQuotaMemory ??= createMemoryStore());
+    const store = IS_PROD ? blobsStore() : (devGlobal.__aiQuotaMemory ??= createMemoryStore());
     return {
         secret: secret || DEV_SECRET,
         deps: {
@@ -154,7 +154,7 @@ export async function refundQuota(ticket: QuotaTicket | null): Promise<void> {
 /** DEV only: empties the memory store ("Reset limiter" button). No-op in prod. */
 export function resetDevQuota(): boolean {
     if (IS_PROD) return false;
-    devGlobal.__axonsQuotaMemory = undefined;
+    devGlobal.__aiQuotaMemory = undefined;
     return true;
 }
 

@@ -13,5 +13,5 @@ export function getCookie(name: string): string | null {
     );
     return m ? decodeURIComponent(m[1]) : null;
 }
-export const COOKIE_THEME = "axons-theme";
-export const COOKIE_CONSENT = "axons-consent";
+export const COOKIE_THEME = "theme";
+export const COOKIE_CONSENT = "consent";

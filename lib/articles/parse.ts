@@ -1,5 +1,5 @@
-// PURE module (no fs, no next-intl): parsing and indexing of the Markdown articles stored as
-// content/articles/<id>/<locale>.md. The IO side lives in lib/articles/source.ts.
+// PURE module (no fs, no next-intl): parsing and indexing of the Markdown entries of a collection
+// stored as content/<collection>/<id>/<locale>.md (the articles: content/articles/). The IO side lives in lib/articles/source.ts.
 // Fail-fast: an invalid file throws at BUILD time with its path, never a silently missing page.
 import { parse as parseYaml } from "yaml";
 
@@ -13,6 +13,9 @@ export interface Article {
     date: string;
     // Site-absolute public path (e.g. /articles/<id>/cover.svg), optional.
     image?: string;
+    // Front-matter `archived` (only when set): true/false overrides the collection's archiveBefore
+    // rule for this translation (lib/articles/status.ts).
+    archived?: boolean;
     body: string;
 }
 
@@ -26,6 +29,8 @@ export interface ArticleFile {
     id: string;
     locale: string;
     raw: string;
+    // Collection folder (e.g. "articles"), only used to name the file in errors.
+    collection?: string;
 }
 
 // A listed article in a given locale: `isFallback` = shown in another language because the
@@ -64,14 +69,14 @@ function requiredString(data: Record<string, unknown>, key: string, file: string
     return value.trim();
 }
 
-function isValidIsoDate(value: string): boolean {
+export function isValidIsoDate(value: string): boolean {
     if (!ISO_DATE.test(value)) return false;
     const date = new Date(`${value}T00:00:00Z`);
     return !Number.isNaN(date.getTime()) && date.toISOString().slice(0, 10) === value;
 }
 
-export function parseArticleFile({ id, locale, raw }: ArticleFile): Article {
-    const file = `${id}/${locale}.md`;
+export function parseArticleFile({ id, locale, raw, collection }: ArticleFile): Article {
+    const file = collection ? `${collection}/${id}/${locale}.md` : `${id}/${locale}.md`;
     if (!SLUG.test(id)) fail(file, `invalid folder id (expected: ${SLUG.source}).`);
     const { data, body } = splitFrontMatter(raw, file);
     if (!data || typeof data !== "object" || Array.isArray(data))
@@ -88,6 +93,9 @@ export function parseArticleFile({ id, locale, raw }: ArticleFile): Article {
         image = requiredString(fields, "image", file);
         if (!image.startsWith("/")) fail(file, `image "${image}" must be an absolute site path (/...).`);
     }
+    const archived = fields.archived;
+    if (archived !== undefined && typeof archived !== "boolean")
+        fail(file, `field "archived" must be true or false (got ${JSON.stringify(archived)}).`);
     if (!body) fail(file, "empty Markdown body.");
 
     return {
@@ -98,6 +106,7 @@ export function parseArticleFile({ id, locale, raw }: ArticleFile): Article {
         description: requiredString(fields, "description", file),
         date,
         ...(image ? { image } : {}),
+        ...(archived === undefined ? {} : { archived }),
         body,
     };
 }
@@ -116,7 +125,11 @@ export function buildCatalog(files: ArticleFile[], served: readonly string[]): A
         const key = `${article.locale}:${article.slug}`;
         const owner = slugOwners.get(key);
         if (owner) {
-            fail(`${article.id}/${article.locale}.md`, `slug "${article.slug}" already used by "${owner}".`);
+            const where = `${article.id}/${article.locale}.md`;
+            fail(
+                file.collection ? `${file.collection}/${where}` : where,
+                `slug "${article.slug}" already used by "${owner}".`,
+            );
         }
         slugOwners.set(key, article.id);
         const entry = byId.get(article.id) ?? { id: article.id, translations: {} };

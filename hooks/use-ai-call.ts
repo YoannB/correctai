@@ -9,9 +9,9 @@ import { useAiPending, useStore } from "./use-store";
 // endpoint ONLY (never create a second hook, see docs/ai-capabilities.md). No setState
 // in an effect (everything is event-driven).
 //
-// GENERALIZATION: the optional `buildBody` lets the SAME hook serve two
-// body contracts: the legacy agent format {locale,input} (default, => /api/hello) and the
-// unified format {prompt,agentId,skillId,inputs} (=> /api/run). pending/canCall come from
+// GENERALIZATION: the optional `buildBody` maps the call context to the body of the unified
+// route (/api/run: {prompt,agentId?,skillId?,inputs?}); the default sends the input as the
+// prompt with the locale, no agent. pending/canCall come from
 // the store's GLOBAL state, so any call in progress disables all AI buttons at once
 // (on purpose: a single AI call at a time in the app).
 //
@@ -30,10 +30,10 @@ import { useAiPending, useStore } from "./use-store";
 // changes on every render.
 export type AiCallCtx = { locale: string; input?: string };
 export function useAiCall(
-    endpoint = "/api/hello",
+    endpoint = "/api/run",
     buildBody: (ctx: AiCallCtx) => unknown = ({ locale, input }) => ({
-        locale,
-        input,
+        prompt: input ?? "",
+        inputs: { locale },
     }),
     onSuccess?: (reply: string) => boolean | void,
 ) {

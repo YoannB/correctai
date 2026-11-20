@@ -1,4 +1,4 @@
-// CorrectAI tool settings (site-specific; constants/site.ts stays the Axons-shaped site config).
+// CorrectAI tool settings (tool-specific; constants/site.ts holds the site identity and configuration).
 
 /** Input cap: the LinkedIn post norm. Mirrors `maxPromptChars` in capabilities/agents/correct.md. */
 export const MAX_CHARS = 3000;

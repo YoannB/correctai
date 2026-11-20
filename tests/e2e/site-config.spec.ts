@@ -1,4 +1,5 @@
 import { expect, test, type Page } from "@playwright/test";
+import { LS_THEME_MODE } from "../../lib/storage";
 import { acceptCookiesButton, cookieBanner } from "./support/home";
 
 // v0.3.0 site configuration: consent can be re-opened from the footer and the security headers
@@ -65,6 +66,36 @@ test.describe("Site configuration", () => {
         await page.goto("/");
         await hydrated(page);
         await expect(page.locator(".ad-slot")).toHaveCount(0);
+    });
+
+    test("the body keeps the --bg-0 token over MUI CssBaseline, in both themes", async ({ page }) => {
+        // Regression: CssBaseline injected body { background-color: transparent } after base.css.
+        for (const mode of ["dark", "light"]) {
+            // Stored as writeLS stores it (JSON): the boot script and hydrateClient decode it.
+            await page.addInitScript(([k, v]) => localStorage.setItem(k, v), [LS_THEME_MODE, JSON.stringify(mode)]);
+            await page.goto("/");
+            await hydrated(page);
+            const [bg, token] = await page.evaluate(() => {
+                const probe = document.createElement("div");
+                probe.style.backgroundColor = "var(--bg-0)";
+                document.body.append(probe);
+                const resolved = getComputedStyle(probe).backgroundColor;
+                probe.remove(); // test-owned probe node, not a React-owned one
+                return [getComputedStyle(document.body).backgroundColor, resolved];
+            });
+            expect(bg).toBe(token);
+            expect(bg).not.toBe("rgba(0, 0, 0, 0)");
+        }
+    });
+
+    test("the favicon is app/icon.svg, served as SVG", async ({ page, request }) => {
+        await page.goto("/");
+        const href = await page.locator("link[rel=icon]").first().getAttribute("href");
+        expect(href).toBeTruthy();
+        const res = await request.get(href as string);
+        expect(res.status()).toBe(200);
+        expect(res.headers()["content-type"]).toContain("image/svg+xml");
+        expect(await res.text()).toContain("<svg");
     });
 
     test("headers: framing limited to the same origin by default", async ({ request }) => {

@@ -22,7 +22,15 @@ export default defineConfig({
             "lib/**/*.{test,spec}.{ts,tsx}",
             "hooks/**/*.{test,spec}.{ts,tsx}",
         ],
-        exclude: ["tests/e2e/**", "node_modules/**", ".next/**", "storybook-static/**", "**/*.stories.{ts,tsx}"],
+        exclude: [
+            "tests/e2e/**",
+            "node_modules/**",
+            ".next/**",
+            "storybook-static/**",
+            "**/*.stories.{ts,tsx}",
+            // Claude Code session worktrees (full checkouts): never collect their tests.
+            ".claude/**",
+        ],
         env: publicEnv,
         coverage: {
             provider: "v8",

@@ -9,6 +9,8 @@ export interface Consent {
     necessary: true;
     analytics: boolean;
     ads: boolean;
+    // Third-party comments (Disqus) load without asking under every entry that has them.
+    comments: boolean;
 }
 export interface ToastItem {
     id: string;
@@ -62,6 +64,7 @@ function hydrateClient(base: AppState): AppState {
                 necessary: true,
                 analytics: !!parsed.analytics,
                 ads: !!parsed.ads,
+                comments: !!parsed.comments,
             };
         }
     } catch {

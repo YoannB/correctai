@@ -14,6 +14,8 @@
     --danger: #ff5470;
     --ok: #27d39a;
     --warn: #f59e0b;
+    /* Label of the primary (gradient) button; same in both themes unless a site overrides it. */
+    --btn-fg: #fff;
     --radius-sm: 8px;
     --radius-md: 12px;
     --radius-lg: 18px;
@@ -22,6 +24,22 @@
     --glow: 18%;
     --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Inter, sans-serif;
     --font-mono: ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, monospace;
+    /* Code highlighting (article code blocks, on --bg-0): every token >= 7:1 here, >= 6:1 in light. */
+    --code-keyword: #c4b5fd;
+    --code-string: #86efac;
+    --code-comment: #8b9bb8;
+    --code-number: #fdba74;
+    --code-title: #67e8f9;
+    --code-attr: #93c5fd;
+    --code-tag: #f9a8d4;
+    --code-meta: #fde68a;
+    --code-deletion: #fda4af;
+    /* Scrollbars (styles/scrollbars.css), VS Code spirit: a quiet thumb on a transparent track
+       that brightens on hover. Thumb >= 3:1 against --bg-0 / --surface-*, in both themes. */
+    --scrollbar-size: 10px;
+    --scrollbar-track: transparent;
+    --scrollbar-thumb: color-mix(in oklab, var(--muted) 70%, transparent);
+    --scrollbar-thumb-hover: color-mix(in oklab, var(--text-2) 80%, transparent);
     color-scheme: dark;
 }
 [data-theme="light"] {
@@ -37,5 +55,16 @@
     --shadow-1: 0 10px 28px rgba(28, 39, 72, 0.12), 0 2px 6px rgba(28, 39, 72, 0.07);
     --shadow-2: 0 16px 40px rgba(28, 39, 72, 0.18), 0 4px 10px rgba(28, 39, 72, 0.1);
     --glow: 5%;
+    --code-keyword: #5b21b6;
+    --code-string: #14532d;
+    --code-comment: #4a5468;
+    --code-number: #8a2c0d;
+    --code-title: #0e4f63;
+    --code-attr: #1e3a8a;
+    --code-tag: #86198f;
+    --code-meta: #713f12;
+    --code-deletion: #9f1239;
+    --scrollbar-thumb: color-mix(in oklab, var(--muted) 80%, transparent);
+    --scrollbar-thumb-hover: color-mix(in oklab, var(--text-2) 85%, transparent);
     color-scheme: light;
 }

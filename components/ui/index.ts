@@ -2,6 +2,7 @@
 // Switching libraries (PrimeReact, plain Tailwind) = adapt this folder + material/, not the app.
 export { AdSlot } from "./AdSlot";
 export { AiNotice } from "./AiNotice";
+export { AppSplash } from "./AppSplash";
 export { Breadcrumb } from "./Breadcrumb";
 export { Button } from "./Button";
 export { Card } from "./Card";

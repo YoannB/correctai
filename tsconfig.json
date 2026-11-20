@@ -31,5 +31,14 @@
         ".next/dev/types/**/*.ts",
         "proxy.ts.disabled"
     ],
-    "exclude": ["node_modules", ".next", "out", "storybook-static", "coverage", "playwright-report", "test-results"]
+    "exclude": [
+        "node_modules",
+        ".next",
+        "out",
+        "storybook-static",
+        "coverage",
+        "playwright-report",
+        "test-results",
+        ".claude"
+    ]
 }

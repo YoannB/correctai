@@ -27,11 +27,17 @@ The decorator in `.storybook/preview.tsx` mounts the app providers and exposes a
 toolbar (`globalTypes.theme`) that drives `data-theme` on the canvas container, so light and
 dark are toggled from the toolbar rather than hardcoded. `layout: "fullscreen"` makes the
 painted container fill the canvas (no white border from the default `centered` layout).
-Honest limit: the toolbar switches the CSS TOKENS carried by `[data-theme]` (`var(--bg-*)`,
-borders, text), but NOT the fixed MUI primary hex in `theme.ts` — the accent gradient stays
-in both modes by design (MUI does not read `var()` for those). Do not "fix" that by leaking
+The toolbar mode is also passed to `StorybookProviders mode={…}`, which builds the MUI theme
+for THAT mode (`buildTheme(mode)`, `PALETTE` from `constants/site.ts`), like the app does; the MUI
+primary hex stays a palette value (MUI does not read `var()` for those). Do not "fix" that by leaking
 `var()` into a MUI palette channel (it cannot derive one and re-triggers the
 `palette.*Channel` warning).
+
+## Story assets
+
+Stories never point at site content (`public/articles/**`, demo content that a site replaces):
+Storybook-only files live in `.storybook/assets/`, served under `/storybook-assets/`
+(`staticDirs` in `.storybook/main.ts`), e.g. `/storybook-assets/story-cover.svg`.
 
 ## CSS side-effect imports (TS2882)
 

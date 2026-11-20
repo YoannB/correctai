@@ -12,10 +12,15 @@ prop-leak — that is on you).
 
 ## MUI theme build & light mode
 
-`buildTheme(mode)` takes the RESOLVED light/dark value (never a hardcoded `'dark'`);
-`palette.background.default` and `paper` are `transparent` so `CssBaseline` does not paint
-`<body>` and `styles/tokens.css` tokens stay authoritative (a hardcoded dark + opaque CssBaseline
-background is what previously broke light mode). Light mode = a TINTED background (`--bg-0`
+`buildTheme(mode, palette = PALETTE[mode])` takes the RESOLVED light/dark value (never a
+hardcoded `'dark'`) and the site's colours (`constants/site.ts` `PALETTE`: `primary`, `secondary`,
+`contrastText` = text on the primary). `palette.background.default` and `paper` are `transparent` (a hardcoded dark + opaque
+CssBaseline background is what previously broke light mode), AND the `MuiCssBaseline`
+`styleOverrides` re-point `body` at `background-color: var(--bg-0); color: var(--text-1)`:
+CssBaseline's own `body` rule (`--mui-palette-background-default` = transparent,
+`--mui-palette-text-primary`) is injected AFTER `styles/base.css` and used to erase `--bg-0` and,
+with a palette of the other mode (Storybook), paint the text white on light. Tokens stay
+authoritative. The primary (gradient) button label is the `--btn-fg` token, not the palette. Light mode = a TINTED background (`--bg-0`
 soft blue-grey, not white) with white shadowed cards; accent glow reduced via `--glow`.
 Tokens in `:root` / `[data-theme="light"]` are the single source of truth for colors.
 `defaultChannel`/`paperChannel` are explicitly `undefined` (MUI v9 cannot derive a channel
@@ -45,6 +50,26 @@ hover, disabled rules unchanged). An internal pathname (typed `AppInternalHref`,
 `mailto:` stays a plain `<a>`. A disabled/loading link drops its `href` and falls back to a
 `<button disabled>` (not focusable, not navigable). `type` is ignored in link mode. E2E guard:
 `tests/e2e/button-link.spec.ts` (no `a button` in the hero / 404, keyboard Tab + Enter).
+
+`external` (link mode only; a type error without `href`) opens the link in a new tab: the
+adapter adds `target="_blank"` + `rel="noopener noreferrer"` (the neutral API exposes only the
+boolean, never raw `target`/`rel`) and appends a visually hidden, localized "(new tab)"
+(`common.newTab`, a client namespace) to the content, or to `ariaLabel` when one is given. Only
+an ACTIVE external link reads next-intl, so every other `Button` still renders without an intl
+provider. No icon is added: the app has no "open in new tab" glyph, and `iconRight` stays
+available to a caller that wants one. A disabled/loading external link is a disabled `<button>`
+like any other link (no target, no hint).
+
+## Busy button (`busy`)
+
+`busy` (action mode only; a type error with `href`) is for a long action during which the button
+must KEEP the focus (a native `disabled` button drops it, sending keyboard and screen-reader users
+back to `<body>`). It renders `loading`'s spinner and look (the `Mui-disabled` class carries MUI's
+disabled styles and the contrast rule above) with `aria-disabled="true"` + `aria-busy="true"`,
+WITHOUT the `disabled` attribute; clicks, Enter and Space are swallowed (`preventDefault`:
+`onClick` is not called, a submit button does not submit). `loading` is unchanged (native
+`disabled`, focus lost) and wins over `busy`, as does `disabled`. Unit guard:
+`tests/unit/button.test.tsx`.
 
 ## MUI-control animations (no geometry on hover)
 

@@ -12,134 +12,21 @@
         "taglineSub": "Ortografia • Gramática • Estilo"
     },
     "hero": {
-        "badge": "Seu assistente de IA, pronto num clique",
-        "titleLead": "O boilerplate Next.js para os seus ",
-        "rotating": ["agentes de IA", "sites SEO", "apps Next.js", "demos OpenRouter"],
-        "subtitle": "Uma base moderna, rápida e otimizada para SEO para criar facilmente aplicações web com IA. Componentes prontos a usar, multilingue, implantável na Netlify.",
-        "ctaDemo": "Ver a demo",
-        "ctaPlan": "Mapa do site",
-        "scrollCue": "Percorra para baixo",
         "limitSuffix": "Limitado: {count} chamadas de IA / dia",
-        "tech": {
-            "next": "Next.js 16+",
-            "nextSub": "App Router",
-            "ts": "TypeScript",
-            "tsSub": "Segurança e estabilidade",
-            "mui": "Material UI 9+",
-            "muiSub": "Componentes modernos",
-            "or": "OpenRouter",
-            "orSub": "IA gratuita"
-        }
+        "scrollCue": "Percorra para baixo"
     },
     "showcase": {
-        "title": "Biblioteca de componentes",
-        "inputLabel": "Entrada",
-        "inputPlaceholder": "O seu texto...",
-        "textareaLabel": "Área de texto",
-        "textareaPlaceholder": "A sua mensagem...",
-        "btnPrimary": "Botão primário",
-        "btnSecondary": "Botão secundário",
-        "chipLabel": "Chip",
-        "chipInfo": "Info",
-        "chipSuccess": "Verificado",
-        "chipWarn": "Rever",
-        "chipRemoved": "Item removido.",
-        "toastLabel": "Toast",
-        "toastFire": "Mostrar um toast",
-        "toastMsg": "Toast exibido com sucesso.",
-        "dialogLabel": "Diálogo",
-        "dialogOpen": "Abrir diálogo",
-        "dialogTitle": "Janela modal",
-        "dialogBody": "Conteúdo do diálogo, isolado atrás da API neutra.",
-        "dialogClose": "Fechar",
-        "confirmLabel": "Confirmar",
-        "confirmQuestion": "Tem a certeza de que deseja continuar?",
-        "confirmCancel": "Cancelar",
-        "confirmOk": "Confirmar",
-        "gaugeLabel": "Pontuação / Indicador",
-        "gaugeValue": "{value}%",
-        "iconsLabel": "Ícones animados",
         "bcHome": "Início",
-        "bcSection": "Secção",
-        "bcPage": "Página",
-        "langLabel": "Seletor de idioma",
-        "langCurrent": "{name} (detetado automaticamente)",
-        "themeLabel": "Modo claro / escuro",
-        "themeSub": "De acordo com o seu sistema",
-        "counterLabel": "Exibição do contador",
-        "counterRemaining": "{count} chamadas restantes",
         "copyLabel": "Copiar para a área de transferência",
         "copyCopied": "Copiado!",
-        "testAi": "Testar a IA",
+        "langLabel": "Seletor de idioma",
         "resetDone": "Limitador reiniciado.",
-        "runSkill": "Executar a skill (demo)",
-        "elapsed": "{seconds} s",
-        "tabsLabel": "Painéis",
-        "tabTerminal": "Terminal",
-        "tabOutput": "Saída",
-        "tabProblems": "Problemas",
-        "terminalTitle": "Demo encenada",
-        "terminalRun": "Iniciar a demo",
-        "terminalReset": "Repor",
-        "outputEmpty": "Ainda sem saída.",
-        "problemsEmpty": "Nenhum problema detetado.",
-        "terminalLines": [
-            "npm run demo",
-            "A ler a configuração…",
-            "A preparar os 6 idiomas…",
-            "A gerar as páginas estáticas…",
-            "Concluído: sequência simulada, sem chamada à IA."
-        ]
+        "dialogClose": "Fechar"
     },
     "aiNotice": {
         "thirdParty": "O seu texto é enviado ao fornecedor de IA externo ({provider}) e ao modelo que este utiliza, que o podem guardar segundo as suas próprias condições. Este site, por si, não o guarda.",
         "quality": "Os modelos gratuitos podem ser lentos ou imprecisos: se o resultado parecer errado, basta executar de novo.",
         "wait": "Uma resposta pode demorar até 30 segundos quando o modelo gratuito está sobrecarregado."
-    },
-    "seo": {
-        "title": "Guias e tutoriais",
-        "videoCaption": "Aprenda a criar aplicações modernas com Next.js 16",
-        "articlesTitle": "Por que escolher {site}?",
-        "why": [
-            "Uma base Next.js 16 ultrarrápida",
-            "SEO otimizado e multilíngue (6 idiomas)",
-            "Componentes UI reutilizáveis (Material UI)",
-            "Integração simples com IA (OpenRouter)",
-            "Implantação num clique na Netlify"
-        ],
-        "ctaTitle": "Pronto para começar?",
-        "ctaText": "Explore os componentes e teste já a IA para ver o que pode criar!",
-        "ctaButton": "Testar a IA",
-        "a1": {
-            "title": "Next.js 16: o tutorial completo (2026)",
-            "summary": "Aprenda como criar uma aplicação full stack com Next.js 16 em 13 passos concretos: App Router, RSC, Server Actions, Turbopack, PPR, Prisma, Auth.js e implantação.",
-            "source": "YouTube",
-            "duration": "12 min"
-        },
-        "a2": {
-            "title": "Crie uma aplicação React com Next.js",
-            "summary": "Aprenda a iniciar um projeto Next.js e configurar o seu ambiente de desenvolvimento: estrutura da pasta app/, Server Components por defeito, layout raiz e renderização no servidor para SEO e velocidade.",
-            "source": "OpenClassrooms",
-            "duration": "8 min"
-        },
-        "a3": {
-            "title": "Next.js 16: Tutorial completo",
-            "summary": "Um guia completo para dominar o Next.js 16 e as suas novidades em 2026: versão estável 16.3.x, reforço de segurança (avisos CVE coordenados), cache, imagens e alojamento soberano na UE.",
-            "source": "Tech Insider",
-            "duration": "10 min"
-        }
-    },
-    "features": {
-        "multilang": "Multilíngue",
-        "multilangSub": "FR, EN, ES, DE, IT, PT",
-        "theme": "Modo claro / escuro",
-        "themeSub": "De acordo com o seu sistema",
-        "cookies": "Cookies",
-        "cookiesSub": "Gestão do consentimento",
-        "storage": "Armazenamento local",
-        "storageSub": "Os seus dados ficam locais",
-        "security": "Seguro",
-        "securitySub": "Proteção anti-bots"
     },
     "faq": {
         "title": "Perguntas frequentes",
@@ -177,12 +64,17 @@
         "poweredBy": "Feito com <next>Next.js</next> · Publicado na <netlify>Netlify</netlify>"
     },
     "cookie": {
-        "message": "Este site utiliza cookies para melhorar a sua experiência, medir audiência e apresentar anúncios. Pode aceitar ou recusar a sua utilização.",
+        "message": "Este site utiliza cookies e serviços de terceiros que requerem o seu consentimento, para as finalidades indicadas abaixo. Pode aceitá-los ou recusá-los.",
         "accept": "Aceitar",
         "refuse": "Recusar",
         "settings": "Preferências",
         "link": "Saber mais",
-        "manage": "Gerir cookies"
+        "manage": "Gerir cookies",
+        "purposes": {
+            "analytics": "Medição de audiência",
+            "ads": "Publicidade",
+            "comments": "Comentários (Disqus, serviço de terceiros)"
+        }
     },
     "theme": {
         "light": "Claro",
@@ -201,7 +93,8 @@
     },
     "common": {
         "loading": "Carregamento…",
-        "close": "Fechar"
+        "close": "Fechar",
+        "newTab": "(novo separador)"
     },
     "pages": {
         "sitemap": {
@@ -223,7 +116,11 @@
                     "heading": "Alojamento",
                     "body": [
                         "O site é alojado pela Netlify, Inc., 2325 3rd Street, Suite 100, San Francisco, CA 94107, Estados Unidos (ou pela sua subsidiária europeia relevante).",
-                        "Os dados técnicos necessários ao funcionamento do serviço (registos de ligação, endereços IP) são tratados pelo alojamento no âmbito da prestação do serviço."
+                        "Os dados técnicos necessários ao funcionamento do serviço (registos de ligação, endereços IP) são tratados pelo alojamento no âmbito da prestação do serviço.",
+                        {
+                            "text": "Os comentários apresentados sob alguns conteúdos são escritos pelos seus autores e alojados pelo Disqus, um serviço de comentários de terceiros (política de privacidade: https://disqus.com/privacy-policy/).",
+                            "when": ["comments"]
+                        }
                     ]
                 },
                 {
@@ -237,7 +134,10 @@
                     "heading": "Limitação de responsabilidade",
                     "body": [
                         "O site é fornecido a título informativo. O editor não garante a exatidão, completude ou atualização das informações publicadas e não será responsável por danos diretos ou indiretos resultantes do acesso ou utilização do site.",
-                        "Os conteúdos gerados por IA (via OpenRouter) são fornecidos como assistência e não comprometem a responsabilidade do editor; cabe ao utilizador verificar a sua exatidão."
+                        {
+                            "text": "Os conteúdos gerados por IA (via OpenRouter) são fornecidos como assistência e não comprometem a responsabilidade do editor; cabe ao utilizador verificar a sua exatidão.",
+                            "when": ["ai"]
+                        }
                     ]
                 },
                 {
@@ -262,30 +162,93 @@
                 {
                     "heading": "Dados recolhidos",
                     "body": [
-                        "Este site não recolhe deliberadamente dados pessoais identificáveis no servidor, exceto as informações que enviar livremente para obter uma resposta de IA.",
-                        "As chamadas de IA passam por um Route Handler que reencaminha um pedido de texto para a OpenRouter; a chave da API permanece no servidor e nunca é exposta ao browser.",
-                        "As preferências de tema, o consentimento de cookies e o contador diário de chamadas são armazenados localmente no seu browser (cookie + localStorage) e não são transmitidos ao servidor."
+                        {
+                            "text": "Este site não recolhe deliberadamente dados pessoais identificáveis no servidor, exceto as informações que enviar livremente para obter uma resposta de IA.",
+                            "when": ["ai"]
+                        },
+                        {
+                            "text": "Este site não recolhe deliberadamente dados pessoais identificáveis no servidor.",
+                            "when": ["!ai"]
+                        },
+                        {
+                            "text": "As chamadas de IA passam por um Route Handler que reencaminha um pedido de texto para a OpenRouter; a chave da API permanece no servidor e nunca é exposta ao browser.",
+                            "when": ["ai"]
+                        },
+                        {
+                            "text": "As preferências de tema, o consentimento de cookies e o contador diário de chamadas são armazenados localmente no seu browser (cookie + localStorage) e não são transmitidos ao servidor.",
+                            "when": ["ai"]
+                        },
+                        {
+                            "text": "As preferências de tema e o consentimento de cookies são armazenados localmente no seu browser (cookie + localStorage) e não são transmitidos ao servidor.",
+                            "when": ["!ai"]
+                        },
+                        {
+                            "text": "Se optar por mostrar os comentários de um conteúdo, o serviço Disqus é carregado no seu navegador e recebe os dados necessários para os apresentar (como o seu endereço IP e as informações do navegador); o que aí publicar é tratado pelo Disqus segundo a sua própria política de privacidade: https://disqus.com/privacy-policy/.",
+                            "when": ["comments"]
+                        }
                     ]
                 },
                 {
                     "heading": "Finalidades e base legal",
                     "body": [
-                        "As operações de tratamento implementadas servem: o funcionamento do site (execução do contrato / interesse legítimo), a medição de audiência e publicidade (consentimento), e a disponibilização de respostas de IA ao seu pedido (execução do serviço solicitado).",
-                        "Se incluir dados pessoais numa mensagem enviada à IA, estes são tratados unicamente para gerar a resposta solicitada.",
+                        "As operações de tratamento implementadas servem:",
+                        {
+                            "list": [
+                                "o funcionamento do site (execução do contrato / interesse legítimo)",
+                                {
+                                    "text": "a medição de audiência (consentimento)",
+                                    "when": ["gtm"]
+                                },
+                                {
+                                    "text": "a publicidade (consentimento)",
+                                    "when": ["ads"]
+                                },
+                                {
+                                    "text": "a apresentação dos comentários através do Disqus (consentimento)",
+                                    "when": ["comments"]
+                                },
+                                {
+                                    "text": "a disponibilização de respostas de IA ao seu pedido (execução do serviço solicitado)",
+                                    "when": ["ai"]
+                                }
+                            ]
+                        },
+                        {
+                            "text": "Se incluir dados pessoais numa mensagem enviada à IA, estes são tratados unicamente para gerar a resposta solicitada.",
+                            "when": ["ai"]
+                        },
                         "A base legal de cada operação de tratamento é indicada acima; os tratamentos baseados no consentimento podem ser interrompidos a qualquer momento."
                     ]
                 },
                 {
                     "heading": "Período de conservação",
                     "body": [
-                        "Os dados armazenados localmente (tema, consentimento, contador) são conservados enquanto o seu browser os conservar e até serem eliminados por si.",
+                        {
+                            "text": "Os dados armazenados localmente (tema, consentimento, contador) são conservados enquanto o seu browser os conservar e até serem eliminados por si.",
+                            "when": ["ai"]
+                        },
+                        {
+                            "text": "Os dados armazenados localmente (tema, consentimento) são conservados enquanto o seu browser os conservar e até serem eliminados por si.",
+                            "when": ["!ai"]
+                        },
                         "Os registos técnicos do alojamento são conservados pelo período estritamente necessário para operar e proteger o serviço."
                     ]
                 },
                 {
                     "heading": "Destinatários e transferências",
                     "body": [
-                        "Os dados não são vendidos nem arrendados. Apenas o alojamento (Netlify) e, quando aplicável, o fornecedor de IA (OpenRouter) podem tratar os dados estritamente necessários para prestar o serviço.",
+                        {
+                            "text": "Os dados não são vendidos nem arrendados. Apenas o alojamento (Netlify) e, quando aplicável, o fornecedor de IA (OpenRouter) podem tratar os dados estritamente necessários para prestar o serviço.",
+                            "when": ["ai"]
+                        },
+                        {
+                            "text": "Os dados não são vendidos nem arrendados. Apenas o alojamento (Netlify) pode tratar os dados estritamente necessários para prestar o serviço.",
+                            "when": ["!ai"]
+                        },
+                        {
+                            "text": "Quando mostra os comentários, o Disqus, prestador terceiro, recebe os dados necessários para os apresentar e trata-os segundo a sua própria política.",
+                            "when": ["comments"]
+                        },
                         "Se ocorrer alguma transferência fora da União Europeia, ela é enquadrada por salvaguardas apropriadas (cláusulas contratuais-tipo da Comissão Europeia ou decisão de adequação)."
                     ]
                 },
@@ -300,7 +263,10 @@
                     "heading": "Segurança",
                     "body": [
                         "São implementadas medidas técnicas e organizativas razoáveis para proteger os dados contra acesso não autorizado, alteração, divulgação ou destruição.",
-                        "A chave OpenRouter é armazenada em variáveis de ambiente do servidor e nunca é enviada ao cliente nem incluída nas respostas."
+                        {
+                            "text": "A chave OpenRouter é armazenada em variáveis de ambiente do servidor e nunca é enviada ao cliente nem incluída nas respostas.",
+                            "when": ["ai"]
+                        }
                     ]
                 }
             ]
@@ -319,28 +285,61 @@
                     "heading": "Cookies utilizados",
                     "body": [
                         "Cookies funcionais (tema claro/escuro, consentimento): estritamente necessários, não requerem consentimento prévio e são armazenados localmente.",
-                        "Cookie do contador diário de chamadas de IA: mede a utilização local da quota, armazenado no seu browser.",
-                        "Cookies de medição de audiência e publicitários: depositados apenas após o seu consentimento, podem ser recusados sem degradar a navegação."
+                        {
+                            "text": "Cookie do contador diário de chamadas de IA: mede a utilização local da quota, armazenado no seu browser.",
+                            "when": ["ai"]
+                        },
+                        {
+                            "text": "Cookies de medição de audiência e publicitários: depositados apenas após o seu consentimento, podem ser recusados sem degradar a navegação.",
+                            "when": ["gtm", "ads"]
+                        },
+                        {
+                            "text": "Cookies de medição de audiência: depositados apenas após o seu consentimento, podem ser recusados sem degradar a navegação.",
+                            "when": ["gtm", "!ads"]
+                        },
+                        {
+                            "text": "Cookies publicitários: depositados apenas após o seu consentimento, podem ser recusados sem degradar a navegação.",
+                            "when": ["ads", "!gtm"]
+                        },
+                        {
+                            "text": "Cookies de comentários (Disqus): o fio de comentários é carregado a partir do Disqus, um serviço de terceiros, apenas após um clique em «Mostrar os comentários» ou a sua autorização para os comentários; o Disqus pode então depositar os seus próprios cookies, descritos na sua política de privacidade (https://disqus.com/privacy-policy/). Recusá-los nunca impede a leitura do conteúdo.",
+                            "when": ["comments"]
+                        }
                     ]
                 },
                 {
                     "heading": "Consentimento",
                     "body": [
-                        "Na primeira visita, um banner permite-lhe aceitar, recusar ou personalizar o depósito de cookies não essenciais.",
-                        "Até dar o seu acordo, apenas são depositados cookies estritamente necessários. A sua escolha é recordada e pode ser alterada a qualquer momento através da ligação “Cookies” no rodapé."
+                        {
+                            "text": "Na primeira visita, um banner permite-lhe aceitar, recusar ou personalizar o depósito de cookies não essenciais.",
+                            "when": ["consent"]
+                        },
+                        {
+                            "text": "Até dar o seu acordo, apenas são depositados cookies estritamente necessários. A sua escolha é recordada e pode ser alterada a qualquer momento através da ligação “Cookies” no rodapé.",
+                            "when": ["consent"]
+                        }
                     ]
                 },
                 {
                     "heading": "Período de conservação",
                     "body": [
-                        "Os cookies de consentimento são conservados por um máximo de seis (6) meses, em linha com as recomendações das autoridades de controlo, exceto durações técnicas estritamente necessárias.",
-                        "Os cookies de medição de audiência são conservados pelo período mínimo necessário para a sua finalidade."
+                        {
+                            "text": "Os cookies de consentimento são conservados por um máximo de seis (6) meses, em linha com as recomendações das autoridades de controlo, exceto durações técnicas estritamente necessárias.",
+                            "when": ["consent"]
+                        },
+                        {
+                            "text": "Os cookies de medição de audiência são conservados pelo período mínimo necessário para a sua finalidade.",
+                            "when": ["gtm"]
+                        }
                     ]
                 },
                 {
                     "heading": "As suas escolhas",
                     "body": [
-                        "Pode aceitar ou recusar cookies não essenciais a qualquer momento através do banner ou da página “Cookies”.",
+                        {
+                            "text": "Pode aceitar ou recusar cookies não essenciais a qualquer momento através do banner ou da página “Cookies”.",
+                            "when": ["consent"]
+                        },
                         "Pode também configurar o seu browser para bloquear ou eliminar cookies; algumas funcionalidades do site poderão então não funcionar corretamente."
                     ]
                 },
@@ -356,6 +355,7 @@
             "title": "Artigos",
             "intro": "Guias e notas de fundo sobre o site, publicados em Markdown.",
             "latestTitle": "Últimos artigos",
+            "archivesTitle": "Do arquivo",
             "viewAll": "Todos os artigos",
             "publishedOn": "Publicado em {date}",
             "onlyIn": "Disponível apenas em {language}",
@@ -519,5 +519,18 @@
             "title": "CorrectAI – Corretor ortográfico e gramatical com IA",
             "description": "Corrija ortografia, gramática e pontuação com IA sem alterar o seu estilo. Simples, rápido e fiel à sua voz."
         }
+    },
+    "entryStatus": {
+        "new": "Novo",
+        "archive": "Arquivo",
+        "archiveNotice": "Conteúdo de arquivo: publicado há algum tempo e mantido como estava, pode estar desatualizado."
+    },
+    "comments": {
+        "title": "Comentários",
+        "notice": "Os comentários são fornecidos pelo Disqus, um serviço de terceiros. Mostrá-los carrega o Disqus, que pode depositar os seus próprios cookies e tratar os seus dados segundo a sua política de privacidade.",
+        "policy": "Política de privacidade do Disqus",
+        "show": "Mostrar os comentários",
+        "always": "Mostrar sempre os comentários",
+        "loading": "A carregar os comentários…"
     }
 }

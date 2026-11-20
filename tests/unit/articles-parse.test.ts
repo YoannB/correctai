@@ -59,11 +59,23 @@ describe("parseArticleFile — success", () => {
         expect(article.date).toBe("2026-01-31");
         expect(article.image).toBe("/articles/demo/c.png");
     });
+
+    it("keeps an explicit archived flag (true or false) and omits it when absent", () => {
+        expect(parseArticleFile(file("demo", "en", { archived: "true" })).archived).toBe(true);
+        expect(parseArticleFile(file("demo", "en", { archived: "false" })).archived).toBe(false);
+        expect(parseArticleFile(file("demo", "en"))).not.toHaveProperty("archived");
+    });
 });
 
 describe("parseArticleFile — errors", () => {
     it("rejects an invalid folder id", () => {
         expect(() => parseArticleFile(file("Bad_Id", "en"))).toThrow(/invalid folder id/);
+    });
+
+    it("names the collection folder in the error when the file carries one", () => {
+        expect(() => parseArticleFile({ ...file("Bad_Id", "en"), collection: "reminders" })).toThrow(
+            "Article reminders/Bad_Id/en.md: invalid folder id",
+        );
     });
 
     it("rejects an empty front matter", () => {
@@ -112,6 +124,12 @@ describe("parseArticleFile — errors", () => {
         expect(() => parseArticleFile(file("demo", "en", { image: '""' }))).toThrow(/"image" required/);
     });
 
+    it("rejects a non-boolean archived flag", () => {
+        expect(() => parseArticleFile(file("demo", "en", { archived: '"yes"' }))).toThrow(
+            /"archived" must be true or false \(got "yes"\)/,
+        );
+    });
+
     it("rejects an empty body", () => {
         expect(() => parseArticleFile({ id: "demo", locale: "en", raw: md(header(), "   ") })).toThrow(
             /empty Markdown body/,
@@ -136,6 +154,14 @@ describe("buildCatalog", () => {
     it("rejects a duplicate slug within one locale", () => {
         expect(() => buildCatalog([file("one", "en"), file("two", "en")], ["en"])).toThrow(
             /two\/en\.md.*already used by "one"/,
+        );
+    });
+
+    it("names the collection folder of a duplicate slug", () => {
+        const one = { ...file("one", "en"), collection: "reminders" };
+        const two = { ...file("two", "en"), collection: "reminders" };
+        expect(() => buildCatalog([one, two], ["en"])).toThrow(
+            'Article reminders/two/en.md: slug "my-slug" already used by "one"',
         );
     });
 

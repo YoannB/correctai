@@ -1,5 +1,5 @@
 // Pure, dictionary-free guess of the language a text is written in, among the six locales
-// Axons ships (fr, en, es, de, it, pt). Weighted stop-word voting on accent/apostrophe-
+// the app ships (fr, en, es, de, it, pt). Weighted stop-word voting on accent/apostrophe-
 // insensitive tokens: good enough to preselect a language flag next to an editor, NOT a
 // classifier (short or mixed texts may fail; the caller passes a fallback, usually the UI
 // locale, which also wins near-ties). No React, no IO; generic for any text tool
