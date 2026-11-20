@@ -25,7 +25,7 @@ Site en ligne : https://correctai-preview.netlify.app
 Next.js 16 (App Router, Turbopack) · React 19 · TypeScript · Material UI 9 derrière une API neutre · `next-intl` 4 ·
 OpenRouter via le Vercel AI SDK · Vitest, Playwright, Storybook 10 · Netlify.
 
-**Version : CorrectAI 1.1.0, moteur issu du boilerplate [Axons](https://github.com/YoannB/axons)
+**Version : CorrectAI 1.2.0, moteur issu du boilerplate [Axons](https://github.com/YoannB/axons)
 [v0.16.0](https://github.com/YoannB/axons/tree/v0.16.0).**
 
 `AGENTS.md` et `docs/` décrivent le moteur (en anglais) pour les agents de code.
