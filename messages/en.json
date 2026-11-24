@@ -108,7 +108,7 @@
                 {
                     "heading": "Site publisher",
                     "body": [
-                        "This website is published by {editorName}, a sole trader operating under the trade name {tradeName}, registered under SIREN number {siren} (APE code {apeCode} – Computer programming), listed in the national register of enterprises, with registered office at {address}. Sole proprietorship without share capital; activity declared on {declaredDate}.",
+                        "This website is published by {editorName}, a sole trader operating under the trade name {tradeName}, registered under SIREN number {siren} (APE code {apeCode} – Computer programming), listed in the national register of enterprises, with registered office {addressKind, select, city {in {address}} other {at {address}}}. Sole proprietorship without share capital; activity declared on {declaredDate}.",
                         "Publication director: {publicationDirector}. Contact: {contactEmail}."
                     ]
                 },
@@ -155,7 +155,7 @@
                 {
                     "heading": "Data controller",
                     "body": [
-                        "The data controller is {editorName}, a sole trader operating under the trade name {tradeName}, registered under SIREN number {siren} (APE code {apeCode} – Computer programming), listed in the national register of enterprises, with registered office at {address}.",
+                        "The data controller is {editorName}, a sole trader operating under the trade name {tradeName}, registered under SIREN number {siren} (APE code {apeCode} – Computer programming), listed in the national register of enterprises, with registered office {addressKind, select, city {in {address}} other {at {address}}}.",
                         "Contact: {contactEmail}. For any question regarding data protection, you may use this e-mail address."
                     ]
                 },
