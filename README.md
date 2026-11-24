@@ -26,7 +26,7 @@ Next.js 16 (App Router, Turbopack) · React 19 · TypeScript · Material UI 9 de
 OpenRouter via le Vercel AI SDK · Vitest, Playwright, Storybook 10 · Netlify.
 
 **Version : CorrectAI 1.2.0, moteur issu du boilerplate [Axons](https://github.com/YoannB/axons)
-[v0.16.0](https://github.com/YoannB/axons/tree/v0.16.0).**
+[v0.17.0](https://github.com/YoannB/axons/tree/v0.17.0).**
 
 `AGENTS.md` et `docs/` décrivent le moteur (en anglais) pour les agents de code.
 
@@ -66,6 +66,7 @@ Référence complète et commentée : [`.env.example`](.env.example). Les princi
 | `NEXT_PUBLIC_ADS_ENABLED`    | `false` tant que de vraies balises publicitaires ne sont pas branchées.                                          |
 | `NEXT_PUBLIC_GTM_ID`         | Google Tag Manager (vide = non chargé). Le bandeau cookies n'existe que si GTM ou les pubs sont actifs.          |
 | `LEGAL_*`                    | Informations éditeur des mentions légales (serveur uniquement) ; jamais de vraies valeurs dans le dépôt.         |
+| `LEGAL_EDITOR_ADDRESS_KIND`  | `street` (défaut) ou `city` si `LEGAL_EDITOR_ADDRESS` n'est qu'une ville (« situé à Nantes, France »).           |
 
 Le nom du site (`SITE_NAME`) et l'URL du dépôt sont déclarés une seule fois dans
 [`constants/site.ts`](constants/site.ts).

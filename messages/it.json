@@ -108,7 +108,7 @@
                 {
                     "heading": "Editore del sito",
                     "body": [
-                        "Il presente sito web è edito da {editorName}, imprenditore individuale che opera sotto l'insegna {tradeName}, registrato con il numero SIREN {siren} (codice APE {apeCode} – Programmazione informatica), iscritto al registro nazionale delle imprese, con sede legale situata in {address}. Impresa individuale senza capitale sociale; attività dichiarata il {declaredDate}.",
+                        "Il presente sito web è edito da {editorName}, imprenditore individuale che opera sotto l'insegna {tradeName}, registrato con il numero SIREN {siren} (codice APE {apeCode} – Programmazione informatica), iscritto al registro nazionale delle imprese, con sede legale situata {addressKind, select, city {a {address}} other {in {address}}}. Impresa individuale senza capitale sociale; attività dichiarata il {declaredDate}.",
                         "Direttore della pubblicazione: {publicationDirector}. Contatto: {contactEmail}."
                     ]
                 },
@@ -155,7 +155,7 @@
                 {
                     "heading": "Titolare del trattamento",
                     "body": [
-                        "Il titolare del trattamento è {editorName}, imprenditore individuale che opera sotto l'insegna {tradeName}, registrato con il numero SIREN {siren} (codice APE {apeCode} – Programmazione informatica), iscritto al registro nazionale delle imprese, con sede legale situata in {address}.",
+                        "Il titolare del trattamento è {editorName}, imprenditore individuale che opera sotto l'insegna {tradeName}, registrato con il numero SIREN {siren} (codice APE {apeCode} – Programmazione informatica), iscritto al registro nazionale delle imprese, con sede legale situata {addressKind, select, city {a {address}} other {in {address}}}.",
                         "Contatto: {contactEmail}. Per qualsiasi questione relativa alla protezione dei dati, puoi utilizzare questo indirizzo e-mail."
                     ]
                 },

@@ -108,7 +108,7 @@
                 {
                     "heading": "Éditeur du site",
                     "body": [
-                        "Le présent site est édité par {editorName}, entrepreneur individuel exerçant sous l'enseigne {tradeName}, immatriculé sous le numéro SIREN {siren} (code APE {apeCode} – Programmation informatique), inscrit au registre national des entreprises, dont le siège est situé {address}. Entreprise individuelle sans capital social ; activité déclarée le {declaredDate}.",
+                        "Le présent site est édité par {editorName}, entrepreneur individuel exerçant sous l'enseigne {tradeName}, immatriculé sous le numéro SIREN {siren} (code APE {apeCode} – Programmation informatique), inscrit au registre national des entreprises, dont le siège est situé {addressKind, select, city {à {address}} other {{address}}}. Entreprise individuelle sans capital social ; activité déclarée le {declaredDate}.",
                         "Directeur de la publication : {publicationDirector}. Contact : {contactEmail}."
                     ]
                 },
@@ -155,7 +155,7 @@
                 {
                     "heading": "Responsable de traitement",
                     "body": [
-                        "Le responsable du traitement est {editorName}, entrepreneur individuel exerçant sous l'enseigne {tradeName}, immatriculé sous le numéro SIREN {siren} (code APE {apeCode} – Programmation informatique), inscrit au registre national des entreprises, dont le siège est situé {address}.",
+                        "Le responsable du traitement est {editorName}, entrepreneur individuel exerçant sous l'enseigne {tradeName}, immatriculé sous le numéro SIREN {siren} (code APE {apeCode} – Programmation informatique), inscrit au registre national des entreprises, dont le siège est situé {addressKind, select, city {à {address}} other {{address}}}.",
                         "Contact : {contactEmail}. Pour toute question relative à la protection des données, vous pouvez utiliser cette adresse e-mail."
                     ]
                 },
